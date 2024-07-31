@@ -9,7 +9,6 @@ public enum GAMESTATE {
 }
 
 public class GameManager : MonoBehaviour {
-    public static GameManager Instance;
 
     private GAMESTATE _GameState = GAMESTATE.RUNNING;
     public GAMESTATE GetGameState() {
@@ -28,20 +27,11 @@ public class GameManager : MonoBehaviour {
 
     public string CurrentScene = "MainScene";
 
-    private void Awake() {
-        if (Instance == null) {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (Instance != this) {
-            Destroy(gameObject);
-        }
-    }
-
     private void Start() {
         _inventories.Add(new PlayerInventory());
         _inventories.Add(new CraftInventory());
         _inventories.Add(new StockInventory());
+        _inventories.Add(new KitchenInventory());
 
         foreach (var inventory in _inventories) {
             inventory.Initialize();

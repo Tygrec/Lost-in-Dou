@@ -11,7 +11,7 @@ public class CraftDisplay : MonoBehaviour {
 
     [SerializeField] Button _validateButton;
     private void Start() {
-        _validateButton.onClick.AddListener(CraftManager.Instance.TryCraft);
+        _validateButton.onClick.AddListener(Game.G.Craft.TryCraft);
     }
 
     public void DisplayCraftInfo(string info) {
@@ -25,14 +25,12 @@ public class CraftDisplay : MonoBehaviour {
     }
 
     public void DisplayCraftSelection() {
-        GameManager.Instance.ChangeGameState(GAMESTATE.PAUSE);
+        Game.G.GameManager.ChangeGameState(GAMESTATE.PAUSE);
 
         UiManager.Instance.Clear(_craftButtonsTransform);
         gameObject.SetActive(true);
 
-        print(CraftManager.Instance.GetAllCraftables().Count);
-
-        foreach (var craftable in CraftManager.Instance.GetAllCraftables()) {
+        foreach (var craftable in Game.G.Craft.GetAllCraftables()) {
             var button = Instantiate(Resources.Load<ButtonCraftBehavior>("Prefabs/Ui/Button Craft Item"), _craftButtonsTransform);
             button.Display(craftable.Key, craftable.Value, this);
         }
@@ -45,6 +43,6 @@ public class CraftDisplay : MonoBehaviour {
     public void QuitDisplay() {
         _craftInventoryDisplay.gameObject.SetActive(false);
         gameObject.SetActive(false);
-        GameManager.Instance.ChangeGameState(GAMESTATE.RUNNING);
+        Game.G.GameManager.ChangeGameState(GAMESTATE.RUNNING);
     }
 }

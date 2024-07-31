@@ -11,7 +11,7 @@ public class HudDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _dayText.text = $"Jour {TimeManager.Instance.GetDay()}";
-        _timeText.text = $"{TimeManager.Instance.GetHourText()}:{TimeManager.Instance.GetMinText()}";
+        _dayText.text = $"Jour {Game.G.Time.GetDay()}";
+        _timeText.text = $"{Game.G.Time.GetDayHourText()}:{Game.G.Time.GetDayMinText()}";
     }
 }

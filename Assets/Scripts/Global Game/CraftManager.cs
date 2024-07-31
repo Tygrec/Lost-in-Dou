@@ -5,7 +5,6 @@ using UnityEngine;
 using static UnityEditor.Progress;
 
 public class CraftManager : MonoBehaviour {
-    public static CraftManager Instance;
 
     private Dictionary<ItemData, bool> _craftables = new Dictionary<ItemData, bool>();
     [SerializeField] List<ItemData> _availableCraftsAtStart;
@@ -30,12 +29,7 @@ public class CraftManager : MonoBehaviour {
         return _craftables;
     }
 
-    private void Awake() {
-        Instance = this;
-    }
-
     private void Start() {
-
         var craftList = Resources.LoadAll<ItemData>("Scriptables/Items/").Where(i => i.Craftable).ToList();
         foreach (var item in craftList) {
             _craftables.Add(item, false);

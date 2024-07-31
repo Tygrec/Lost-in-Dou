@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4076da0fdda6b6e4e930c53c7380bf9e, type: 3}
   m_Name: Lance
   m_EditorClassIdentifier: 
-  Type: 0
+  Type: 2
   Description: 
   Consommable: 0
   Craftable: 1

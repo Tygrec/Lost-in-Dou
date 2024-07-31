@@ -1,9 +1,8 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    public static PlayerController Instance;
-
     private PlayerData _playerData;
 
     public float Hunger() {
@@ -15,39 +14,57 @@ public class PlayerController : MonoBehaviour {
     public float Energy() { 
         return _playerData.Energy;
     }
-    public float Life() { 
+    public float Life() {
         return _playerData.Life;
+    }
+    public void LoseEnergy() {
+        _playerData.Energy -= 1;
     }
     public ItemData Equipped() { return _playerData.EquippedItem; }
 
-    [SerializeField] float _speed = 5f; // Vitesse de déplacement
-    private Rigidbody _rb;
+    float _speed; // Vitesse de déplacement
 
     private bool isNapping = false;
+    private bool isSleeping = false;
+    private bool isRunning = false;
     private Coroutine _napCoroutine;
 
-    private void Awake() {
-        Instance = this;
+    private const int _hungerLoss = 2;
+    private const int _thirstLoss = 3;
+    private const int _energyLoss = 1;
+    private const int _lifeLoss = 1;
 
-        _playerData = GameManager.Instance.GetPlayerData();
-    }
+    private const int _intervalLoss = 10;
+
+    [SerializeField] CharacterThoughts _characterThoughts;
+
     void Start() {
-        _rb = GetComponent<Rigidbody>();
+        _playerData = Game.G.GameManager.GetPlayerData();
+        _speed = Game.G.Values.PLAYER_SPEED;
+        Game.G.Time.RegisterRecurringCallback(UpdateStatsByTime, _intervalLoss);
     }
-
-    void FixedUpdate() {
-        if (GameManager.Instance.GetGameState() != GAMESTATE.RUNNING)
+    private void Update() {
+        if (Game.G.GameManager.GetGameState() != GAMESTATE.RUNNING)
             return;
+
+        if (Input.GetKeyDown(KeyCode.R) && Hunger() > 0)
+            _napCoroutine = StartCoroutine(INap());
 
         if (!isNapping) {
             Move();
         }
     }
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.R))
-            _napCoroutine = StartCoroutine(INap());
-    }
     private void Move() {
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            if (!isRunning) {
+                StartRunning();
+            }
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift)) {
+            if (isRunning)
+                StopRunning();
+        }
+
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
@@ -62,15 +79,33 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void Eat(ItemData item) {
-        if (item.Type != ItemType.Food) {
+    private void StartRunning() {
+        _speed = Game.G.Values.PLAYER_SPEED * 2;
+        isRunning = true;
+        Game.G.Time.RegisterRecurringCallback(UpdateEnergy, 2);
+    }
+    private void StopRunning() {
+        _speed = Game.G.Values.PLAYER_SPEED;
+        isRunning = false;
+        Game.G.Time.RemoveRecurringCallback(UpdateEnergy);
+    }
+
+    public void Eat(ItemData food) {
+        if (food.Type != ItemType.Food) {
             Debug.LogError("ERREUR : On essaye de manger quelque chose qui n'est pas de la nourriture");
         }
 
-        _playerData.Hunger += item.SatietyValue;
-        _playerData.Thirst += item.ThirstValue;
+        _playerData.Hunger += food.SatietyValue;
+        _playerData.Thirst += food.ThirstValue;
 
-        _playerData.CheckMaxValues();
+        _playerData.ClampStats();
+    }
+
+    public void Eat(RecipeData food) {
+        _playerData.Hunger += food.SatietyValue;
+        _playerData.Thirst += food.ThirstValue;
+        
+        _playerData.ClampStats();
     }
 
     public void Drink(ItemData item) {
@@ -83,37 +118,47 @@ public class PlayerController : MonoBehaviour {
     public void Drink() {
         _playerData.Thirst = 100;
     }
+
+    public void Fishing() {
+        PlayerInventory.Instance.AddItem(ItemData.Fish());
+    }
+
+    public void Sleep() {
+        StartCoroutine(ISleep());
+    }
+
     public IEnumerator ISleep() {
 
-        StartCoroutine(SceneController.Instance.ITransition());
+        isSleeping = true;
+        Game.G.Scene.Transition();
 
         yield return new WaitForSeconds(1);
 
-        TimeManager.Instance.SetNewDay(ConstGlobalValues.Instance.WAKE_UP_HOUR);
+        Game.G.Time.SetNewDay(Game.G.Values.WAKE_UP_HOUR);
 
-        _playerData.Energy = 100;
-        // Nombre d'heures de sommeil converties en minutes / 5
-        UpdateHunger((((ConstGlobalValues.Instance.WAKE_UP_HOUR + 24) - TimeManager.Instance.GetHour()) * 60) / 5, -1);
-        UpdateThirst((((ConstGlobalValues.Instance.WAKE_UP_HOUR + 24) - TimeManager.Instance.GetHour()) * 60) / 5, -1);
-        UpdateEnergy((((ConstGlobalValues.Instance.WAKE_UP_HOUR + 24) - TimeManager.Instance.GetHour()) * 60) / 5, 1);
+        isSleeping = false;
 
-        _playerData.CheckMaxValues();
+        _playerData.ClampStats();
     }
+    private IEnumerator INap() {
 
-    IEnumerator INap() {
         isNapping = true;
-        TimeManager.Instance.SetTimeSpeed(ConstGlobalValues.Instance.TIME_SPEED_WHILE_NAPPING);
+        Game.G.Time.SetTimeSpeed(Game.G.Values.TIME_SPEED_WHILE_NAPPING);
 
-        yield return new WaitForSeconds(ConstGlobalValues.Instance.NAPPING_DURATION);
+        yield return new WaitForSeconds(Game.G.Values.NAPPING_DURATION);
 
-        TimeManager.Instance.SetTimeSpeed(ConstGlobalValues.Instance.TIME_SPEED);
+        Game.G.Time.SetTimeSpeed(Game.G.Values.TIME_SPEED);
+        isNapping = false;
+    }
+    private void StopNapping() {
         isNapping = false;
 
-        UpdateHunger((ConstGlobalValues.Instance.NAPPING_DURATION * 60) / 5, -1);
-        UpdateThirst((ConstGlobalValues.Instance.NAPPING_DURATION * 60) / 5, -1);
-        UpdateEnergy((ConstGlobalValues.Instance.NAPPING_DURATION * 60) / 5, 1);
+        if(_napCoroutine != null) {
+            StopCoroutine(_napCoroutine);
+            _napCoroutine = null;
+        }
+        Game.G.Time.SetTimeSpeed(Game.G.Values.TIME_SPEED);
     }
-
     public void Equip(ItemInInventory itemValues) {
         _playerData.EquippedItem = itemValues.Data;
         itemValues.Equipped = true;
@@ -122,23 +167,35 @@ public class PlayerController : MonoBehaviour {
         _playerData.EquippedItem = null;
         itemValues.Equipped = false;
     }
+    private void UpdateStatsByTime() {
 
-    public void UpdateStatsByTime() {
-        UpdateHunger(1, -1);
-        UpdateThirst(1, -1);
-        UpdateEnergy(1, -1);
+        _playerData.Hunger -= _hungerLoss;
+
+        if (Hunger() <= 0 && isNapping)
+            StopNapping();
+
+        _playerData.Thirst -= _thirstLoss;
+
+        if(Thirst() <= 0 && !isSleeping) {
+            _playerData.Life -= _lifeLoss;
+        }
+
+        _playerData.Energy = isNapping|| isSleeping ? _playerData.Energy + _energyLoss : _playerData.Energy - _energyLoss;
+
+        _playerData.ClampStats();
+    }
+    private void UpdateEnergy() {
+        _playerData.Energy -= _energyLoss;
     }
 
-    private void UpdateHunger(float time, int posOrNeg) {
-        _playerData.Hunger += 3 * time * posOrNeg;
-        _playerData.CheckMaxValues();
+    public void ThinkSomething(ThoughtsSituation situation) {
+        _characterThoughts.Display(situation);
+        StartCoroutine(IThink());
     }
-    private void UpdateThirst(float time, int posOrNeg) {
-        _playerData.Thirst += 5 * time * posOrNeg;
-        _playerData.CheckMaxValues();
-    }
-    private void UpdateEnergy(float time, int posOrNeg) {
-        _playerData.Energy += 2 * time * posOrNeg;
-        _playerData.CheckMaxValues();
+    
+    private IEnumerator IThink() {
+        yield return new WaitForSeconds(2);
+
+        _characterThoughts.Hide();
     }
 }

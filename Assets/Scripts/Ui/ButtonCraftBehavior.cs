@@ -20,7 +20,7 @@ public class ButtonCraftBehavior : MonoBehaviour, IPointerEnterHandler, IPointer
         if (discovered) {
             _itemImg.sprite = item.Sprite();
             GetComponent<Button>().onClick.AddListener(() => {
-                CraftManager.Instance.CurrentCraft = item;
+                Game.G.Craft.CurrentCraft = item;
                 _craftDisplay.DisplayIngredientsSelection(item);
             });
         }

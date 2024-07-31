@@ -1,13 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DetectItemForward : MonoBehaviour {
     [SerializeField] LayerMask _layerMask;
+    [SerializeField] LayerMask _vaultLayer;
+
+    [SerializeField] float _maxVaultingDistance;
     [SerializeField] float _detectionDistance;
-    [SerializeField] float _detectionAngle;
+
+    [SerializeField] CapsuleCollider _collider;
+
+    private void Start() {
+    }
     void Update() {
-        if (GameManager.Instance.GetGameState() != GAMESTATE.RUNNING)
+        if (Game.G.GameManager.GetGameState() != GAMESTATE.RUNNING)
             return;
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _detectionDistance, _layerMask);
@@ -15,39 +24,45 @@ public class DetectItemForward : MonoBehaviour {
         foreach (var hit in hitColliders) {
 
             if (hit.transform.CompareTag("Item")) {
-
-                var currentItem = hit.transform.gameObject.GetComponent<ItemManager>();
-                UiManager.Instance.DisplayPressEInfo("Ramasser");
-
-                if (Input.GetKeyDown(KeyCode.E))
-                    GameManager.Instance.OnPickUpItem(currentItem.GetItem(), currentItem);
+                ItemBehavior(hit);
                 return;
             }
             else if (hit.transform.CompareTag("Bed")) {
-
-                UiManager.Instance.DisplayPressEInfo("Dormir");
-
-                if (Input.GetKeyDown(KeyCode.E))
-                    StartCoroutine(PlayerController.Instance.ISleep());
+                BedBehavior(hit);
                 return;
             }
             else if (hit.transform.CompareTag("Water")) {
-
-                UiManager.Instance.DisplayPressEInfo("Boire");
-
-                if (Input.GetKeyDown(KeyCode.E))
-                    PlayerController.Instance.Drink();
+                WaterBehavior(hit);
                 return;
             }
             else if (hit.transform.CompareTag("Stock")) {
-                UiManager.Instance.DisplayPressEInfo("Ouvrir le stockage");
+                StockBehavior(hit);
+                return;
+            }
+            else if (hit.transform.CompareTag("Fire")) {
+                UiManager.Instance.DisplayPressEInfo("Ajouter du bois");
 
                 if (Input.GetKeyDown(KeyCode.E)) {
-                    UiManager.Instance.DisplayInventory(StockInventory.Instance);
-                    UiManager.Instance.DisplayInventory(PlayerInventory.Instance);
-                    return;
+                    if (PlayerInventory.Instance.ItemExistsInInventory(ItemData.Wood())) {
+                        Game.G.Db.Fire.AddFuel();
+                        PlayerInventory.Instance.RemoveItem(ItemData.Wood());
+                    }
+                    else
+                        Debug.Log("Pas de bois dans l'inventaire");
                 }
-                    
+
+                return;
+            }
+            else if (hit.transform.CompareTag("Kitchen")) {
+                UiManager.Instance.DisplayPressEInfo("Cuisiner");
+
+                if (Input.GetKeyDown(KeyCode.E)) {
+                    Game.G.Cook.StartCooking();
+                }
+            }
+            else if (hit.gameObject.layer == 6) { // TODO : Mettre "vault" à la place de 6
+                VaultBehavior(hit);
+                return;
             }
         }
 
@@ -55,17 +70,102 @@ public class DetectItemForward : MonoBehaviour {
             UiManager.Instance.HidePressEInfo();
     }
 
- /*   private void OnDrawGizmos() {
+    IEnumerator LerpVault(Vector3 targetPosition, float duration, Collider hit) {
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _detectionDistance);
-        Vector3 forward = transform.forward * _detectionDistance;
-        Vector3 rightBoundary = Quaternion.Euler(0, _detectionAngle / 2, 0) * forward;
-        Vector3 leftBoundary = Quaternion.Euler(0, -_detectionAngle / 2, 0) * forward;
+        float time = 0;
+        Vector3 startPosition = transform.position;
 
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, forward);
-        Gizmos.DrawRay(transform.position, rightBoundary);
-        Gizmos.DrawRay(transform.position, leftBoundary);
-    } */
+        while (time < duration) {
+            transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPosition;
+        _collider.isTrigger = false;
+    }
+
+    private void VaultBehavior(Collider vault) {
+        UiManager.Instance.DisplayPressEInfo("Grimper");
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+
+            Game.G.Player.LoseEnergy();
+            float obstacleHeight = vault.GetComponent<Renderer>().bounds.size.y;
+            // La position à laquelle le joueur essaye de grimper :
+            // sa position actuelle + Son rayon * 2 devant lui + la distance max à laquelle il peut grimper en hauteur
+            Vector3 position = transform.position +
+                (transform.forward * _collider.radius * 2) +
+                (Vector3.up * _maxVaultingDistance);
+
+            var value = Physics.Raycast(position, Vector3.down, out var secondHit, _vaultLayer);
+
+            // On tire un raycast de la position trouvé vers le bas, de la taille du joueur pour voir s'il peut atterrir quelque part
+            if (value && Vector3.Distance(transform.position, secondHit.point) < _maxVaultingDistance) {
+                _collider.isTrigger = true;
+                StartCoroutine(LerpVault(secondHit.point, 0.5f, vault));
+            }
+        }
+    }
+    private void BedBehavior(Collider bed) {
+
+        UiManager.Instance.DisplayPressEInfo("Dormir");
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            if(Game.G.Player.Hunger() <= 0) {
+                Game.G.Player.ThinkSomething(ThoughtsSituation.TooHungryToSleep);
+            }
+            else if (Game.G.Db.Fire.GetFireState() <= 0) {
+                Game.G.Player.ThinkSomething(ThoughtsSituation.TooColdToSleep);
+            }
+            else {
+                Game.G.Player.Sleep();
+            }
+        }
+    }
+    private void ItemBehavior(Collider item) {
+        var currentItem = item.transform.gameObject.GetComponent<ItemManager>();
+        UiManager.Instance.DisplayPressEInfo("Ramasser");
+
+        if (Input.GetKeyDown(KeyCode.E))
+            Game.G.GameManager.OnPickUpItem.Invoke(currentItem.GetItem(), currentItem);
+    }
+    private void WaterBehavior(Collider water) {
+
+        if(Game.G.Player.Equipped()?.name == "Lance") {
+            UiManager.Instance.DisplayPressEInfo("Pêcher");
+
+            if (Input.GetKeyDown(KeyCode.E))
+                Game.G.Player.Fishing();
+        }
+        else {
+            UiManager.Instance.DisplayPressEInfo("Boire");
+
+            if (Input.GetKeyDown(KeyCode.E))
+                Game.G.Player.Drink();
+        }
+        
+    }
+    private void StockBehavior(Collider stock) {
+        UiManager.Instance.DisplayPressEInfo("Ouvrir le stockage");
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            UiManager.Instance.DisplayInventory(StockInventory.Instance);
+            UiManager.Instance.DisplayInventory(PlayerInventory.Instance);
+
+        }
+    }
+    /*   private void OnDrawGizmos() {
+
+           Gizmos.color = Color.red;
+           Gizmos.DrawWireSphere(transform.position, _detectionDistance);
+           Vector3 forward = transform.forward * _detectionDistance;
+           Vector3 rightBoundary = Quaternion.Euler(0, _detectionAngle / 2, 0) * forward;
+           Vector3 leftBoundary = Quaternion.Euler(0, -_detectionAngle / 2, 0) * forward;
+
+           Gizmos.color = Color.green;
+           Gizmos.DrawRay(transform.position, forward);
+           Gizmos.DrawRay(transform.position, rightBoundary);
+           Gizmos.DrawRay(transform.position, leftBoundary);
+       } */
 }

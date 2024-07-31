@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ConstGlobalValues : MonoBehaviour {
-    public static ConstGlobalValues Instance;
-
-    private void Awake() {
-        Instance = this;
-    }
 
     public int PLAYER_INVENTORY_SIZE;
+    public int PLAYER_SPEED;
     public float TIME_SPEED;
     public float TIME_SPEED_WHILE_NAPPING;
     public float NAPPING_DURATION;
     public int WAKE_UP_HOUR;
+    public int MAX_PREPARATION_SLOTS;
+    public int MAX_PREPARATION;
 }
 
 public static class Utils {

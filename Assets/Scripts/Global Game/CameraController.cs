@@ -8,6 +8,6 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate() {
         
-        transform.position = PlayerController.Instance.transform.position + _offset;
+        transform.position = Game.G.Player.transform.position + _offset;
     }
 }

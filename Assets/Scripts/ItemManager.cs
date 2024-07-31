@@ -6,6 +6,7 @@ using static UnityEditor.Progress;
 public class ItemManager : MonoBehaviour {
     [SerializeField] ItemData _data;
 
+    private SpawnerBehavior _spawner;
     private void Start() {
         if (_data == null) {
             _data = Resources.Load<ItemData>($"Scriptables/Items/{name}");
@@ -18,6 +19,16 @@ public class ItemManager : MonoBehaviour {
 
     public ItemData GetItem() {
         return _data;
+    }
+    public void SetSpawner(SpawnerBehavior spawner, Vector3 position) {
+        _spawner = spawner;
+        transform.position = position;
+    }
+    public void RemoveFromSpawn() {
+        if (_spawner == null)
+            return;
+
+        _spawner.GetData().ItemsToSpawn.Remove(_data);
     }
 
     public void DestroyItem() {

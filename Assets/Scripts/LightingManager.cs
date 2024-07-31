@@ -11,7 +11,7 @@ public class LightingManager : MonoBehaviour {
         if (_preset == null)
             return;
         
-        UpdateLighting(TimeManager.Instance.GlobalTimer / 1440f);
+        UpdateLighting(Game.G.Time.GlobalTimer / 1440f);
     }
     private void UpdateLighting(float timePercent) {
         RenderSettings.ambientLight = _preset.AmbientColor.Evaluate(timePercent);

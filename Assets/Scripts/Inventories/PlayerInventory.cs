@@ -8,6 +8,7 @@ public class PlayerInventory : Inventory {
     public static PlayerInventory Instance;
     public void HandlePickUpItem(ItemData item, ItemManager itemManager) {
         if (AddItem(item)) {
+            itemManager.RemoveFromSpawn();
             itemManager.DestroyItem();
         }
     }
@@ -17,7 +18,7 @@ public class PlayerInventory : Inventory {
 
         base.Initialize();
 
-        GameManager.Instance.OnPickUpItem += HandlePickUpItem;
+        Game.G.GameManager.OnPickUpItem += HandlePickUpItem;
 
         Instance = this;
         _slotType = SlotType.PlayerInventory;

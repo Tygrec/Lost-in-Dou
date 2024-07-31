@@ -8,6 +8,8 @@ TagManager:
   - Bed
   - Water
   - Stock
+  - Fire
+  - Kitchen
   layers:
   - Default
   - TransparentFX
@@ -15,9 +17,9 @@ TagManager:
   - Interaction
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Vault
+  - Ground
+  - Jump
   - 
   - 
   - 

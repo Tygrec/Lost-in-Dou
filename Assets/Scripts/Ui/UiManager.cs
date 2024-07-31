@@ -9,10 +9,13 @@ public class UiManager : MonoBehaviour {
     [SerializeField] InventoryDisplay _playerInventory;
     [SerializeField] InventoryDisplay _craftInventory;
     [SerializeField] InventoryDisplay _stockInventory;
+    [SerializeField] InventoryDisplay _kitchenInventory;
+    [SerializeField] List<InventoryDisplay> _preparationInventories;
 
     [SerializeField] TooltipDisplay _tooltip;
     [SerializeField] PlayerStateDisplay _playerStateDisplay;
     [SerializeField] CraftDisplay _craftDisplay;
+    [SerializeField] CookingDisplay _cookingDisplay;
 
     static public UiManager Instance;
 
@@ -41,6 +44,10 @@ public class UiManager : MonoBehaviour {
         InventoryDisplayMapping.Add(PlayerInventory.Instance, _playerInventory);
         InventoryDisplayMapping.Add(CraftInventory.Instance, _craftInventory);
         InventoryDisplayMapping.Add(StockInventory.Instance, _stockInventory);
+        InventoryDisplayMapping.Add(KitchenInventory.Instance, _kitchenInventory);
+    }
+    public void MapPreparationDisplay(PreparationInventory inventory, int index) {
+        InventoryDisplayMapping.Add(inventory, _preparationInventories[index]);
     }
 
     public void DisplayPressEInfo(string info) {
@@ -90,6 +97,17 @@ public class UiManager : MonoBehaviour {
     }
     public void QuitCraftDisplay() {
         _craftDisplay.QuitDisplay();
+    }
+
+    public void DisplayCooking() {
+        _cookingDisplay.Display();
+    }
+    // TODO : à changer, ce n'est pas à l'UI manager de gérer ça
+    public void SetCurrentPreparation(Preparation prep) {
+        _cookingDisplay.SetCurrentPreparation(prep);
+    }
+    public void QuitDisplayCooking() {
+        _cookingDisplay?.QuitDisplay();
     }
 
     private void Update() {

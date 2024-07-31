@@ -45,7 +45,7 @@ public abstract class Inventory {
     // Retourne FALSE s'il n'y a pas assez d'item à retirer de l'inventaire
     public virtual bool RemoveItem(ItemData item) {
 
-        if (!ItemExistsInInventory(_stock, item)) {
+        if (!ItemExistsInInventory(item)) {
             return false;
         }
 
@@ -57,8 +57,8 @@ public abstract class Inventory {
     }
 
     // Fonctions utilitaires pour manipuler l'inventaire
-    protected static bool ItemExistsInInventory(ItemInInventory[] stock, ItemData item) {
-        foreach (var i in stock) {
+    public bool ItemExistsInInventory(ItemData item) {
+        foreach (var i in _stock) {
             if (i == null)
                 continue;
             else if (i.Data == item)
@@ -67,6 +67,19 @@ public abstract class Inventory {
 
         return false;
     }
+    public List<ItemInInventory> GetFoodStock() {
+        List<ItemInInventory> foodStock = new List<ItemInInventory>();
+
+        foreach (var item in _stock) {
+            if (item != null && item.Data.Type == ItemType.Food) {
+
+                foodStock.Add(item);
+            }
+        }
+
+        return foodStock;
+    }
+
     protected static bool InventoryHasRoom(ItemInInventory[] stock) {
         foreach (var item in stock) {
             if (item == null)

@@ -10,7 +10,9 @@ using static UnityEditor.Progress;
 public enum SlotType {
     PlayerInventory,
     Craft,
-    OtherInventory
+    OtherInventory,
+    Kitchen,
+    Preparation
 }
 
 public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler {
@@ -43,7 +45,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             _equip.gameObject.SetActive(true);
 
         if (_inventory.GetSlotType() == SlotType.Craft) {
-            _blocker.gameObject.SetActive(!CraftManager.Instance.CurrentCraft.NeedItemForRecipe(itemValues.Data));
+            _blocker.gameObject.SetActive(!Game.G.Craft.CurrentCraft.NeedItemForRecipe(itemValues.Data));
         }
     }
 
@@ -61,9 +63,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         else if (_inventory.GetSlotType() == SlotType.OtherInventory) {
             CheckOtherInventoryClick(item);
         }
+        else if (_inventory.GetSlotType() == SlotType.Kitchen) {
+            CheckKitchenInventoryClick(item);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
+        if(_inventory == null) {
+            Debug.LogError("On n'a pas associé d'inventaire au slot !");
+            return;
+        }
         if (_inventory.GetItemAtIndex(_index) == null)
             return;
 
@@ -81,27 +90,27 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (Time.time - lastClickTime < doubleClickThreshold) {
 
             if (UiManager.Instance.StockInventoryIsOpen()) {
-                StockInventory.Instance.AddItem(item);
-                PlayerInventory.Instance.RemoveItem(item);
+                if (StockInventory.Instance.AddItem(item))
+                    PlayerInventory.Instance.RemoveItem(item);
             }
 
             if (item.Consommable) {
                 if (_inventory is PlayerInventory) {
 
-                    PlayerController.Instance.Eat(item);
+                    Game.G.Player.Eat(item);
                     _inventory.RemoveItem(item);
                 }
             }
             else if (item.Equippable) {
                 if (itemValues.Equipped) {
 
-                    PlayerController.Instance.UnEquip(itemValues);
+                    Game.G.Player.UnEquip(itemValues);
                     itemValues.Equipped = false;
                     _equip.gameObject.SetActive(false);
                 }
-                else if (PlayerController.Instance.Equipped() == null) {
+                else if (Game.G.Player.Equipped() == null) {
 
-                    PlayerController.Instance.Equip(itemValues);
+                    Game.G.Player.Equip(itemValues);
                     itemValues.Equipped = true;
                     _equip.gameObject.SetActive(true);
                 }
@@ -120,12 +129,24 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         selected = !selected;
 
         if (selected)
-            CraftManager.Instance.CurrentIngredients.Add(item.Data);
+            Game.G.Craft.CurrentIngredients.Add(item.Data);
         else
-            CraftManager.Instance.CurrentIngredients.Remove(item.Data);
+            Game.G.Craft.CurrentIngredients.Remove(item.Data);
 
         _check.gameObject.SetActive(selected);
     }
+
+    private void CheckKitchenInventoryClick(ItemInInventory item) {
+        selected = !selected;
+
+        if (selected)
+            Game.G.Cook.AddIngredientToCurrentPreparation(item.Data);
+        else
+            Game.G.Cook.RemoveIngredientFromCurrentPreparation(item.Data);
+
+        _check.gameObject.SetActive(selected);
+    }
+
     private void CheckOtherInventoryClick(ItemInInventory itemValues) {
         ItemData item = itemValues.Data;
 

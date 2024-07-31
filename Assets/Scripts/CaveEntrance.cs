@@ -7,9 +7,9 @@ public class CaveEntrance : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             if (gameObject.scene.name == "CaveScene")
-                SceneController.Instance.ChangeScene("MainScene");
+                Game.G.Scene.ChangeScene("CaveScene", "MainScene");
             else if (gameObject.scene.name == "MainScene")
-                SceneController.Instance.ChangeScene("CaveScene");
+                Game.G.Scene.ChangeScene("MainScene", "CaveScene");
         }
     }
 }

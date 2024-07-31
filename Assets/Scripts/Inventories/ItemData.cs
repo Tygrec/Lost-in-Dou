@@ -42,6 +42,16 @@ public class ItemData : ScriptableObject
 
         return false;
     }
+
+    public static ItemData Wood() {
+        return Resources.Load<ItemData>("Scriptables/Items/Bois");
+    }
+    public static ItemData Spear() {
+        return Resources.Load<ItemData>("Scriptables/Items/Lance");
+    }
+    public static ItemData Fish() {
+        return Resources.Load<ItemData>("Scriptables/Items/Poisson");
+    }
 }
 
 [Serializable]

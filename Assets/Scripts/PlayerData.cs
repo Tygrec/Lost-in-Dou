@@ -11,14 +11,10 @@ public class PlayerData {
     public float Energy = 50;
     public float Life = 100;
 
-    public void CheckMaxValues() {
-        if (Hunger > 100)
-            Hunger = 100;
-        if (Thirst > 100)
-            Thirst = 100;
-        if (Energy > 100)
-            Energy = 100;
-        if (Life > 100)
-            Life = 100;
+    public void ClampStats() {
+        Hunger = Mathf.Clamp(Hunger, 0, 100);
+        Thirst = Mathf.Clamp(Thirst, 0, 100);
+        Energy = Mathf.Clamp(Energy, 0, 100);
+        Life = Mathf.Clamp(Life, 0, 100);
     }
 }
