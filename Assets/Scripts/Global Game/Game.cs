@@ -14,6 +14,7 @@ public class Game : MonoBehaviour
     public CookManager Cook;
     public DataBase Db;
     public PlayerController Player;
+    public InventoryManager Inv;
 
     private void Awake() {
 

@@ -22,11 +22,8 @@ public class CookManager : MonoBehaviour {
     private void Start() {
         Preparations = new Preparation[Game.G.Values.MAX_PREPARATION];
         for (int i = 0; i < Preparations.Length; i++) {
-            Preparations[i] = new Preparation();
-            UiManager.Instance.MapPreparationDisplay(Preparations[i].Inventory, i);
+            Preparations[i] = new Preparation(i);
         }
-
-        print("Préparations initialisées");
     }
     public void StartCooking() {
         Game.G.GameManager.ChangeGameState(GAMESTATE.PAUSE);
@@ -78,6 +75,18 @@ public class CookManager : MonoBehaviour {
         // TODO : à changer, ce n'est pas à l'UI manager de gérer ça
         UiManager.Instance.SetCurrentPreparation(preparation);
     }
+    public int GetCurrentPreparationId() {
+        if (_currentPreparation == null)
+            return -1;
+
+        return _currentPreparation.Id;
+    }
+    public Color GetCurrentPreparationColor() {
+        return _currentPreparation.Color;
+    }
+    public Preparation GetPreparationById(int id) {
+        return Preparations[id-1];
+    }
     public void AddIngredientToCurrentPreparation(ItemData item) {
         if (_currentPreparation == null)
             return;
@@ -90,16 +99,20 @@ public class CookManager : MonoBehaviour {
 
         _currentPreparation.Inventory.RemoveItem(item);
     }
+    public void RemoveIngredientFromPreparation(ItemData item, int id) {
+        Preparations[id].Inventory.RemoveItem(item);
+    }
 }
 
 public class Preparation {
     public PreparationInventory Inventory;
-    public int Index;
+    public Color Color;
+    public int Id;
 
-    public Preparation() {
-        Inventory = new PreparationInventory();
-        Inventory.Initialize();
-        Index = CookManager.Index++;
+    public Preparation(int index) {
+        Inventory = (PreparationInventory)Game.G.Inv.Get(InvTag.Prep1 + index);
+        Id = index;
+        Color = Random.ColorHSV();
     }
 }
 public class Plate {

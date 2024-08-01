@@ -6,11 +6,15 @@ using UnityEngine;
 public class UiManager : MonoBehaviour {
     [SerializeField] TextMeshProUGUI _pressEInfoTxt;
 
-    [SerializeField] InventoryDisplay _playerInventory;
-    [SerializeField] InventoryDisplay _craftInventory;
-    [SerializeField] InventoryDisplay _stockInventory;
-    [SerializeField] InventoryDisplay _kitchenInventory;
-    [SerializeField] List<InventoryDisplay> _preparationInventories;
+    public InventoryDisplay PlayerInventoryDisplay;
+    public InventoryDisplay CraftInventoryDisplay;
+    public InventoryDisplay StockInventoryDisplay;
+    public InventoryDisplay KitchenInventoryDisplay;
+
+    public InventoryDisplay Prep1Display;
+    public InventoryDisplay Prep2Display;
+    public InventoryDisplay Prep3Display;
+    public InventoryDisplay Prep4Display;
 
     [SerializeField] TooltipDisplay _tooltip;
     [SerializeField] PlayerStateDisplay _playerStateDisplay;
@@ -21,13 +25,12 @@ public class UiManager : MonoBehaviour {
 
     public Action<Inventory> OnInventoryChanged;
     //  public Action OnPlayerStateChanged;
-    public Dictionary<Inventory, InventoryDisplay> InventoryDisplayMapping = new Dictionary<Inventory, InventoryDisplay>();
 
     public bool PlayerInventoryIsOpen() {
-        return _playerInventory.IsOpen;
+        return Game.G.Inv.GetDisplay(InvTag.Player).IsOpen;
     }
     public bool StockInventoryIsOpen() {
-        return _stockInventory.IsOpen;
+        return Game.G.Inv.GetDisplay(InvTag.Stock).IsOpen;
     }
 
     private void OnEnable() {
@@ -40,16 +43,6 @@ public class UiManager : MonoBehaviour {
         Instance = this;
     }
 
-    public void Init() {
-        InventoryDisplayMapping.Add(PlayerInventory.Instance, _playerInventory);
-        InventoryDisplayMapping.Add(CraftInventory.Instance, _craftInventory);
-        InventoryDisplayMapping.Add(StockInventory.Instance, _stockInventory);
-        InventoryDisplayMapping.Add(KitchenInventory.Instance, _kitchenInventory);
-    }
-    public void MapPreparationDisplay(PreparationInventory inventory, int index) {
-        InventoryDisplayMapping.Add(inventory, _preparationInventories[index]);
-    }
-
     public void DisplayPressEInfo(string info) {
         _pressEInfoTxt.transform.parent.gameObject.SetActive(true);
         _pressEInfoTxt.text = $"E ({info})";
@@ -60,7 +53,7 @@ public class UiManager : MonoBehaviour {
     }
 
     public void RefreshInventoryDisplay(Inventory inventory) {
-        InventoryDisplay inventoryDisplay = InventoryDisplayMapping[inventory];
+        InventoryDisplay inventoryDisplay = Game.G.Inv.GetDisplay(inventory);
 
         if (!inventoryDisplay.gameObject.activeSelf)
             return;
@@ -70,7 +63,7 @@ public class UiManager : MonoBehaviour {
     }
     public void DisplayInventory(Inventory inventory) {
 
-        var display = InventoryDisplayMapping[inventory];
+        var display = Game.G.Inv.GetDisplay(inventory);
 
         if (display.gameObject.activeSelf) {
             HideTooltip();
@@ -112,7 +105,7 @@ public class UiManager : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.I)) {
-            DisplayInventory(PlayerInventory.Instance);
+            DisplayInventory(Game.G.Inv.Get(InvTag.Player));
         }
 
         if (Input.GetKeyDown(KeyCode.C)) {

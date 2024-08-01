@@ -35,26 +35,24 @@ public class CookingDisplay : MonoBehaviour {
         }
     }
     private void DisplayIngredients() {
+        KitchenInventory kitchen = (KitchenInventory)Game.G.Inv.Get(InvTag.Kitchen);
+        kitchen.SetFoodStock();
 
-        KitchenInventory.Instance.SetFoodStock();
-
-        UiManager.Instance.DisplayInventory(KitchenInventory.Instance);
+        UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Kitchen));
     }
 
     private void DisplayPreparations() {
-        int i = 0;
 
-        foreach (var preparation in Game.G.Cook.Preparations) {
-
-            _preparationDisplays[i].Related = preparation;
-            UiManager.Instance.DisplayInventory(preparation.Inventory);
+        for (int i = 0; i < _preparationDisplays.Count; i++) {
+            _preparationDisplays[i].SetPreparation(Game.G.Cook.Preparations[i]);
+            UiManager.Instance.DisplayInventory(Game.G.Cook.Preparations[i].Inventory);
         }
     }
 
     public void SetCurrentPreparation(Preparation preparation) {
-        print(preparation.Index);
-        foreach (var prep in _preparationDisplays) {
-            prep.SetSelected(prep.Related == preparation);
+        
+        foreach (var display in _preparationDisplays) {
+            display.SetSelected(display.GetPreparation() == preparation);
         }
     }
 

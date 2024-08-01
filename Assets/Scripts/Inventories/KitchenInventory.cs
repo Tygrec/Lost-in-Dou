@@ -4,26 +4,23 @@ using UnityEngine;
 
 public class KitchenInventory : Inventory
 {
-    public static KitchenInventory Instance;
-
     public override void Initialize() {
-        Instance = this;
 
-        _slotType = SlotType.Kitchen;
+        _slotType = InvTag.Kitchen;
 
         SetFoodStock();
     }
 
     public void SetFoodStock() {
-        _size = PlayerInventory.Instance.GetMaxSize() + StockInventory.Instance.GetMaxSize();
+        _size = Game.G.Inv.Get(InvTag.Player).GetMaxSize() + Game.G.Inv.Get(InvTag.Stock).GetMaxSize();
         _stock = new ItemInInventory[_size];
 
         int i = 0;
 
-        foreach (var item in PlayerInventory.Instance.GetFoodStock()) {
+        foreach (var item in Game.G.Inv.Get(InvTag.Player).GetFoodStock()) {
             _stock[i++] = item;
         }
-        foreach(var item in StockInventory.Instance.GetFoodStock()) {
+        foreach(var item in Game.G.Inv.Get(InvTag.Stock).GetFoodStock()) {
             _stock[i++] = item;
         }
     }

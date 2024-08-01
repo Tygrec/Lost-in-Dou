@@ -23,22 +23,8 @@ public class GameManager : MonoBehaviour {
         {
         return _playerData;
     }
-    private List<Inventory> _inventories = new List<Inventory>();
 
     public string CurrentScene = "MainScene";
-
-    private void Start() {
-        _inventories.Add(new PlayerInventory());
-        _inventories.Add(new CraftInventory());
-        _inventories.Add(new StockInventory());
-        _inventories.Add(new KitchenInventory());
-
-        foreach (var inventory in _inventories) {
-            inventory.Initialize();
-        }
-
-        UiManager.Instance.Init();
-    }
 
     public void ChangeGameState(GAMESTATE gs) {
         _GameState = gs;

@@ -4,8 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInventory : Inventory {
-
-    public static PlayerInventory Instance;
     public void HandlePickUpItem(ItemData item, ItemManager itemManager) {
         if (AddItem(item)) {
             itemManager.RemoveFromSpawn();
@@ -20,7 +18,6 @@ public class PlayerInventory : Inventory {
 
         Game.G.GameManager.OnPickUpItem += HandlePickUpItem;
 
-        Instance = this;
-        _slotType = SlotType.PlayerInventory;
+        _slotType = InvTag.Player;
     }
 }

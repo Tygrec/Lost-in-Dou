@@ -1057,74 +1057,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135480554}
   m_CullTransparentMesh: 1
---- !u!1001 &154416418
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3567634228063693144, guid: 8bf9e845a471d344fa9dd037adb67f40,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -14.755469
-      objectReference: {fileID: 0}
-    - target: {fileID: 3567634228063693144, guid: 8bf9e845a471d344fa9dd037adb67f40,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3567634228063693144, guid: 8bf9e845a471d344fa9dd037adb67f40,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 14.051664
-      objectReference: {fileID: 0}
-    - target: {fileID: 3567634228063693144, guid: 8bf9e845a471d344fa9dd037adb67f40,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3567634228063693144, guid: 8bf9e845a471d344fa9dd037adb67f40,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3567634228063693144, guid: 8bf9e845a471d344fa9dd037adb67f40,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3567634228063693144, guid: 8bf9e845a471d344fa9dd037adb67f40,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3567634228063693144, guid: 8bf9e845a471d344fa9dd037adb67f40,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3567634228063693144, guid: 8bf9e845a471d344fa9dd037adb67f40,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3567634228063693144, guid: 8bf9e845a471d344fa9dd037adb67f40,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5304249757613194578, guid: 8bf9e845a471d344fa9dd037adb67f40,
-        type: 3}
-      propertyPath: m_Name
-      value: Noix de coco
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8bf9e845a471d344fa9dd037adb67f40, type: 3}
 --- !u!114 &180259608 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3127613130285555043, guid: 2eb89e7119ba1ed40b7e0a42124b2e5f,
@@ -8229,15 +8161,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pressEInfoTxt: {fileID: 764083292}
-  _playerInventory: {fileID: 83065004}
-  _craftInventory: {fileID: 1261579876}
-  _stockInventory: {fileID: 1959254022}
-  _kitchenInventory: {fileID: 2126596886}
-  _preparationInventories:
-  - {fileID: 340235003}
-  - {fileID: 1887637765}
-  - {fileID: 1865688330}
-  - {fileID: 1020372367}
+  PlayerInventoryDisplay: {fileID: 83065004}
+  CraftInventoryDisplay: {fileID: 1261579876}
+  StockInventoryDisplay: {fileID: 1959254022}
+  KitchenInventoryDisplay: {fileID: 2126596886}
+  Prep1Display: {fileID: 340235003}
+  Prep2Display: {fileID: 1887637765}
+  Prep3Display: {fileID: 1865688330}
+  Prep4Display: {fileID: 1020372367}
   _tooltip: {fileID: 730133349}
   _playerStateDisplay: {fileID: 1507020968}
   _craftDisplay: {fileID: 2139767290}
@@ -9671,4 +9602,3 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1972869714}
-  - {fileID: 154416418}

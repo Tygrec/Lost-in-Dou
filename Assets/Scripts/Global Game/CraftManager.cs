@@ -57,10 +57,10 @@ public class CraftManager : MonoBehaviour {
         if (success) {
 
             foreach (var item in CurrentIngredients) {
-                PlayerInventory.Instance.RemoveItem(item);
+                Game.G.Inv.Get(InvTag.Player).RemoveItem(item);
             }
 
-            PlayerInventory.Instance.AddItem(CurrentCraft);
+            Game.G.Inv.Get(InvTag.Player).AddItem(CurrentCraft);
 
             CurrentCraft = null;
             CurrentIngredients.Clear();

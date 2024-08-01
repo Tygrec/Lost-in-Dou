@@ -37,7 +37,7 @@ public class CraftDisplay : MonoBehaviour {
     }
 
     public void DisplayIngredientsSelection(ItemData item) {
-        UiManager.Instance.DisplayInventory(CraftInventory.Instance);
+        UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Craft));
     }
 
     public void QuitDisplay() {

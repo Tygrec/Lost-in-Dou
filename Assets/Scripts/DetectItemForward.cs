@@ -43,9 +43,9 @@ public class DetectItemForward : MonoBehaviour {
                 UiManager.Instance.DisplayPressEInfo("Ajouter du bois");
 
                 if (Input.GetKeyDown(KeyCode.E)) {
-                    if (PlayerInventory.Instance.ItemExistsInInventory(ItemData.Wood())) {
+                    if (Game.G.Inv.Get(InvTag.Player).ItemExistsInInventory(ItemData.Wood())) {
                         Game.G.Db.Fire.AddFuel();
-                        PlayerInventory.Instance.RemoveItem(ItemData.Wood());
+                        Game.G.Inv.Get(InvTag.Player).RemoveItem(ItemData.Wood());
                     }
                     else
                         Debug.Log("Pas de bois dans l'inventaire");
@@ -150,8 +150,8 @@ public class DetectItemForward : MonoBehaviour {
         UiManager.Instance.DisplayPressEInfo("Ouvrir le stockage");
 
         if (Input.GetKeyDown(KeyCode.E)) {
-            UiManager.Instance.DisplayInventory(StockInventory.Instance);
-            UiManager.Instance.DisplayInventory(PlayerInventory.Instance);
+            UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Player));
+            UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Stock));
 
         }
     }

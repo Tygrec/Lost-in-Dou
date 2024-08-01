@@ -6,14 +6,21 @@ using UnityEngine.UI;
 
 public class PreparationDisplay : MonoBehaviour, IPointerDownHandler
 {
-    public Preparation Related;
+    private Preparation _related;
+
+    public void SetPreparation(Preparation preparation) {
+        _related = preparation;
+    }
+    public Preparation GetPreparation() {
+        return _related;
+    }
 
     public void OnPointerDown(PointerEventData eventData) {
-        print(Related);
-        Game.G.Cook.ChangeCurrentPreparation(Related);
+        Game.G.Cook.ChangeCurrentPreparation(_related);
     }
 
     public void SetSelected(bool value) {
         GetComponent<Outline>().enabled = value;
+        GetComponent<Outline>().effectColor = _related.Color;
     }
 }

@@ -1,23 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
-
-public enum SlotType {
-    PlayerInventory,
-    Craft,
-    OtherInventory,
-    Kitchen,
-    Preparation
-}
 
 public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler {
     private Inventory _inventory;
     private int _index;
+    private int _prepId = 0;
 
     [SerializeField] Image _itemImg;
     [SerializeField] Image _check;
@@ -44,7 +32,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (itemValues.Equipped)
             _equip.gameObject.SetActive(true);
 
-        if (_inventory.GetSlotType() == SlotType.Craft) {
+        if (_inventory.GetSlotType() == InvTag.Craft) {
             _blocker.gameObject.SetActive(!Game.G.Craft.CurrentCraft.NeedItemForRecipe(itemValues.Data));
         }
     }
@@ -54,16 +42,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
         if (item == null) { return; }
 
-        if (_inventory.GetSlotType() == SlotType.PlayerInventory) {
+        if (_inventory.GetSlotType() == InvTag.Player) {
             CheckPlayerInventoryClick(item);
         }
-        else if (_inventory.GetSlotType() == SlotType.Craft) {
+        else if (_inventory.GetSlotType() == InvTag.Craft) {
             CheckCraftInventoryClick(item);
         }
-        else if (_inventory.GetSlotType() == SlotType.OtherInventory) {
-            CheckOtherInventoryClick(item);
+        else if (_inventory.GetSlotType() == InvTag.Stock) {
+            CheckStockInventoryClick(item);
         }
-        else if (_inventory.GetSlotType() == SlotType.Kitchen) {
+        else if (_inventory.GetSlotType() == InvTag.Kitchen) {
             CheckKitchenInventoryClick(item);
         }
     }
@@ -90,8 +78,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (Time.time - lastClickTime < doubleClickThreshold) {
 
             if (UiManager.Instance.StockInventoryIsOpen()) {
-                if (StockInventory.Instance.AddItem(item))
-                    PlayerInventory.Instance.RemoveItem(item);
+                if (Game.G.Inv.Get(InvTag.Stock).AddItem(item))
+                    Game.G.Inv.Get(InvTag.Player).RemoveItem(item);
             }
 
             if (item.Consommable) {
@@ -137,23 +125,37 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     }
 
     private void CheckKitchenInventoryClick(ItemInInventory item) {
+        int currentPrepId = Game.G.Cook.GetCurrentPreparationId();
+
+        // Aucune préparation sélectionnée et l'item n'est dans aucune préparation
+        if (currentPrepId == -1 && !selected)
+            return;
+
+        // Préparation sélectionnée et l'item n'est dans aucune préparation
+        if (currentPrepId != -1 && !selected) {
+            Game.G.Cook.AddIngredientToCurrentPreparation(item.Data);
+            GetComponent<Outline>().effectColor = Game.G.Cook.GetCurrentPreparationColor();
+            _prepId = currentPrepId;
+        }
+
+        // L'item est dans une préparation
+        if (selected) {
+            Game.G.Cook.RemoveIngredientFromPreparation(item.Data, _prepId);
+            _prepId = -1;
+        }
+
         selected = !selected;
 
-        if (selected)
-            Game.G.Cook.AddIngredientToCurrentPreparation(item.Data);
-        else
-            Game.G.Cook.RemoveIngredientFromCurrentPreparation(item.Data);
-
-        _check.gameObject.SetActive(selected);
+        GetComponent<Outline>().enabled = selected;
     }
 
-    private void CheckOtherInventoryClick(ItemInInventory itemValues) {
+    private void CheckStockInventoryClick(ItemInInventory itemValues) {
         ItemData item = itemValues.Data;
 
 
         if (Time.time - lastClickTime < doubleClickThreshold) {
-            StockInventory.Instance.RemoveItem(item);
-            PlayerInventory.Instance.AddItem(item);
+            Game.G.Inv.Get(InvTag.Stock).RemoveItem(item);
+            Game.G.Inv.Get(InvTag.Player).AddItem(item);
         }
         else {
             lastClickTime = Time.time;

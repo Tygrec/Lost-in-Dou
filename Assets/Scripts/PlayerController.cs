@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Fishing() {
-        PlayerInventory.Instance.AddItem(ItemData.Fish());
+        Game.G.Inv.Get(InvTag.Player).AddItem(ItemData.Fish());
     }
 
     public void Sleep() {

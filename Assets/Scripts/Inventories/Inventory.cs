@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Inventory {
+    public int Id;
 
     protected ItemInInventory[] _stock;
     protected int _size;
-    protected SlotType _slotType;
+    protected InvTag _slotType;
 
     public int GetMaxSize() {
         return _size;
@@ -17,7 +18,7 @@ public abstract class Inventory {
     public int GetCurrentSize() {
         return _stock.Length;
     }
-    public SlotType GetSlotType() {
+    public InvTag GetSlotType() {
         return _slotType;
     }
     public ItemInInventory[] GetStock() {
@@ -79,6 +80,8 @@ public abstract class Inventory {
 
         return foodStock;
     }
+
+
 
     protected static bool InventoryHasRoom(ItemInInventory[] stock) {
         foreach (var item in stock) {

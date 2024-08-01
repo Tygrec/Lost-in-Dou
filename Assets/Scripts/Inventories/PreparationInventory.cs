@@ -9,6 +9,13 @@ public class PreparationInventory : Inventory
 
         base.Initialize();
 
-        _slotType = SlotType.Preparation;
+        if (Id == 1)
+            _slotType = InvTag.Prep1;
+        else if (Id == 2)
+            _slotType = InvTag.Prep2;
+        else if (Id == 3)
+            _slotType = InvTag.Prep3;
+        else if (Id == 4)
+            _slotType= InvTag.Prep4;
     }
 }
