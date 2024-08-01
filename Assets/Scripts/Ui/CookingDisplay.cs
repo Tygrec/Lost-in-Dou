@@ -63,6 +63,13 @@ public class CookingDisplay : MonoBehaviour {
 
         _result.SetActive(true);
     }
+    public void HidePlate() {
+        _result.SetActive(false);
+    }
+
+    public void Validate() {
+        Game.G.Cook.CookAndEat();
+    }
 
     public void QuitDisplay() {
         gameObject.SetActive(false);
@@ -71,5 +78,11 @@ public class CookingDisplay : MonoBehaviour {
     public void AbandonCooking() {
         gameObject.SetActive(false);
         Game.G.Cook.StopCooking();
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            AbandonCooking();
+        }
     }
 }

@@ -99,6 +99,12 @@ public class UiManager : MonoBehaviour {
     public void SetCurrentPreparation(Preparation prep) {
         _cookingDisplay.SetCurrentPreparation(prep);
     }
+    public void DisplayPlate(Plate plate) {
+        _cookingDisplay.DisplayPlate(plate);
+    }
+    public void HidePlate() {
+        _cookingDisplay.HidePlate();
+    }
     public void QuitDisplayCooking() {
         _cookingDisplay?.QuitDisplay();
     }

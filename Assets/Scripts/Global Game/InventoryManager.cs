@@ -62,4 +62,12 @@ public class InventoryManager : MonoBehaviour
         _inventoryDisplays.Add(_inventories[InvTag.Prep3], UiManager.Instance.Prep3Display);
         _inventoryDisplays.Add(_inventories[InvTag.Prep4], UiManager.Instance.Prep4Display);
     }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            foreach (var inventory in _inventoryDisplays.Values) {
+                inventory.ExitDisplay();
+            }
+        }
+    }
 }

@@ -12,6 +12,8 @@ public class ConstGlobalValues : MonoBehaviour {
     public int WAKE_UP_HOUR;
     public int MAX_PREPARATION_SLOTS;
     public int MAX_PREPARATION;
+    public string PLAYER_NAME;
+    public string PNJ_NAME;
 }
 
 public static class Utils {

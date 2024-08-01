@@ -196,6 +196,50 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 359300057}
   m_SourcePrefab: {fileID: 100100000, guid: 566cf418b4615274ca6cbae0babfc3fd, type: 3}
+--- !u!1 &249410082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 249410084}
+  - component: {fileID: 249410083}
+  m_Layer: 0
+  m_Name: DialogSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &249410083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249410082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c580ee82332d744ca6db619a9a6da04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &249410084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249410082}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 807496957}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &359300051 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8359445881615201900, guid: 566cf418b4615274ca6cbae0babfc3fd,
@@ -667,6 +711,7 @@ Transform:
   - {fileID: 773746008}
   - {fileID: 996796876}
   - {fileID: 435422165}
+  - {fileID: 249410084}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &807496958
@@ -690,6 +735,7 @@ MonoBehaviour:
   Db: {fileID: 1771947094}
   Player: {fileID: 1952398257}
   Inv: {fileID: 435422164}
+  Dialog: {fileID: 249410083}
 --- !u!1 &842002069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,6 +1317,8 @@ MonoBehaviour:
   WAKE_UP_HOUR: 7
   MAX_PREPARATION_SLOTS: 4
   MAX_PREPARATION: 4
+  PLAYER_NAME: Alice
+  PNJ_NAME: Max
 --- !u!114 &1740062596
 MonoBehaviour:
   m_ObjectHideFlags: 0

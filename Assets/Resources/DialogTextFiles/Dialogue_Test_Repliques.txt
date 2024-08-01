@@ -1,0 +1,11 @@
+Alice	Neutre	Salut Max. Comment ça va ?
+Max	Content	Salut Alice. Super bien, j'ai bien dormi !
+Alice	Rit	Aha tant mieux !
+Max	Content	Alors, qu'est-ce que tu comptes faire aujourd'hui ?
+Alice	Neutre	Ah... aujourd'hui je pensais explorer la jungle.
+Alice	Inquiet	J'espère qu'il n'y a pas de tigre...
+Max	Inquiet	Ne dis pas ça !
+Max	Inquiet	Tu penses que c'est possible ?
+Réponses		
+Max	Inquiet	Fais attention à toi en tout cas.
+Fin		

@@ -81,8 +81,6 @@ public abstract class Inventory {
         return foodStock;
     }
 
-
-
     protected static bool InventoryHasRoom(ItemInInventory[] stock) {
         foreach (var item in stock) {
             if (item == null)
@@ -113,6 +111,11 @@ public abstract class Inventory {
                 stock[i] = new ItemInInventory(item);
                 return;
             }
+        }
+    }
+    public void ClearInventory() {
+        for (int i = 0; i < _size ; i++) {
+            _stock[i] = null;
         }
     }
 }

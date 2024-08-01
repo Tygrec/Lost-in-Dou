@@ -15,6 +15,7 @@ public class Game : MonoBehaviour
     public DataBase Db;
     public PlayerController Player;
     public InventoryManager Inv;
+    public DialogSystem Dialog;
 
     private void Awake() {
 

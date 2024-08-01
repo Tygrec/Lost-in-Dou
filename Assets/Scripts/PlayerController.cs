@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour {
         _playerData.ClampStats();
     }
 
-    public void Eat(RecipeData food) {
+    public void Eat(Plate food) {
         _playerData.Hunger += food.SatietyValue;
         _playerData.Thirst += food.ThirstValue;
         

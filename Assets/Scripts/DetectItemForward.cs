@@ -40,17 +40,7 @@ public class DetectItemForward : MonoBehaviour {
                 return;
             }
             else if (hit.transform.CompareTag("Fire")) {
-                UiManager.Instance.DisplayPressEInfo("Ajouter du bois");
-
-                if (Input.GetKeyDown(KeyCode.E)) {
-                    if (Game.G.Inv.Get(InvTag.Player).ItemExistsInInventory(ItemData.Wood())) {
-                        Game.G.Db.Fire.AddFuel();
-                        Game.G.Inv.Get(InvTag.Player).RemoveItem(ItemData.Wood());
-                    }
-                    else
-                        Debug.Log("Pas de bois dans l'inventaire");
-                }
-
+                FireBehavior();
                 return;
             }
             else if (hit.transform.CompareTag("Kitchen")) {
@@ -58,6 +48,13 @@ public class DetectItemForward : MonoBehaviour {
 
                 if (Input.GetKeyDown(KeyCode.E)) {
                     Game.G.Cook.StartCooking();
+                }
+                return;
+            }
+            else if (hit.transform.CompareTag("PNJ")) {
+                UiManager.Instance.DisplayPressEInfo("Parler");
+                if (Input.GetKeyDown(KeyCode.E)) {
+                    
                 }
             }
             else if (hit.gameObject.layer == 6) { // TODO : Mettre "vault" à la place de 6
@@ -153,6 +150,19 @@ public class DetectItemForward : MonoBehaviour {
             UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Player));
             UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Stock));
 
+        }
+    }
+
+    private void FireBehavior() {
+        UiManager.Instance.DisplayPressEInfo("Ajouter du bois");
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            if (Game.G.Inv.Get(InvTag.Player).ItemExistsInInventory(ItemData.Wood())) {
+                Game.G.Db.Fire.AddFuel();
+                Game.G.Inv.Get(InvTag.Player).RemoveItem(ItemData.Wood());
+            }
+            else
+                Debug.Log("Pas de bois dans l'inventaire");
         }
     }
     /*   private void OnDrawGizmos() {

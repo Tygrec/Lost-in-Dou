@@ -14,8 +14,6 @@ public enum CookingState {
 
 public class CookManager : MonoBehaviour {
 
-    static public int Index = 0;
-
     public Preparation[] Preparations;
     private Preparation _currentPreparation;
 
@@ -33,6 +31,15 @@ public class CookManager : MonoBehaviour {
     public void StopCooking() {
         print("Fin de la séance de cuisine");
         Game.G.GameManager.ChangeGameState(GAMESTATE.RUNNING);
+        _currentPreparation = null;
+
+        RemoveIngredientFromInventories();
+
+        foreach (Preparation preparation in Preparations) {
+            preparation.Inventory.ClearInventory();
+        }
+
+        UiManager.Instance.QuitDisplayCooking();
     }
 
     public void CookAndEat() {
@@ -48,14 +55,18 @@ public class CookManager : MonoBehaviour {
     }
 
     private IEnumerator IEat(List<Plate> foods, int index) {
-        yield return new WaitForSeconds(0.5f);
+        if (foods.Count > index) {
+            UiManager.Instance.DisplayPlate(foods[index]);
+            Game.G.Player.Eat(foods[index]);
 
-        print("On mange " + foods[index]);
+            yield return new WaitForSeconds(1.5f);
 
-        if (foods.Count > index)
             StartCoroutine(IEat(foods, index + 1));
-        else
+        }
+        else {
             StopCooking();
+            UiManager.Instance.HidePlate();
+        }
     }
 
     public RecipeData FindRecipeForCurrentIngredients(List<ItemData> ingredients) {
@@ -69,7 +80,6 @@ public class CookManager : MonoBehaviour {
     }
 
     public void ChangeCurrentPreparation(Preparation preparation) {
-        
         _currentPreparation = preparation;
 
         // TODO : à changer, ce n'est pas à l'UI manager de gérer ça
@@ -101,6 +111,24 @@ public class CookManager : MonoBehaviour {
     }
     public void RemoveIngredientFromPreparation(ItemData item, int id) {
         Preparations[id].Inventory.RemoveItem(item);
+    }
+
+    private void RemoveIngredientFromInventories() {
+        foreach(var preparation in Preparations) {
+            foreach (var item in preparation.Inventory.GetStock()) {
+                if (item == null)
+                    continue;
+
+                if (Game.G.Inv.Get(InvTag.Player).ItemExistsInInventory(item.Data)) {
+                    Game.G.Inv.Get(InvTag.Player).RemoveItem(item.Data);
+                }
+                else if (Game.G.Inv.Get(InvTag.Stock).ItemExistsInInventory(item.Data)) {
+                    Game.G.Inv.Get(InvTag.Stock).RemoveItem(item.Data);
+                }
+                else
+                    Debug.LogError("Erreur : aucun inventaire ne contenait l'ingrédient");
+            }
+        }
     }
 }
 

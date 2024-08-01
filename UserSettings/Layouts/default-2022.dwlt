@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -43,15 +43,15 @@ MonoBehaviour:
     y: 710
     width: 1920
     height: 237
-  m_MinSize: {x: 100, y: 121}
-  m_MaxSize: {x: 4000, y: 4021}
-  m_ActualView: {fileID: 17}
+  m_MinSize: {x: 230, y: 271}
+  m_MaxSize: {x: 10000, y: 10021}
+  m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
   - {fileID: 18}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -217,8 +217,8 @@ MonoBehaviour:
     y: 0
     width: 367
     height: 710
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -271,8 +271,8 @@ MonoBehaviour:
     y: 0
     width: 397
     height: 710
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -347,7 +347,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -416,23 +416,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 34b7ffff
-      m_LastClickedID: -18636
-      m_ExpandedIDs: c810ffffd210fffff6c1ffff00c2ffffcee0ffffc4faffffc8faffffcafaffffaa6a0000006b0000126b0000766b0000846b0000d46b0000566c0000
+      m_SelectedIDs: 4cc2fbff
+      m_LastClickedID: -277940
+      m_ExpandedIDs: 38befbff4cc2fbff68c6fbff3ecafbff4ccbfbff16cdfbffd2cefbff16d5fbff0cfbffff0efbffff10fbffff12fbfffff4ffffff986a0000086b00008c6b00009a6b0000e06b0000c46c0000fa6c0000cc70000062570100bc5f0100126b01000c7a0100627a0100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Preparation2
-        m_OriginalName: Preparation2
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -83812
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 9}
       m_SearchString: 
@@ -851,9 +851,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1059.7778, y: 700.85864, z: 68.785645}
+    m_Target: {x: 990.8387, y: 482.6973, z: 185.48059}
     speed: 2
-    m_Value: {x: 1059.7778, y: 700.85864, z: 68.785645}
+    m_Value: {x: 990.8387, y: 482.6973, z: 185.48059}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -899,20 +899,20 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.07973594, y: 0.00057416584, z: -0.00038052493, w: -0.9969083}
+    m_Target: {x: -0.019796846, y: 0.02759002, z: -0.0008858668, w: -0.9995195}
     speed: 2
-    m_Value: {x: -0.079728596, y: 0.0005741129, z: -0.00038048986, w: -0.99681646}
+    m_Value: {x: -0.019794935, y: 0.027587356, z: -0.0008857813, w: -0.999423}
   m_Size:
-    m_Target: 663.74817
+    m_Target: 599.1133
     speed: 2
-    m_Value: 663.74817
+    m_Value: 599.1133
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_CameraSettings:
-    m_Speed: 0.060969997
-    m_SpeedNormalized: 0.03
+    m_Speed: 0.36082
+    m_SpeedNormalized: 0.17999999
     m_SpeedMin: 0.001
     m_SpeedMax: 2
     m_EasingEnabled: 1
@@ -1049,7 +1049,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Prefabs/Ui
+    - Assets/Resources/Scriptables/Dialogs
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1057,16 +1057,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Resources/Prefabs/Ui
+  - Assets/Resources/Scriptables/Dialogs
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\Coline\Unity Projects\Lost in Dou
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 84}
-    m_SelectedIDs: 74710000
-    m_LastClickedID: 29044
-    m_ExpandedIDs: 000000001c7100001e71000020710000227100002471000026710000287100002a7100002c7100002e7100003071000000ca9a3b
+    scrollPos: {x: 0, y: 176}
+    m_SelectedIDs: 64870100
+    m_LastClickedID: 100196
+    m_ExpandedIDs: 00000000aa710000ac710000ae710000b0710000b2710000b4710000b6710000b8710000ba710000bc710000be7100001887010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1094,7 +1094,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000001c7100001e71000020710000227100002471000026710000287100002a7100002c7100002e71000030710000
+    m_ExpandedIDs: 00000000aa710000ac710000ae710000b0710000b2710000b4710000b6710000b8710000ba710000bc710000be710000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1119,21 +1119,21 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 6ab8feff
-    m_LastClickedInstanceID: -83862
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300005679000070830000c871000056b20200927b0000c07b0000167b0000d8f90000087b00001e6c000028f200000c6f000086690000e87700009a6a00004a690000106b0000226d0000ca730000fe7200008270000068f60000c47000009ea60000da700000c27000001c720000d4890000fc910000ee8200006275000034770000d876000006890000ec61000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: PreparationInventory
-      m_OriginalName: PreparationInventory
+      m_Name: DialogTextFiles
+      m_OriginalName: DialogTextFiles
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 41980
+      m_UserData: 100204
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -1222,7 +1222,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -83760
+  m_LastSelectedObjectID: -275636
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
