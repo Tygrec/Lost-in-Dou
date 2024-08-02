@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -43,15 +43,15 @@ MonoBehaviour:
     y: 710
     width: 1920
     height: 237
-  m_MinSize: {x: 230, y: 271}
-  m_MaxSize: {x: 10000, y: 10021}
-  m_ActualView: {fileID: 16}
+  m_MinSize: {x: 100, y: 121}
+  m_MaxSize: {x: 4000, y: 4021}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
   - {fileID: 18}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 52
+  controlID: 63
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 50}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 53
+  controlID: 64
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -416,9 +416,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 4cc2fbff
-      m_LastClickedID: -277940
-      m_ExpandedIDs: 38befbff4cc2fbff68c6fbff3ecafbff4ccbfbff16cdfbffd2cefbff16d5fbff0cfbffff0efbffff10fbffff12fbfffff4ffffff986a0000086b00008c6b00009a6b0000e06b0000c46c0000fa6c0000cc70000062570100bc5f0100126b01000c7a0100627a0100
+      m_SelectedIDs: 34710000
+      m_LastClickedID: 28980
+      m_ExpandedIDs: 6a49ffff124bffffae9afffff8f9ffff0cfbffff0efbffff10fbfffff4ffffffe66a0000d06b0000fc6c000034710000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -851,9 +851,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 990.8387, y: 482.6973, z: 185.48059}
+    m_Target: {x: 1005.4807, y: 397.4256, z: 183.38452}
     speed: 2
-    m_Value: {x: 990.8387, y: 482.6973, z: 185.48059}
+    m_Value: {x: 1005.4807, y: 397.4256, z: 183.38452}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -899,13 +899,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.019796846, y: 0.02759002, z: -0.0008858668, w: -0.9995195}
+    m_Target: {x: -0.019795496, y: 0.029089266, z: -0.00091556105, w: -0.999477}
     speed: 2
-    m_Value: {x: -0.019794935, y: 0.027587356, z: -0.0008857813, w: -0.999423}
+    m_Value: {x: -0.019793585, y: 0.029086458, z: -0.0009154726, w: -0.9993805}
   m_Size:
-    m_Target: 599.1133
+    m_Target: 569.8384
     speed: 2
-    m_Value: 599.1133
+    m_Value: 569.8384
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1024,8 +1024,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 783
+    x: 1920
+    y: 1001
     width: 1920
     height: 216
   m_SerializedDataModeController:
@@ -1049,7 +1049,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Scriptables/Dialogs
+    - Assets/Resources/DialogTextFiles
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1057,16 +1057,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Resources/Scriptables/Dialogs
+  - Assets/Resources/DialogTextFiles
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\Coline\Unity Projects\Lost in Dou
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 176}
-    m_SelectedIDs: 64870100
-    m_LastClickedID: 100196
-    m_ExpandedIDs: 00000000aa710000ac710000ae710000b0710000b2710000b4710000b6710000b8710000ba710000bc710000be7100001887010000ca9a3b
+    scrollPos: {x: 0, y: 72}
+    m_SelectedIDs: 46720000
+    m_LastClickedID: 29254
+    m_ExpandedIDs: 00000000127200001472000016720000187200001a7200001c7200001e7200002072000022720000247200003072000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1094,7 +1094,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000aa710000ac710000ae710000b0710000b2710000b4710000b6710000b8710000ba710000bc710000be710000
+    m_ExpandedIDs: 00000000127200001472000016720000187200001a7200001c7200001e72000020720000227200002472000026720000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1125,15 +1125,15 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c62300005679000070830000c871000056b20200927b0000c07b0000167b0000d8f90000087b00001e6c000028f200000c6f000086690000e87700009a6a00004a690000106b0000226d0000ca730000fe7200008270000068f60000c47000009ea60000da700000c27000001c720000d4890000fc910000ee8200006275000034770000d876000006890000ec61000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: DialogTextFiles
-      m_OriginalName: DialogTextFiles
+      m_Name: AnswerDisplay
+      m_OriginalName: AnswerDisplay
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 100204
+      m_UserData: 58880
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -1222,7 +1222,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -275636
+  m_LastSelectedObjectID: -1544
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52

@@ -14,6 +14,7 @@ public class ConstGlobalValues : MonoBehaviour {
     public int MAX_PREPARATION;
     public string PLAYER_NAME;
     public string PNJ_NAME;
+    public float TEXT_SPEED;
 }
 
 public static class Utils {

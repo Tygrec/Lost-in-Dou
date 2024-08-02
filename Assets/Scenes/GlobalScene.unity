@@ -186,6 +186,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6077721654660292014, guid: 566cf418b4615274ca6cbae0babfc3fd,
+        type: 3}
+      propertyPath: _characterThoughts
+      value: 
+      objectReference: {fileID: 359300057}
     m_RemovedComponents:
     - {fileID: 7930383515235786649, guid: 566cf418b4615274ca6cbae0babfc3fd, type: 3}
     m_RemovedGameObjects: []
@@ -1319,6 +1324,7 @@ MonoBehaviour:
   MAX_PREPARATION: 4
   PLAYER_NAME: Alice
   PNJ_NAME: Max
+  TEXT_SPEED: 0.05
 --- !u!114 &1740062596
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -54,7 +54,7 @@ public class DetectItemForward : MonoBehaviour {
             else if (hit.transform.CompareTag("PNJ")) {
                 UiManager.Instance.DisplayPressEInfo("Parler");
                 if (Input.GetKeyDown(KeyCode.E)) {
-                    
+                    Game.G.Dialog.StartDialog(DialogId.TEST);
                 }
             }
             else if (hit.gameObject.layer == 6) { // TODO : Mettre "vault" à la place de 6
@@ -162,7 +162,7 @@ public class DetectItemForward : MonoBehaviour {
                 Game.G.Inv.Get(InvTag.Player).RemoveItem(ItemData.Wood());
             }
             else
-                Debug.Log("Pas de bois dans l'inventaire");
+                Game.G.Player.ThinkSomething(ThoughtsSituation.NoWoodInInventory);
         }
     }
     /*   private void OnDrawGizmos() {

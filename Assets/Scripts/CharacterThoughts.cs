@@ -5,7 +5,8 @@ using UnityEngine;
 
 public enum ThoughtsSituation {
     TooColdToSleep,
-    TooHungryToSleep
+    TooHungryToSleep,
+    NoWoodInInventory
 }
 public class CharacterThoughts : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class CharacterThoughts : MonoBehaviour
 
         _thoughtsMapping.Add(ThoughtsSituation.TooColdToSleep, "J'ai trop froid pour dormir...");
         _thoughtsMapping.Add(ThoughtsSituation.TooHungryToSleep, "J'ai trop faim pour dormir...");
+        _thoughtsMapping.Add(ThoughtsSituation.NoWoodInInventory, "Je n'ai pas de bois.");
     }
     public void Display(ThoughtsSituation situation) {
         gameObject.SetActive(true);

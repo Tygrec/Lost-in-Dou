@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f55cd3b6f05b5684baacb0ec7c3de0ac, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: Assembly-CSharp::Dialog
   _replicasFile: {fileID: 4900000, guid: 97baae335ce6b8b4bafdfa104607ee2c, type: 3}
-  _answersFile: {fileID: 0}
+  _answersFile:
+  - {fileID: 4900000, guid: fc8799b9536138a439eff549092d6b8e, type: 3}
+  Id: 0

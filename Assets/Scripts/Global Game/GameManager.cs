@@ -19,8 +19,20 @@ public class GameManager : MonoBehaviour {
     public Action OnNewDay;
 
     private PlayerData _playerData = new PlayerData();
-    public PlayerData GetPlayerData() 
-        {
+    private int _relationship = 50;
+
+    public void ChangeRelationship(RelationshipModifier modifier) {
+        switch (modifier) {
+            case RelationshipModifier.Positive: 
+                _relationship += 10; 
+                break;
+            case RelationshipModifier.Negative: 
+                _relationship -= 10; 
+                break;
+        }
+    }
+
+    public PlayerData GetPlayerData() {
         return _playerData;
     }
 

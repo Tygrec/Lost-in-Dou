@@ -6,6 +6,5 @@ Alice	Neutre	Ah... aujourd'hui je pensais explorer la jungle.
 Alice	Inquiet	J'espère qu'il n'y a pas de tigre...
 Max	Inquiet	Ne dis pas ça !
 Max	Inquiet	Tu penses que c'est possible ?
-Réponses		
+Réponses		0
 Max	Inquiet	Fais attention à toi en tout cas.
-Fin		
