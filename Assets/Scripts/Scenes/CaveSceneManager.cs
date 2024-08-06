@@ -4,7 +4,7 @@ using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CaveSceneManager : SceneManager
+public class CaveSceneManager : SceneSystem
 {
     
 }

@@ -1,41 +1,18 @@
 using System;
 using System.Collections;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    private PlayerData _playerData;
+    private PlayerData _data;
 
-    public float Hunger() {
-        return _playerData.Hunger;
-    }
-    public float Thirst() {
-        return _playerData.Thirst;
-    }
-    public float Energy() {
-        return _playerData.Energy;
-    }
-    public float Life() {
-        return _playerData.Life;
-    }
-    public void LoseEnergy() {
-        _playerData.Energy -= 1;
-    }
-    public ItemData Equipped() { return _playerData.EquippedItem; }
+    public ItemData Equipped() { return _data.EquippedItem; }
 
     float _speed; // Vitesse de déplacement
-
-    private bool isNapping = false;
-    private bool isSleeping = false;
     private bool isRunning = false;
+
     private Coroutine _napCoroutine;
-
-    private const int _hungerLoss = 2;
-    private const int _thirstLoss = 3;
-    private const int _energyLoss = 1;
-    private const int _lifeLoss = 1;
-
-    private const int _intervalLoss = 10;
 
     [SerializeField] CharacterThoughts _characterThoughts;
     private void OnEnable() {
@@ -49,20 +26,23 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start() {
-        _playerData = Game.G.GameManager.GetPlayerData();
+        _data = (PlayerData)Game.G.GameManager.GetHumanData(Name.Player);
         _speed = Game.G.Values.PLAYER_SPEED;
-        Game.G.Time.RegisterRecurringCallback(UpdateStatsByTime, _intervalLoss);
     }
+
     private void Update() {
         if (Game.G.GameManager.GetGameState() != GAMESTATE.RUNNING)
             return;
 
-        if (Input.GetKeyDown(KeyCode.R) && Hunger() > 0)
+        if (Input.GetKeyDown(KeyCode.R) && _data.Hunger > 0)
             _napCoroutine = StartCoroutine(INap());
 
-        if (!isNapping) {
+        if (!_data.IsNapping) {
             Move();
         }
+
+        if (_data.Hunger <= 0 && _data.IsNapping)
+            StopNapping();
     }
     private void Move() {
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
@@ -92,73 +72,26 @@ public class PlayerController : MonoBehaviour {
     private void StartRunning() {
         _speed = Game.G.Values.PLAYER_SPEED * 2;
         isRunning = true;
-        Game.G.Time.RegisterRecurringCallback(UpdateEnergy, 2);
+        Game.G.Time.RegisterRecurringCallback(GetComponent<NeedsManager>().UpdateEnergy, 2);
     }
     private void StopRunning() {
         _speed = Game.G.Values.PLAYER_SPEED;
         isRunning = false;
-        Game.G.Time.RemoveRecurringCallback(UpdateEnergy);
+        Game.G.Time.RemoveRecurringCallback(GetComponent<NeedsManager>().UpdateEnergy);
     }
 
-    public void Eat(ItemData food) {
-        if (food.Type != ItemType.Food) {
-            Debug.LogError("ERREUR : On essaye de manger quelque chose qui n'est pas de la nourriture");
-        }
-
-        _playerData.Hunger += food.SatietyValue;
-        _playerData.Thirst += food.ThirstValue;
-
-        _playerData.ClampStats();
-    }
-
-    public void Eat(Plate food) {
-        _playerData.Hunger += food.SatietyValue;
-        _playerData.Thirst += food.ThirstValue;
-
-        _playerData.ClampStats();
-    }
-
-    public void Drink(ItemData item) {
-        if (item.Type != ItemType.Food) {
-            Debug.LogError("ERREUR : On essaye de manger quelque chose qui n'est pas de la nourriture");
-        }
-
-        _playerData.Thirst += item.ThirstValue;
-    }
-    public void Drink() {
-        _playerData.Thirst = 100;
-    }
-    public void Fishing() {
-        Game.G.Inv.Get(InvTag.Player).AddItem(ItemData.Fish());
-    }
-    public void Sleep() {
-        StartCoroutine(ISleep());
-    }
-    public IEnumerator ISleep() {
-
-        isSleeping = true;
-        Game.G.Scene.Transition();
-
-        yield return new WaitForSeconds(1);
-
-        Game.G.Time.SetNewDay(Game.G.Values.WAKE_UP_HOUR);
-
-        isSleeping = false;
-
-        _playerData.ClampStats();
-    }
     private IEnumerator INap() {
 
-        isNapping = true;
+        _data.IsNapping = true;
         Game.G.Time.SetTimeSpeed(Game.G.Values.TIME_SPEED_WHILE_NAPPING);
 
         yield return new WaitForSeconds(Game.G.Values.NAPPING_DURATION);
 
         Game.G.Time.SetTimeSpeed(Game.G.Values.TIME_SPEED);
-        isNapping = false;
+        _data.IsNapping = false;
     }
     private void StopNapping() {
-        isNapping = false;
+        _data.IsNapping = false;
 
         if (_napCoroutine != null) {
             StopCoroutine(_napCoroutine);
@@ -166,33 +99,34 @@ public class PlayerController : MonoBehaviour {
         }
         Game.G.Time.SetTimeSpeed(Game.G.Values.TIME_SPEED);
     }
+    public void Sleep() {
+        StartCoroutine(ISleep());
+    }
+    public IEnumerator ISleep() {
+
+        _data.IsSleeping = true;
+        Game.G.Scene.Transition();
+
+        yield return new WaitForSeconds(1);
+
+        Game.G.Time.SetNewDay(Game.G.Values.WAKE_UP_HOUR);
+
+        _data.IsSleeping = false;
+
+        _data.ClampStats();
+    }
+
+    public void Fishing(FishData fish) {
+        Game.G.Inv.Get(InvTag.Player).AddItem(fish);
+    }
+
     public void Equip(ItemInInventory itemValues) {
-        _playerData.EquippedItem = itemValues.Data;
+        _data.EquippedItem = itemValues.Data;
         itemValues.Equipped = true;
     }
     public void UnEquip(ItemInInventory itemValues) {
-        _playerData.EquippedItem = null;
+        _data.EquippedItem = null;
         itemValues.Equipped = false;
-    }
-    private void UpdateStatsByTime() {
-
-        _playerData.Hunger -= _hungerLoss;
-
-        if (Hunger() <= 0 && isNapping)
-            StopNapping();
-
-        _playerData.Thirst -= _thirstLoss;
-
-        if (Thirst() <= 0 && !isSleeping) {
-            _playerData.Life -= _lifeLoss;
-        }
-
-        _playerData.Energy = isNapping || isSleeping ? _playerData.Energy + _energyLoss : _playerData.Energy - _energyLoss;
-
-        _playerData.ClampStats();
-    }
-    private void UpdateEnergy() {
-        _playerData.Energy -= _energyLoss;
     }
     public void ThinkSomething(string thinking) {
         StartCoroutine(IThink(thinking));

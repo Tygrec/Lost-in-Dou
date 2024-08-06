@@ -17,7 +17,8 @@ public class UiManager : MonoBehaviour {
     public InventoryDisplay Prep4Display;
 
     [SerializeField] TooltipDisplay _tooltip;
-    [SerializeField] PlayerStateDisplay _playerStateDisplay;
+    [SerializeField] StateDisplay _playerStateDisplay;
+    [SerializeField] StateDisplay _pnjStateDisplay;
     [SerializeField] CraftDisplay _craftDisplay;
     [SerializeField] CookingDisplay _cookingDisplay;
     [SerializeField] CollectionDisplay _collectionDisplay;
@@ -133,6 +134,7 @@ public class UiManager : MonoBehaviour {
         }
 
         _playerStateDisplay.Display();
+        _pnjStateDisplay.Display();
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
             _craftDisplay.QuitDisplay();

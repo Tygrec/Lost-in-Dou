@@ -67,11 +67,11 @@ public class DataBase : MonoBehaviour
 
     public void Discover(ItemData item) {
         _discoveredCrafts[item] = true;
-        Game.G.Player.ThinkSomething("Hé, avec ça je pourrais fabriquer un(e) " + item.name + " !");
+        Game.G.Player.Controller.ThinkSomething("Hé, avec ça je pourrais fabriquer un(e) " + item.name + " !");
     }
     public void Discover(RecipeData recipe) {
         _discoveredRecipes[recipe] = true;
-        Game.G.Player.ThinkSomething("Je pense que je devrais pouvoir cuisiner " + recipe.name + " à présent.");
+        Game.G.Player.Controller.ThinkSomething("Je pense que je devrais pouvoir cuisiner " + recipe.name + " à présent.");
     }
 
     public bool FillSpawnerDataMapping(Transform spawnersTransform) {

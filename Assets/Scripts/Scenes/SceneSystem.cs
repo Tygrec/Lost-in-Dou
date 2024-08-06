@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class SceneSystem : MonoBehaviour
 {
-    [SerializeField] protected Transform _playerSpawn;
+    [SerializeField] Transform _pnjSpawn;
     [SerializeField] private List<SceneTransitionPlayer> _playerSpawns;
 
     private Vector3 _playerPositionSave;
 
     public void ChangeScene(string oldScene, string newScene) {
+        Game.G.GameManager.ChangePnjScene(newScene);
         Game.G.Db.SaveSpawnersId();
         StartCoroutine(IChangeScene(oldScene, newScene, GetSpawn(oldScene, newScene).position));
     }
@@ -30,8 +31,8 @@ public class SceneManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(newScene, LoadSceneMode.Additive);
-        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(oldScene);
+        SceneManager.LoadScene(newScene, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(oldScene);
         Game.G.Player.transform.position = playerPosition;
 
         SceneTransition.Instance.TransitionAnimation("Start");

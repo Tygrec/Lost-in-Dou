@@ -83,20 +83,20 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             if (item.Consommable) {
                 if (_inventory is PlayerInventory) {
 
-                    Game.G.Player.Eat(item);
+                    Game.G.Player.Needs.Eat(item);
                     _inventory.RemoveItem(item);
                 }
             }
             else if (item.Equippable) {
                 if (itemValues.Equipped) {
 
-                    Game.G.Player.UnEquip(itemValues);
+                    Game.G.Player.Controller.UnEquip(itemValues);
                     itemValues.Equipped = false;
                     _equip.gameObject.SetActive(false);
                 }
-                else if (Game.G.Player.Equipped() == null) {
+                else if (Game.G.Player.Controller.Equipped() == null) {
 
-                    Game.G.Player.Equip(itemValues);
+                    Game.G.Player.Controller.Equip(itemValues);
                     itemValues.Equipped = true;
                     _equip.gameObject.SetActive(true);
                 }
