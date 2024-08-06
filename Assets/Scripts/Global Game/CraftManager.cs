@@ -6,42 +6,18 @@ using static UnityEditor.Progress;
 
 public class CraftManager : MonoBehaviour {
 
-    private Dictionary<ItemData, bool> _craftables = new Dictionary<ItemData, bool>();
-    [SerializeField] List<ItemData> _availableCraftsAtStart;
-
     public ItemData CurrentCraft;
     public List<ItemData> CurrentIngredients;
 
     public List<ItemData> GetCurrentlyCraftables() {
         List<ItemData> knownCraftables = new List<ItemData>();
 
-        foreach (var pair in _craftables) {
+        foreach (var pair in Game.G.Db.GetAllCrafts()) {
             if (pair.Value)
                 knownCraftables.Add(pair.Key);
         }
 
         return knownCraftables;
-    }
-    public int GetCraftablesCount() {
-        return _craftables.Count;
-    }
-    public Dictionary<ItemData, bool> GetAllCraftables() {
-        return _craftables;
-    }
-
-    private void Start() {
-        var craftList = Resources.LoadAll<ItemData>("Scriptables/Items/").Where(i => i.Craftable).ToList();
-        foreach (var item in craftList) {
-            _craftables.Add(item, false);
-        }
-
-        foreach (var item in _availableCraftsAtStart) {
-            _craftables[item] = true;
-        }
-    }
-
-    public void DiscoverCraftable(ItemData item) {
-        _craftables[item] = true;
     }
 
     public void TryCraft() {
@@ -64,7 +40,7 @@ public class CraftManager : MonoBehaviour {
 
             CurrentCraft = null;
             CurrentIngredients.Clear();
-            UiManager.Instance.QuitCraftDisplay();
+            UiManager.Instance.HideCraft();
         }
         else {
             print("On ne peut pas craft " + CurrentCraft + " avec ces objets");

@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "Recette", menuName = "Nouvelle recette")]
-public class RecipeData : ScriptableObject
-{
+public class RecipeData : ScriptableObject, ITooltipDisplay {
     public List<ItemData> Ingredients;
     public Sprite Sprite;
     public int SatietyValue;
@@ -15,10 +14,10 @@ public class RecipeData : ScriptableObject
     public int GetThirst(SuccessRate rate) {
         return ThirstValue *= (int)rate;
     }
-}
+    public bool HasEveryIngredientsDiscovered() {
+        if (Ingredients.TrueForAll(item => Game.G.Db.GetAllDiscoveredItems().Contains(item)))
+            return true;
 
-public enum SuccessRate {
-    Fail,
-    Success,
-    Critical
+        return false;
+    }
 }

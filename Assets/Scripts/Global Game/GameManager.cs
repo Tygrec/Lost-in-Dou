@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public enum GAMESTATE {
-    RUNNING,
-    PAUSE
-}
-
 public class GameManager : MonoBehaviour {
 
     private GAMESTATE _GameState = GAMESTATE.RUNNING;

@@ -16,7 +16,12 @@ public abstract class Inventory {
         return _stock[index];
     }
     public int GetCurrentSize() {
-        return _stock.Length;
+        int size = 0;
+        foreach (var item in _stock) {
+            if (item != null)
+                size++;
+        }
+        return size;
     }
     public InvTag GetSlotType() {
         return _slotType;
@@ -39,6 +44,8 @@ public abstract class Inventory {
         AddItemInInventory(_stock, item);
 
         UiManager.Instance.OnInventoryChanged.Invoke(this);
+        if (_slotType == InvTag.Player)
+            Game.G.Db.OnNewItem.Invoke(item);
 
         return true;
     }
@@ -63,6 +70,16 @@ public abstract class Inventory {
             if (i == null)
                 continue;
             else if (i.Data == item)
+                return true;
+        }
+
+        return false;
+    }
+    public bool ItemAvailableInInventory(ItemData item) {
+        foreach (var i in _stock) {
+            if (i == null || i.Selected)
+                continue;
+            else if (i.Data == item && !i.Selected)
                 return true;
         }
 
@@ -113,6 +130,17 @@ public abstract class Inventory {
             }
         }
     }
+
+    public void SetAllItemsSelected(List<ItemData> items) {
+        foreach (var item in _stock) {
+            if (item != null && items.Contains(item.Data)) {
+                item.Selected = true;
+                items.Remove(item.Data);
+            }
+        }
+
+        UiManager.Instance.RefreshInventoryDisplay(this);
+    }
     public void ClearInventory() {
         for (int i = 0; i < _size ; i++) {
             _stock[i] = null;
@@ -123,9 +151,11 @@ public abstract class Inventory {
 public class ItemInInventory {
     public ItemData Data;
     public bool Equipped;
+    public bool Selected;
 
     public ItemInInventory(ItemData item) {
         Data = item;
         Equipped = false;
+        Selected = false;
     }
 }

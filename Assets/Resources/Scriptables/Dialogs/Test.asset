@@ -12,7 +12,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f55cd3b6f05b5684baacb0ec7c3de0ac, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: Assembly-CSharp::Dialog
-  _replicasFile: {fileID: 4900000, guid: 97baae335ce6b8b4bafdfa104607ee2c, type: 3}
-  _answersFile:
-  - {fileID: 4900000, guid: fc8799b9536138a439eff549092d6b8e, type: 3}
+  Replicas:
+  - Name: 0
+    Emotion: 4
+    Text: "Salut Max. Comment \xE7a va ?"
+    Answers: []
+  - Name: 1
+    Emotion: 0
+    Text: Salut Alice. Super bien, j'ai bien dormi !
+    Answers: []
+  - Name: 1
+    Emotion: 0
+    Text: Alors, qu'est-ce que tu comptes faire aujourd'hui ?
+    Answers: []
+  - Name: 1
+    Emotion: 0
+    Text: 
+    Answers:
+    - Text: Aujourd'hui je vais explorer la jungle
+      Reaction:
+        Name: 1
+        Emotion: 3
+        Text: Houla, attention aux tigres !
+        Answers: []
+      Modifier: 3
+    - Text: Je vais rester sur la plage, j'ai la flemme
+      Reaction:
+        Name: 1
+        Emotion: 2
+        Text: "Mais on n'a plus rien \xE0 manger !"
+        Answers: []
+      Modifier: 2
+    - Text: "Je vais chercher ton fruit pr\xE9f\xE9r\xE9."
+      Reaction:
+        Name: 1
+        Emotion: 0
+        Text: "G\xE9nial, j'ai h\xE2te !"
+        Answers: []
+      Modifier: 1
+  - Name: 1
+    Emotion: 4
+    Text: "A tout \xE0 l'heure."
+    Answers: []
   Id: 0

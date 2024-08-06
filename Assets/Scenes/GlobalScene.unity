@@ -131,10 +131,40 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 923286882011254168, guid: 566cf418b4615274ca6cbae0babfc3fd,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 923286882011254168, guid: 566cf418b4615274ca6cbae0babfc3fd,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1127062255427939596, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2355597750427215730, guid: 566cf418b4615274ca6cbae0babfc3fd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2.4648
+      objectReference: {fileID: 0}
+    - target: {fileID: 2355597750427215730, guid: 566cf418b4615274ca6cbae0babfc3fd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.8197
+      objectReference: {fileID: 0}
+    - target: {fileID: 2355597750427215730, guid: 566cf418b4615274ca6cbae0babfc3fd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0083
+      objectReference: {fileID: 0}
+    - target: {fileID: 2355597750427215730, guid: 566cf418b4615274ca6cbae0babfc3fd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.0093
       objectReference: {fileID: 0}
     - target: {fileID: 5142596656040464264, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
@@ -191,6 +221,11 @@ PrefabInstance:
       propertyPath: _characterThoughts
       value: 
       objectReference: {fileID: 359300057}
+    - target: {fileID: 8359445881615201900, guid: 566cf418b4615274ca6cbae0babfc3fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7930383515235786649, guid: 566cf418b4615274ca6cbae0babfc3fd, type: 3}
     m_RemovedGameObjects: []
@@ -1191,8 +1226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cd3f948b2dbed94e9876c7c19ea8c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _availableCraftsAtStart:
-  - {fileID: 11400000, guid: 05d04c74aba67494db611b4fa9c2de85, type: 2}
   CurrentCraft: {fileID: 0}
   CurrentIngredients: []
 --- !u!1 &1391185727
@@ -1386,6 +1419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edfcf20bbcbfe5943a18a0d6a1b744b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _availableCraftsAtStart: []
+  _availableRecipesAtStart: []
 --- !u!4 &1771947095
 Transform:
   m_ObjectHideFlags: 0

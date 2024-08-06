@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -8,10 +9,10 @@ public class PlayerController : MonoBehaviour {
     public float Hunger() {
         return _playerData.Hunger;
     }
-    public float Thirst() { 
+    public float Thirst() {
         return _playerData.Thirst;
     }
-    public float Energy() { 
+    public float Energy() {
         return _playerData.Energy;
     }
     public float Life() {
@@ -37,6 +38,15 @@ public class PlayerController : MonoBehaviour {
     private const int _intervalLoss = 10;
 
     [SerializeField] CharacterThoughts _characterThoughts;
+    private void OnEnable() {
+        EventHub.Listen(EventType.Test, OnStartDialog);
+    }
+    private void OnDisable() {
+        EventHub.Unlisten(EventType.Test, OnStartDialog);
+    }
+    private void OnStartDialog(object payload) {
+        Game.G.Dialog.StartDialog((DialogId)payload);
+    }
 
     void Start() {
         _playerData = Game.G.GameManager.GetPlayerData();
@@ -104,7 +114,7 @@ public class PlayerController : MonoBehaviour {
     public void Eat(Plate food) {
         _playerData.Hunger += food.SatietyValue;
         _playerData.Thirst += food.ThirstValue;
-        
+
         _playerData.ClampStats();
     }
 
@@ -118,15 +128,12 @@ public class PlayerController : MonoBehaviour {
     public void Drink() {
         _playerData.Thirst = 100;
     }
-
     public void Fishing() {
         Game.G.Inv.Get(InvTag.Player).AddItem(ItemData.Fish());
     }
-
     public void Sleep() {
         StartCoroutine(ISleep());
     }
-
     public IEnumerator ISleep() {
 
         isSleeping = true;
@@ -153,7 +160,7 @@ public class PlayerController : MonoBehaviour {
     private void StopNapping() {
         isNapping = false;
 
-        if(_napCoroutine != null) {
+        if (_napCoroutine != null) {
             StopCoroutine(_napCoroutine);
             _napCoroutine = null;
         }
@@ -176,26 +183,25 @@ public class PlayerController : MonoBehaviour {
 
         _playerData.Thirst -= _thirstLoss;
 
-        if(Thirst() <= 0 && !isSleeping) {
+        if (Thirst() <= 0 && !isSleeping) {
             _playerData.Life -= _lifeLoss;
         }
 
-        _playerData.Energy = isNapping|| isSleeping ? _playerData.Energy + _energyLoss : _playerData.Energy - _energyLoss;
+        _playerData.Energy = isNapping || isSleeping ? _playerData.Energy + _energyLoss : _playerData.Energy - _energyLoss;
 
         _playerData.ClampStats();
     }
     private void UpdateEnergy() {
         _playerData.Energy -= _energyLoss;
     }
-
-    public void ThinkSomething(ThoughtsSituation situation) {
-        _characterThoughts.Display(situation);
-        StartCoroutine(IThink());
+    public void ThinkSomething(string thinking) {
+        StartCoroutine(IThink(thinking));
     }
-    
-    private IEnumerator IThink() {
+    private IEnumerator IThink(string thinking) {
+        _characterThoughts.Display(thinking);
         yield return new WaitForSeconds(2);
 
         _characterThoughts.Hide();
     }
+
 }

@@ -11,6 +11,7 @@ TagManager:
   - Fire
   - Kitchen
   - PNJ
+  - Test
   layers:
   - Default
   - TransparentFX

@@ -2,18 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum InvTag {
-    Player,
-    Stock,
-    Craft,
-    Kitchen,
-    Max,
-    Prep1,
-    Prep2,
-    Prep3,
-    Prep4
-}
-
 public class InventoryManager : MonoBehaviour
 {
     Dictionary<InvTag, Inventory> _inventories = new Dictionary<InvTag, Inventory>();

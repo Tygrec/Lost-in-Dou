@@ -30,7 +30,7 @@ public class CraftDisplay : MonoBehaviour {
         UiManager.Instance.Clear(_craftButtonsTransform);
         gameObject.SetActive(true);
 
-        foreach (var craftable in Game.G.Craft.GetAllCraftables()) {
+        foreach (var craftable in Game.G.Db.GetAllCrafts()) {
             var button = Instantiate(Resources.Load<ButtonCraftBehavior>("Prefabs/Ui/Button Craft Item"), _craftButtonsTransform);
             button.Display(craftable.Key, craftable.Value, this);
         }

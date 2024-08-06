@@ -110,10 +110,10 @@ public class DetectItemForward : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.E)) {
             if(Game.G.Player.Hunger() <= 0) {
-                Game.G.Player.ThinkSomething(ThoughtsSituation.TooHungryToSleep);
+                Game.G.Player.ThinkSomething("J'ai trop faim pour dormir...");
             }
             else if (Game.G.Db.Fire.GetFireState() <= 0) {
-                Game.G.Player.ThinkSomething(ThoughtsSituation.TooColdToSleep);
+                Game.G.Player.ThinkSomething("Il fait trop froid pour dormir...");
             }
             else {
                 Game.G.Player.Sleep();
@@ -162,7 +162,7 @@ public class DetectItemForward : MonoBehaviour {
                 Game.G.Inv.Get(InvTag.Player).RemoveItem(ItemData.Wood());
             }
             else
-                Game.G.Player.ThinkSomething(ThoughtsSituation.NoWoodInInventory);
+                Game.G.Player.ThinkSomething("Je n'ai pas de bois sur moi.");
         }
     }
     /*   private void OnDrawGizmos() {

@@ -4,14 +4,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public enum CookingState {
-    CHOICE,
-    RECIPE,
-    INGREDIENTS,
-    RESULT,
-    EATING
-}
-
 public class CookManager : MonoBehaviour {
 
     public Preparation[] Preparations;
@@ -29,17 +21,14 @@ public class CookManager : MonoBehaviour {
     }
 
     public void StopCooking() {
-        print("Fin de la séance de cuisine");
         Game.G.GameManager.ChangeGameState(GAMESTATE.RUNNING);
         _currentPreparation = null;
-
-        RemoveIngredientFromInventories();
 
         foreach (Preparation preparation in Preparations) {
             preparation.Inventory.ClearInventory();
         }
 
-        UiManager.Instance.QuitDisplayCooking();
+        UiManager.Instance.HideCooking();
     }
 
     public void CookAndEat() {
@@ -64,6 +53,7 @@ public class CookManager : MonoBehaviour {
             StartCoroutine(IEat(foods, index + 1));
         }
         else {
+            RemoveAllIngredientsFromInventories();
             StopCooking();
             UiManager.Instance.HidePlate();
         }
@@ -112,8 +102,15 @@ public class CookManager : MonoBehaviour {
     public void RemoveIngredientFromPreparation(ItemData item, int id) {
         Preparations[id].Inventory.RemoveItem(item);
     }
+    public void AddIngredientToPreparation(ItemData item, Preparation preparation) {
+        preparation.Inventory.AddItem(item);
+    }
+    public void AddIngredientsToPreparation(List<ItemData> items, Preparation preparation) {
+        foreach (ItemData item in items)
+            preparation.Inventory.AddItem(item);
+    }
 
-    private void RemoveIngredientFromInventories() {
+    private void RemoveAllIngredientsFromInventories() {
         foreach(var preparation in Preparations) {
             foreach (var item in preparation.Inventory.GetStock()) {
                 if (item == null)
