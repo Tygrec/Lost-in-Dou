@@ -17,9 +17,11 @@ public class UiManager : MonoBehaviour {
     public InventoryDisplay Prep4Display;
 
     [SerializeField] TooltipDisplay _tooltip;
-    [SerializeField] PlayerStateDisplay _playerStateDisplay;
+    [SerializeField] StateDisplay _playerStateDisplay;
+    [SerializeField] StateDisplay _pnjStateDisplay;
     [SerializeField] CraftDisplay _craftDisplay;
     [SerializeField] CookingDisplay _cookingDisplay;
+    [SerializeField] CollectionDisplay _collectionDisplay;
 
     static public UiManager Instance;
 
@@ -76,8 +78,11 @@ public class UiManager : MonoBehaviour {
     public void DisplayTooltip(ItemData item) {
         _tooltip.Display(item);
     }
+    public void DisplayTooltip(RecipeData recipe) {
+        _tooltip.Display(recipe);
+    }
     public void HideTooltip() {
-        _tooltip.gameObject.SetActive(false);
+        _tooltip.Hide();
     }
     public void DisplayCraft() {
         if (_craftDisplay.gameObject.activeSelf) {
@@ -88,10 +93,16 @@ public class UiManager : MonoBehaviour {
             _craftDisplay.DisplayCraftSelection();
         }
     }
-    public void QuitCraftDisplay() {
+    public void HideCraft() {
         _craftDisplay.QuitDisplay();
     }
 
+    public void DisplayCollection() {
+        _collectionDisplay.Display();
+    }
+    public void HideCollection() {
+        _collectionDisplay.Hide();
+    }
     public void DisplayCooking() {
         _cookingDisplay.Display();
     }
@@ -105,7 +116,7 @@ public class UiManager : MonoBehaviour {
     public void HidePlate() {
         _cookingDisplay.HidePlate();
     }
-    public void QuitDisplayCooking() {
+    public void HideCooking() {
         _cookingDisplay?.QuitDisplay();
     }
 
@@ -118,7 +129,18 @@ public class UiManager : MonoBehaviour {
             DisplayCraft();
         }
 
+        if (Input.GetKeyDown(KeyCode.Tab)) {
+            DisplayCollection();
+        }
+
         _playerStateDisplay.Display();
+        _pnjStateDisplay.Display();
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            _craftDisplay.QuitDisplay();
+            _cookingDisplay.QuitDisplay();
+            _collectionDisplay.Hide();
+        }
     }
 
     public void Clear(Transform t) {

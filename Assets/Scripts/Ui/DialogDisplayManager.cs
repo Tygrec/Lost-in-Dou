@@ -4,8 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogDisplayManager : MonoBehaviour
-{
+public class DialogDisplayManager : MonoBehaviour {
     public static DialogDisplayManager D;
 
     [SerializeField] Image _pnjAvatar;
@@ -18,6 +17,8 @@ public class DialogDisplayManager : MonoBehaviour
     private int i = 0;
     private Coroutine _typeCoroutine;
     public bool IsAnswering = false;
+
+    private bool running;
 
     private void Awake() {
         if (D == null) {
@@ -34,6 +35,7 @@ public class DialogDisplayManager : MonoBehaviour
     }
 
     public void DisplayDialog(Dialog dialog) {
+        running = true;
         transform.GetChild(0).gameObject.SetActive(true);
         i = 0;
         _dialog = dialog;
@@ -43,13 +45,16 @@ public class DialogDisplayManager : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space) && running) {
 
             if (_typeCoroutine != null) {
 
-                StopCoroutine(_typeCoroutine);
-                _typeCoroutine = null;
-                _replicaText.text = _dialog.Replicas[i].Text;
+                if (_dialog.Replicas[i].Answers.Count == 0) {
+                    _replicaText.text = _dialog.Replicas[i].Text;
+                    StopCoroutine(_typeCoroutine);
+                    _typeCoroutine = null;
+                }
+
             }
             else {
                 if (IsAnswering)
@@ -68,31 +73,34 @@ public class DialogDisplayManager : MonoBehaviour
 
     public void DisplayReplica(Replica replica) {
         _replicaText.text = string.Empty;
-        _answersObj.SetActive(replica.Answers != null);
+        _answersObj.SetActive(replica.Answers.Count > 0);
 
-        if (replica.Answers != null) {
+        _playerAvatar.gameObject.SetActive(replica.Name == Name.Player);
+        _pnjAvatar.gameObject.SetActive(replica.Name == Name.Pnj);
+
+        if (replica.Answers.Count > 0) {
             DisplayAnswers(replica.Answers);
             return;
         }
 
-        _playerAvatar.gameObject.SetActive(replica.Name == Game.G.Values.PLAYER_NAME);
-        _pnjAvatar.gameObject.SetActive(replica.Name != Game.G.Values.PLAYER_NAME);
-
-        if (replica.Name == Game.G.Values.PLAYER_NAME)
+        if (replica.Name == Name.Player) {
             _playerAvatar.sprite = Resources.Load<Sprite>($"Sprites/Characters/{replica.Name}{replica.Emotion}");
-        else if (replica.Name == Game.G.Values.PNJ_NAME)
+            _characterName.text = Game.G.Values.PLAYER_NAME;
+        }
+        else if (replica.Name == Name.Pnj) {
             _pnjAvatar.sprite = Resources.Load<Sprite>($"Sprites/Characters/{replica.Name}{replica.Emotion}");
+            _characterName.text = Game.G.Values.PNJ_NAME;
+        }
         else
             Debug.LogError("Erreur : le prénom ne correspond à aucun personnage");
-
-        _characterName.text = replica.Name;
 
         _typeCoroutine = StartCoroutine(TypeLine(replica.Text));
     }
 
-    private void DisplayAnswers(MultipleAnswers answers) {
+    private void DisplayAnswers(List<Answer> answers) {
         IsAnswering = true;
-        foreach (var answer in answers.Answers) {
+
+        foreach (Answer answer in answers) {
             AnswerDisplay display = Instantiate(Resources.Load<AnswerDisplay>("Prefabs/Ui/Answer"), _answersObj.transform);
             display.Set(answer);
         }
@@ -112,6 +120,7 @@ public class DialogDisplayManager : MonoBehaviour
         _typeCoroutine = null;
     }
     public void EndDialog() {
+        running = false;
         transform.GetChild(0).gameObject.SetActive(false);
         Game.G.Dialog.StopDialog();
     }

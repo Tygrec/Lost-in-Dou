@@ -50,10 +50,7 @@ public class DetectItemForward : MonoBehaviour {
                 return;
             }
             else if (hit.transform.CompareTag("PNJ")) {
-                UiManager.Instance.DisplayPressEInfo("Parler");
-                if (Input.GetKeyDown(KeyCode.E)) {
-                    Game.G.Dialog.StartDialog(DialogId.TEST);
-                }
+                PnjBehavior();
             }
             else if (hit.gameObject.layer == 6) { // TODO : Mettre "vault" à la place de 6
                 VaultBehavior(hit);
@@ -85,7 +82,7 @@ public class DetectItemForward : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.E)) {
 
-            Game.G.Player.LoseEnergy();
+            Game.G.Player.Needs.LoseEnergy();
             float obstacleHeight = vault.GetComponent<Renderer>().bounds.size.y;
             // La position à laquelle le joueur essaye de grimper :
             // sa position actuelle + Son rayon * 2 devant lui + la distance max à laquelle il peut grimper en hauteur
@@ -107,14 +104,14 @@ public class DetectItemForward : MonoBehaviour {
         UiManager.Instance.DisplayPressEInfo("Dormir");
 
         if (Input.GetKeyDown(KeyCode.E)) {
-            if(Game.G.Player.Hunger() <= 0) {
-                Game.G.Player.ThinkSomething(ThoughtsSituation.TooHungryToSleep);
+            if(Game.G.Player.Needs.Hunger() <= 0) {
+                Game.G.Player.Controller.ThinkSomething("J'ai trop faim pour dormir...");
             }
             else if (Game.G.Db.Fire.GetFireState() <= 0) {
-                Game.G.Player.ThinkSomething(ThoughtsSituation.TooColdToSleep);
+                Game.G.Player.Controller.ThinkSomething("Il fait trop froid pour dormir...");
             }
             else {
-                Game.G.Player.Sleep();
+                Game.G.Player.Controller.Sleep();
             }
         }
     }
@@ -127,17 +124,17 @@ public class DetectItemForward : MonoBehaviour {
     }
     private void WaterBehavior(Collider water) {
 
-        if(Game.G.Player.Equipped()?.name == "Lance") {
+        if(Game.G.Player.Controller.Equipped()?.name == "Lance") {
             UiManager.Instance.DisplayPressEInfo("Pêcher");
 
             if (Input.GetKeyDown(KeyCode.E))
-                Game.G.Player.Fishing();
+                Game.G.Player.Controller.Fishing(water.GetComponent<Fishing>().GetFish());
         }
         else {
             UiManager.Instance.DisplayPressEInfo("Boire");
 
             if (Input.GetKeyDown(KeyCode.E))
-                Game.G.Player.Drink();
+                Game.G.Player.Needs.Drink();
         }
         
     }
@@ -160,8 +157,23 @@ public class DetectItemForward : MonoBehaviour {
                 Game.G.Inv.Get(InvTag.Player).RemoveItem(ItemData.Wood());
             }
             else
-                Game.G.Player.ThinkSomething(ThoughtsSituation.NoWoodInInventory);
+                Game.G.Player.Controller.ThinkSomething("Je n'ai pas de bois sur moi.");
         }
+    }
+    
+    private void PnjBehavior() {
+        UiManager.Instance.DisplayPressEInfo("Parler");
+        if (Input.GetKeyDown(KeyCode.E)) {
+            Game.G.Dialog.StartDialog(DialogId.TEST);
+        }
+        else if (Input.GetKeyDown(KeyCode.T)) {
+            StartCoroutine(StartFollowing());
+        }
+    }
+
+    IEnumerator StartFollowing() {
+        yield return new WaitForSeconds(0.1f);
+        Game.G.GameManager.SwitchPnjFollow();
     }
     /*   private void OnDrawGizmos() {
 

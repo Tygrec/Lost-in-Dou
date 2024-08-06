@@ -8,7 +8,7 @@ public class CaveEntrance : MonoBehaviour {
         if (other.CompareTag("Player")) {
             if (gameObject.scene.name == "CaveScene")
                 Game.G.Scene.ChangeScene("CaveScene", "MainScene");
-            else if (gameObject.scene.name == "MainScene")
+            else
                 Game.G.Scene.ChangeScene("MainScene", "CaveScene");
         }
     }

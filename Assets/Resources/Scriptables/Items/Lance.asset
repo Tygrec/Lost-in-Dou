@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lance
   m_EditorClassIdentifier: 
   Type: 2
-  Description: 
+  Description: "Un outil tr\xE8s utile pour p\xEAcher dans les eaux peu profondes."
   Consommable: 0
   Craftable: 1
   Equippable: 1

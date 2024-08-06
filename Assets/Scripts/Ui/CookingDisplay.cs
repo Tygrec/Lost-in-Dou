@@ -24,14 +24,17 @@ public class CookingDisplay : MonoBehaviour {
 
     }
     private void DisplayRecipes() {
-        foreach (Transform child in  _recipesButtonTransform) {
+        foreach (Transform child in _recipesButtonTransform) {
             Destroy(child.gameObject);
         }
 
-        foreach (var recipe in Game.G.Db.GetAllRecipes()) {
+        foreach (var pair in Game.G.Db.GetAllRecipes()) {
+            if (!pair.Value)
+                continue;
 
             var button = Instantiate(Resources.Load<Button>("Prefabs/Ui/Button"), _recipesButtonTransform);
-            button.GetComponentInChildren<TextMeshProUGUI>().text = recipe.Key.name;
+            button.GetComponentInChildren<TextMeshProUGUI>().text = pair.Key.name;
+            button.onClick.AddListener(() => { SetRecipeInPreparation(pair.Key); });
         }
     }
     private void DisplayIngredients() {
@@ -50,10 +53,40 @@ public class CookingDisplay : MonoBehaviour {
     }
 
     public void SetCurrentPreparation(Preparation preparation) {
-        
+
         foreach (var display in _preparationDisplays) {
             display.SetSelected(display.GetPreparation() == preparation);
         }
+    }
+
+    private void SetRecipeInPreparation(RecipeData recipe) {
+        Preparation freePrep = null;
+        foreach (var prep in Game.G.Cook.Preparations) {
+            if (prep.Inventory.GetCurrentSize() == 0)
+                freePrep = prep;
+        }
+
+        if (freePrep == null) {
+            Debug.Log("Pas de préparation disponible");
+            return;
+        }
+
+        Game.G.Cook.ChangeCurrentPreparation(freePrep);
+
+        List<ItemData> items = new List<ItemData>();
+        foreach (var item in recipe.Ingredients) {
+            if (Game.G.Inv.Get(InvTag.Kitchen).ItemExistsInInventory(item))
+                items.Add(item);
+            else {
+                Debug.Log("Il manque au moins un item pour la recette");
+                return;
+            }
+        }
+
+        Game.G.Cook.AddIngredientsToPreparation(items, freePrep);
+        Game.G.Inv.Get(InvTag.Kitchen).SetAllItemsSelected(items);
+
+
     }
 
     public void DisplayPlate(Plate plate) {
@@ -66,15 +99,15 @@ public class CookingDisplay : MonoBehaviour {
     public void HidePlate() {
         _result.SetActive(false);
     }
-
     public void Validate() {
         Game.G.Cook.CookAndEat();
     }
-
     public void QuitDisplay() {
         gameObject.SetActive(false);
+        _ingredientsSlotsTransform.gameObject.SetActive(false);
+        foreach (var prep in _preparationDisplays)
+            prep.gameObject.SetActive(false);
     }
-
     public void AbandonCooking() {
         gameObject.SetActive(false);
         Game.G.Cook.StopCooking();

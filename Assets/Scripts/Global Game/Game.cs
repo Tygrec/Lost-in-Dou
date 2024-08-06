@@ -7,13 +7,13 @@ public class Game : MonoBehaviour
     static public Game G;
 
     public GameManager GameManager;
-    public SceneManager Scene;
+    public SceneSystem Scene;
     public ConstGlobalValues Values;
     public TimeManager Time;
     public CraftManager Craft;
     public CookManager Cook;
     public DataBase Db;
-    public PlayerController Player;
+    public Player Player;
     public InventoryManager Inv;
     public DialogSystem Dialog;
 

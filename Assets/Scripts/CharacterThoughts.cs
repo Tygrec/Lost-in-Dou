@@ -3,25 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public enum ThoughtsSituation {
-    TooColdToSleep,
-    TooHungryToSleep,
-    NoWoodInInventory
-}
 public class CharacterThoughts : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _thoughts;
 
-    Dictionary<ThoughtsSituation, string> _thoughtsMapping = new Dictionary<ThoughtsSituation, string>();
-    private void Awake() {
-
-        _thoughtsMapping.Add(ThoughtsSituation.TooColdToSleep, "J'ai trop froid pour dormir...");
-        _thoughtsMapping.Add(ThoughtsSituation.TooHungryToSleep, "J'ai trop faim pour dormir...");
-        _thoughtsMapping.Add(ThoughtsSituation.NoWoodInInventory, "Je n'ai pas de bois.");
-    }
-    public void Display(ThoughtsSituation situation) {
+    public void Display(string thinking) {
         gameObject.SetActive(true);
-        _thoughts.text = _thoughtsMapping[situation];
+        _thoughts.text = thinking;
     }
     public void Hide() {
         gameObject.SetActive(false);

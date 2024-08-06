@@ -1,17 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public enum ItemType {
-    Food,
-    Resource,
-    Tool
+public interface ITooltipDisplay {
+
 }
 
-[CreateAssetMenu(fileName ="Item", menuName = "New Item")]
-public class ItemData : ScriptableObject
-{
+[CreateAssetMenu(fileName = "Item", menuName = "New Item")]
+public class ItemData : ScriptableObject, ITooltipDisplay {
     public ItemType Type;
     public string Description;
 
@@ -37,6 +35,14 @@ public class ItemData : ScriptableObject
             if (recipe.Ingredients.Contains(item)) {
                 return true;
             }
+        }
+
+        return false;
+    }
+    public bool HasEveryIngredientsDiscovered() {
+        foreach (var recipe in Recipes) {
+            if (recipe.Ingredients.All(item => Game.G.Db.GetAllDiscoveredItems().Contains(item)))
+                return true;
         }
 
         return false;

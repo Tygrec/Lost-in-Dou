@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1084403effe0ea54bbe31607c73740dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterThoughts: {fileID: 7930383515235786649}
+  _characterThoughts: {fileID: 3478197106572271113}
 --- !u!114 &1578844369668983158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,8 +240,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.046, y: -0.00000010803}
-  m_SizeDelta: {x: 2.4554, y: 0.8758}
+  m_AnchoredPosition: {x: -0.0083, y: 0.0093}
+  m_SizeDelta: {x: 2.4648, y: 0.8197}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5036571461395621827
 CanvasRenderer:
@@ -298,8 +298,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.3
-  m_fontSizeBase: 0.3
+  m_fontSize: 0.1
+  m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 6284519751670800438}
   - component: {fileID: 3508503071017334384}
   - component: {fileID: 2794846926997036167}
-  - component: {fileID: 7930383515235786649}
+  - component: {fileID: 3478197106572271113}
   m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
@@ -653,7 +653,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7930383515235786649
+--- !u!114 &3478197106572271113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8359445881615201900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a57f902e92666b448f59e9e022748cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 48726293c3154e2439b1b5b887d1e0f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _thoughts: {fileID: 923286882011254168}

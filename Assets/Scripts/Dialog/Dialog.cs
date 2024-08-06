@@ -1,21 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DialogId {
-    TEST
-}
 
 [CreateAssetMenu(fileName = "Dialog", menuName = "New Dialog")]
 public class Dialog : ScriptableObject {
-
     public List<Replica> Replicas = new List<Replica>();
+    public DialogId Id;
+}
 
+[Serializable]
+public class Replica {
+    public Name Name;
+    public Emotion Emotion;
+    public string Text;
+
+    public List<Answer> Answers;
+}
+
+[Serializable]
+public class Answer {
+    public string Text;
+    public Replica Reaction;
+    public RelationshipModifier Modifier;
+    public EventType eventType;
+}
+
+/*
     public TextAsset _replicasFile;
     public List<TextAsset> _answersFile;
-
-    public DialogId Id;
-
     public void Initialize() {
         ParseReplicas();
     }
@@ -56,7 +70,7 @@ public class Dialog : ScriptableObject {
         var answer = new MultipleAnswers(answersText, reactions, modifiers);
         var replica = new Replica(Game.G.Values.PLAYER_NAME, "", "", answer);
         Replicas.Add(replica);
-    }
+    } 
 
     private RelationshipModifier ParseModifier(string text) {
 
@@ -69,57 +83,4 @@ public class Dialog : ScriptableObject {
 
         Debug.LogError("Modificateur de relation non reconnu");
         return RelationshipModifier.Neutral;
-    }
-}
-
-public class Replica {
-    public string Name;
-    public string Text;
-    public string Emotion;
-
-    public MultipleAnswers Answers;
-
-    public Replica(string name, string emotion, string text, MultipleAnswers answers) {
-        Name = name;
-        Text = text;
-        Emotion = emotion;
-        Answers = answers;
-    }
-}
-
-public class Reactions {
-    public Replica Replica;
-    public int NextReplicaId;
-    public Reactions(Replica replica, int nextReplicaId) {
-        Replica = replica;
-        NextReplicaId = nextReplicaId;
-    }
-}
-
-public class MultipleAnswers {
-    public List<Answer> Answers = new List<Answer>();
-
-    public MultipleAnswers(List<string> answers, List<Replica> reactions, List<RelationshipModifier> modifier) {
-        for (int i = 0; i < answers.Count; i++) {
-            Answers.Add(new Answer(reactions[i], answers[i], modifier[i]));
-        }
-    }
-}
-
-public enum RelationshipModifier {
-    Positive,
-    Negative,
-    Neutral
-}
-
-public class Answer {
-    public Replica Reaction;
-    public string Text;
-    public RelationshipModifier Modifier;
-
-    public Answer(Replica reaction, string text, RelationshipModifier modifier) {
-        Reaction = reaction;
-        Text = text;
-        Modifier = modifier;
-    }
-}
+    }*/

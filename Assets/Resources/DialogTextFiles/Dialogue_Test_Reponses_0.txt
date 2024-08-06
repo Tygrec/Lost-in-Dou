@@ -1,3 +1,0 @@
-Je te faisais marcher ! Il n'y a pas de tigres sur les îles !	Colère	Hey, ne me fais pas de blague comme ça !	Négatif
-Je serai très prudente, ne t'inquiète pas.	Content	D'accord !	Positif
-C'est probable mais ce n'est pas comme si nous avions le choix...	Inquiet	C'est vrai...	Neutre

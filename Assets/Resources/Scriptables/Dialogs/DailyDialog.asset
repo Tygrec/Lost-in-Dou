@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55cd3b6f05b5684baacb0ec7c3de0ac, type: 3}
+  m_Name: DailyDialog
+  m_EditorClassIdentifier: 
+  Replicas:
+  - Name: 1
+    Emotion: 4
+    Text: Oui ?
+    Answers:
+    - Text: Comment vas-tu ?
+      Reaction:
+        Name: 1
+        Emotion: 0
+        Text: "Tr\xE8s bien merci !"
+        Answers: []
+      Modifier: 0
+      eventType: 0
+    - Text: "Tiens prends \xE7a"
+      Reaction:
+        Name: 0
+        Emotion: 0
+        Text: 
+        Answers: []
+      Modifier: 0
+      eventType: 2
+  Id: 1
