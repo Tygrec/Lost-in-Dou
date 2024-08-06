@@ -1471,6 +1471,7 @@ MonoBehaviour:
   _characterName: {fileID: 890734720}
   _replicaText: {fileID: 1558646060}
   _answersObj: {fileID: 634236969}
+  IsAnswering: 0
 --- !u!114 &361778621
 MonoBehaviour:
   m_ObjectHideFlags: 0
