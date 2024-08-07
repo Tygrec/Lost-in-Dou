@@ -8,8 +8,10 @@ public class PnjManager : MonoBehaviour
 
     private void Start() {
         _data = (PnjData)Game.G.GameManager.GetHumanData(Name.Pnj);
-        transform.position = _data.Follow ? Game.G.Player.transform.position - Game.G.Player.transform.forward * GetComponent<CapsuleCollider>().radius * 3 :
-            _data.CurrentPosition;
+        Transform player = Game.G.Player.transform;
+        Vector3 followPosition = player.position - player.forward * GetComponent<CapsuleCollider>().radius * 3;
+        followPosition.y = transform.position.y;
+        transform.position = _data.Follow ? followPosition : _data.CurrentPosition;
     }
 
     private void Update() {
