@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireData
 {
-    private float _fireState = 100;
+    private float _fireState = 0;
 
     public FireData() {
         Game.G.Time.RegisterRecurringCallback(FireDie, 2);

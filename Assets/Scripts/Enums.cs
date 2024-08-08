@@ -18,7 +18,8 @@ public enum Emotion {
     Angry,
     Fearful,
     Neutral,
-    Wondering
+    Wondering,
+    Surprised
 }
 public enum DialogId {
     TEST,
@@ -27,7 +28,8 @@ public enum DialogId {
     NotFood,
     ThankfulForEat,
     Daily,
-    DiscoverCave
+    DiscoverCave,
+    FirstEncounter
 }
 public enum InvTag {
     Player,

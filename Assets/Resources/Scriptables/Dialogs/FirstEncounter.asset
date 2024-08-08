@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55553d9340ad7eb4db6938ec06b33043, type: 3}
+  m_Name: FirstEncounter
+  m_EditorClassIdentifier: 
+  Replicas:
+  - Name: 0
+    Emotion: 6
+    Text: Oh !
+    Answers: []
+  - Name: 1
+    Emotion: 3
+    Text: "Qui est l\xE0 ?"
+    Answers: []
+  - Name: 0
+    Emotion: 1
+    Text: "Je suis Max, j'ai \xE9chou\xE9 sur cette \xEEle. Toi aussi ?"
+    Answers: []
+  - Name: 1
+    Emotion: 1
+    Text: "Oui, on devait \xEAtre dans le m\xEAme bateau..."
+    Answers: []
+  - Name: 0
+    Emotion: 0
+    Text: Au moins on n'est plus tous seuls ! A deux on va s'en sortir !
+    Answers: []
+  - Name: 1
+    Emotion: 1
+    Text: "Eh bien... je ne sais pas si je pourrais t'\xEAtre d'une grande aide."
+    Answers: []
+  - Name: 0
+    Emotion: 6
+    Text: Quoi ?
+    Answers: []
+  - Name: 1
+    Emotion: 1
+    Text: Je suis aveugle.
+    Answers: []
+  - Name: 0
+    Emotion: 1
+    Text: Ah...
+    Answers: []
+  - Name: 0
+    Emotion: 0
+    Text: "Ce n'est pas grave ! Je vais m'occuper d'aller nous allumer un feu et
+      chercher \xE0 manger. Je suis s\xFBre que tu trouveras \xE0 te rendre utile.
+      Compte sur moi pour nous maintenir en vie en tout cas !"
+    Answers: []
+  - Name: 1
+    Emotion: 0
+    Text: Ah... merci.
+    Answers: []
+  Id: 7
