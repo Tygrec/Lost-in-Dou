@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInventory : Inventory {
+
+    public bool WaitForItem = false;
+
     public void HandlePickUpItem(ItemData item, ItemManager itemManager) {
         if (AddItem(item)) {
             itemManager.RemoveFromSpawn();

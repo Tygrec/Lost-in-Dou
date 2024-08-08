@@ -13399,7 +13399,6 @@ MonoBehaviour:
   _cookingDisplay: {fileID: 1108487247}
   _collectionDisplay: {fileID: 1718736875}
   _showedItemImage: {fileID: 726702009}
-  WaitForItem: 0
 --- !u!1 &1983621920
 GameObject:
   m_ObjectHideFlags: 0

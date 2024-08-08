@@ -8,7 +8,6 @@ public class DialogSystem : MonoBehaviour
 {
     Dictionary<DialogId, Dialog> m_Dialogs = new Dictionary<DialogId, Dialog>();
     public bool ShowingSuccess = true;
-    private bool _isShowing = false;
 
     public ItemData ItemChosen = null;
     private void OnEnable() {
@@ -43,14 +42,13 @@ public class DialogSystem : MonoBehaviour
         if (ShowingSuccess)
             Game.G.Db.Analyze(ItemChosen);
 
-        _isShowing = false;
         ItemChosen = null;
         ShowingSuccess = true;
     }
 
     public void StartShowingGame(ItemData item) {
         if (!item.Showable) {
-            Debug.LogError("Erreur : l'item ne peut pas être montré");
+            StartDialog(DialogId.NotShowable);
             return;
         }
 
@@ -80,6 +78,5 @@ public class DialogSystem : MonoBehaviour
 
         UiManager.Instance.HideItemShowedSprite();
         DialogDisplayManager.D.DisplayDialog(Game.G.Db.GetShowing(item));
-        _isShowing = true;
     }
 }

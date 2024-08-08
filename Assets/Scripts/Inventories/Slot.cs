@@ -74,7 +74,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
 
         if (Time.time - lastClickTime < doubleClickThreshold) {
-            if (UiManager.Instance.WaitForItem) {
+            PlayerInventory inv = (PlayerInventory)Game.G.Inv.Get(InvTag.Player);
+
+            if (inv.WaitForItem) {
                 UiManager.Instance.CloseInventoryToChose();
                 Game.G.Dialog.ItemChosen = item;
                 return;
@@ -82,7 +84,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
             if (UiManager.Instance.StockInventoryIsOpen()) {
                 if (Game.G.Inv.Get(InvTag.Stock).AddItem(item))
-                    Game.G.Inv.Get(InvTag.Player).RemoveItem(item);
+                    inv.RemoveItem(item);
             }
 
             if (item.Consommable) {

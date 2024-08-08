@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55553d9340ad7eb4db6938ec06b33043, type: 3}
-  m_Name: ThankfulForEat
+  m_Name: NotShowable
   m_EditorClassIdentifier: 
   Replicas:
   - Name: 1
     Emotion: 0
-    Text: "Merci, c'est d\xE9licieux !"
+    Text: "... tu es s\xFBre que tu as besoin de moi pour savoir ce que c'est ?"
     Answers: []
-  Id: 5
+  - Name: 0
+    Emotion: 7
+    Text: Ok, j'avoue.
+    Answers: []
+  Id: 2
