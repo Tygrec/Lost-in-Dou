@@ -14,6 +14,7 @@ public class DataBase : MonoBehaviour
     private Dictionary<ItemData, bool> _discoveredCrafts = new Dictionary<ItemData, bool>();
     private Dictionary<ItemData, bool> _discoveredItems = new Dictionary<ItemData, bool>();
 
+    private Dictionary<ItemData, ShowingDialog> _showingDialogMapping = new Dictionary<ItemData, ShowingDialog>();
 
     [SerializeField] List<ItemData> _availableCraftsAtStart;
     [SerializeField] List<RecipeData> _availableRecipesAtStart;
@@ -23,7 +24,9 @@ public class DataBase : MonoBehaviour
     public List<ItemData> GetAllDiscoveredItems() {
         return _discoveredItems.Where(pair => pair.Value == true).Select(pair => pair.Key).ToList(); 
     }
-
+    public ShowingDialog GetShowing(ItemData item) {
+        return _showingDialogMapping[item];
+    }
     public bool IsDiscovered(ItemData item) {
         return _discoveredCrafts[item];
     }
@@ -63,6 +66,10 @@ public class DataBase : MonoBehaviour
         foreach (var recipe in _availableRecipesAtStart) {
             _discoveredRecipes[recipe] = true;
         }
+
+        foreach (var item in Resources.LoadAll<ItemData>("Scriptables/Items/").Where(i => i.Showable).ToList()) {
+            _showingDialogMapping.Add(item, Resources.Load<ShowingDialog>($"Scriptables/Dialogs/Showing/{item.name}"));
+        }
     }
 
     public void Discover(ItemData item) {
@@ -72,6 +79,10 @@ public class DataBase : MonoBehaviour
     public void Discover(RecipeData recipe) {
         _discoveredRecipes[recipe] = true;
         Game.G.Player.Controller.ThinkSomething("Je pense que je devrais pouvoir cuisiner " + recipe.name + " à présent.");
+    }
+
+    public void Analyze(ItemData item) {
+        print($"{item.name} a été analysé");
     }
 
     public bool FillSpawnerDataMapping(Transform spawnersTransform) {

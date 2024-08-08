@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "Poisson grill\xE9"
   m_EditorClassIdentifier: 
   Ingredients:
-  - {fileID: 11400000, guid: e351dee9025ca4c4d83050aeadec96b4, type: 2}
+  - {fileID: 11400000, guid: 299cd44c5ad11454fb1f08cfdcf064ab, type: 2}
   Sprite: {fileID: 21300000, guid: 2bd92ef41647448488b02cbbec8fc153, type: 3}
   SatietyValue: 30
   ThirstValue: 0

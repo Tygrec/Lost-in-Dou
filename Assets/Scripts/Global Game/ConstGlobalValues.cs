@@ -15,6 +15,8 @@ public class ConstGlobalValues : MonoBehaviour {
     public string PLAYER_NAME;
     public string PNJ_NAME;
     public float TEXT_SPEED;
+    public string INITIAL_SCENE;
+    public Vector3 INITIAL_PNJ_POSITION;
 }
 
 public static class Utils {
@@ -24,7 +26,7 @@ public static class Utils {
                 return t;
         }
 
-        return default(T);
+        return default;
     }
 
     public static int FindIndexInArray<T>(T[] array, T item) {

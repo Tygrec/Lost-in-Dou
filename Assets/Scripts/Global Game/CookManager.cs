@@ -47,6 +47,7 @@ public class CookManager : MonoBehaviour {
         if (foods.Count > index) {
             UiManager.Instance.DisplayPlate(foods[index]);
             Game.G.Player.Needs.Eat(foods[index]);
+            Game.G.GameManager.GetPnjNeedsManager().Eat(foods[index]);
 
             yield return new WaitForSeconds(1.5f);
 

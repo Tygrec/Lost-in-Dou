@@ -16,17 +16,23 @@ public class ItemData : ScriptableObject, ITooltipDisplay {
     public bool Consommable;
     public bool Craftable;
     public bool Equippable;
+    public bool Showable;
 
     public List<Recipe> Recipes;
 
     public int SatietyValue; // Uniquement pour la nourriture
     public int ThirstValue; // Uniquement pour la nourriture et l'eau
 
+    public int Durability; // Pour les ressources et équipement
+
     public ItemManager Prefab() {
         return Resources.Load<ItemManager>($"Prefabs/Items/{name}");
     }
     public Sprite Sprite() {
         return Resources.Load<Sprite>($"Sprites/Items/{name}");
+    }
+    public Sprite ShowToPnjSprite() {
+        return Resources.Load<Sprite>($"Sprites/ShowToPnj/{name}");
     }
 
     public bool NeedItemForRecipe(ItemData item) {
@@ -46,6 +52,11 @@ public class ItemData : ScriptableObject, ITooltipDisplay {
         }
 
         return false;
+    }
+
+    public bool LoseDurabilityAndShouldBroke() {
+        Durability -= 1;
+        return Durability <= 0;
     }
 
     public static ItemData Wood() {

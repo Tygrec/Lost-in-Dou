@@ -133,8 +133,14 @@ public class DetectItemForward : MonoBehaviour {
         else {
             UiManager.Instance.DisplayPressEInfo("Boire");
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E)) {
                 Game.G.Player.Needs.Drink();
+
+                if (Game.G.GameManager.PnjIsFollowing()) {
+                    Game.G.GameManager.GetPnjNeedsManager().Drink();
+                }
+            }
+            
         }
         
     }
@@ -164,7 +170,7 @@ public class DetectItemForward : MonoBehaviour {
     private void PnjBehavior() {
         UiManager.Instance.DisplayPressEInfo("Parler");
         if (Input.GetKeyDown(KeyCode.E)) {
-            Game.G.Dialog.StartDialog(DialogId.TEST);
+            Game.G.Dialog.StartDialog(DialogId.Daily);
         }
         else if (Input.GetKeyDown(KeyCode.T)) {
             StartCoroutine(StartFollowing());

@@ -9,15 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4076da0fdda6b6e4e930c53c7380bf9e, type: 3}
-  m_Name: Bois
+  m_Script: {fileID: 11500000, guid: 55553d9340ad7eb4db6938ec06b33043, type: 3}
+  m_Name: Surprised
   m_EditorClassIdentifier: 
-  Type: 1
-  Description: "Une branche tomb\xE9e d'un arbre"
-  Consommable: 0
-  Craftable: 0
-  Equippable: 0
-  Recipes: []
-  SatietyValue: 0
-  ThirstValue: 0
-  Durability: 1
+  Replicas: []
+  Id: 0

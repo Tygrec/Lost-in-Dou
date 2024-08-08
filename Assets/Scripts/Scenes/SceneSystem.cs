@@ -4,15 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneSystem : MonoBehaviour
-{
+public class SceneSystem : MonoBehaviour {
     [SerializeField] Transform _pnjSpawn;
     [SerializeField] private List<SceneTransitionPlayer> _playerSpawns;
 
     private Vector3 _playerPositionSave;
 
     public void ChangeScene(string oldScene, string newScene) {
-        Game.G.GameManager.ChangePnjScene(newScene);
         Game.G.Db.SaveSpawnersId();
         StartCoroutine(IChangeScene(oldScene, newScene, GetSpawn(oldScene, newScene).position));
     }
@@ -38,8 +36,10 @@ public class SceneSystem : MonoBehaviour
         SceneTransition.Instance.TransitionAnimation("Start");
 
         Game.G.GameManager.ChangeGameState(GAMESTATE.RUNNING);
+        ManagePnj(newScene);
 
         yield return new WaitForSeconds(1);
+
     }
     IEnumerator ILoadMiniGame(string oldScene, string newScene) {
         yield return null;
@@ -61,6 +61,23 @@ public class SceneSystem : MonoBehaviour
 
     private Transform GetSpawn(string fromScene, string toScene) {
         return _playerSpawns.Find(spawn => spawn.fromScene == fromScene && spawn.toScene == toScene).position;
+    }
+
+    private void ManagePnj(string newScene) {
+        PnjData pnj = (PnjData)Game.G.GameManager.GetHumanData(Name.Pnj);
+
+        if (!pnj.Follow) {
+            if (pnj.CurrentScene == newScene) {
+                Game.G.GameManager.Pnj = Instantiate(Resources.Load<PnjManager>("Prefabs/Pnj"), _pnjSpawn);
+            }
+            else if (Game.G.GameManager.Pnj != null) {
+                Destroy(Game.G.GameManager.Pnj.gameObject);
+            }
+        }
+        else {
+            Game.G.GameManager.ChangePnjScene(newScene);
+        }
+            
     }
 }
 

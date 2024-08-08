@@ -9,8 +9,6 @@ public class EventHub
     private static Dictionary<EventType, Action<object>> _events = new Dictionary<EventType, Action<object>>();
 
     public static void SendEvent(EventType eventType, object payload) {
-        Debug.Log($"{eventType} {payload}");
-
         if (!_events.ContainsKey(eventType)) {
             return;
         }

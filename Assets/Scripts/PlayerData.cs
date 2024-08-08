@@ -11,11 +11,8 @@ public class PlayerData : HumanData {
 public class PnjData : HumanData {
     public string CurrentScene = "CaveScene";
     public bool Follow = false;
-    public Vector3 CurrentPosition = Vector3.zero;
+    public Vector3 CurrentPosition = Game.G.Values.INITIAL_PNJ_POSITION;
 
-    public PnjData() {
-        CurrentScene = SceneManager.GetActiveScene().name;
-    }
     public void StartFollowing() {
         Follow = true;
     }

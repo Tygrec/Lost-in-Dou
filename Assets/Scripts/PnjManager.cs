@@ -8,35 +8,28 @@ public class PnjManager : MonoBehaviour
 
     private void Start() {
         _data = (PnjData)Game.G.GameManager.GetHumanData(Name.Pnj);
-        Transform player = Game.G.Player.transform;
-        Vector3 followPosition = player.position - player.forward * GetComponent<CapsuleCollider>().radius * 3;
-        followPosition.y = transform.position.y;
-        transform.position = _data.Follow ? followPosition : _data.CurrentPosition;
+
+        transform.position = _data.CurrentPosition;
     }
 
     private void Update() {
         if (_data.Hunger <= 0)
             StopSleeping();
 
-        GetComponent<Collider>().isTrigger = _data.Follow;
+    //    GetComponent<Collider>().isTrigger = _data.Follow;
         if (_data.Follow)
             FollowPlayer();
 
-        _data.CurrentPosition = transform.position;
         transform.LookAt(Game.G.Player.transform);
     }
 
     private void FollowPlayer() {
         
         var player = Game.G.Player.transform;
-    //    transform.position =  + Vector3.back * GetComponent<CapsuleCollider>().radius * 2;
+    
         Vector3 followPosition = player.position - player.forward * GetComponent<CapsuleCollider>().radius * 3;
-        followPosition.y = transform.position.y; // Maintenir la hauteur actuelle
-
-        // Déplacer le GameObject vers la position souhaitée avec interpolation
+        followPosition.y = transform.position.y;
         transform.position = Vector3.Lerp(transform.position, followPosition, Game.G.Values.PLAYER_SPEED * Time.deltaTime);
-
-        // Optionnel : orienter le GameObject vers le joueur
         transform.LookAt(player);
     }
 

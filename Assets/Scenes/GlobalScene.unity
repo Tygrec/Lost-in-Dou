@@ -149,7 +149,7 @@ PrefabInstance:
     - target: {fileID: 5142596656040464264, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.01
+      value: 7.37
       objectReference: {fileID: 0}
     - target: {fileID: 5142596656040464264, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
@@ -228,6 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c580ee82332d744ca6db619a9a6da04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowingSuccess: 1
+  ItemChosen: {fileID: 0}
 --- !u!4 &249410084
 Transform:
   m_ObjectHideFlags: 0
@@ -270,7 +272,7 @@ Transform:
   m_GameObject: {fileID: 415976710}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.83}
+  m_LocalPosition: {x: 0, y: 0.81, z: -2.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -649,7 +651,7 @@ Transform:
   m_GameObject: {fileID: 773746007}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.900955, y: 26.687683, z: -65.870544}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -683,7 +685,7 @@ Transform:
   m_GameObject: {fileID: 807496955}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.900955, y: -26.687683, z: 65.870544}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -692,7 +694,6 @@ Transform:
   - {fileID: 1356739469}
   - {fileID: 1771947095}
   - {fileID: 1118580576}
-  - {fileID: 1316025860}
   - {fileID: 773746008}
   - {fileID: 996796876}
   - {fileID: 435422165}
@@ -1039,7 +1040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e866e4e5a19e04e9fe92e9b0342036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pnjSpawn: {fileID: 0}
+  _pnjSpawn: {fileID: 1253282689}
   _playerSpawns:
   - fromScene: MainScene
     toScene: CaveScene
@@ -1115,7 +1116,7 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!1 &1316025859
+--- !u!1 &1253282688
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1123,8 +1124,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1316025860}
-  - component: {fileID: 1316025861}
+  - component: {fileID: 1253282689}
   m_Layer: 0
   m_Name: PnjSpawn
   m_TagString: Untagged
@@ -1132,33 +1132,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1316025860
+--- !u!4 &1253282689
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1316025859}
+  m_GameObject: {fileID: 1253282688}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.86, y: 27.107683, z: -65.870544}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 807496957}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1316025861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1316025859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 467d00b71e91cdf4783ee858d5e6e047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1356739468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,6 +1323,8 @@ MonoBehaviour:
   PLAYER_NAME: Alice
   PNJ_NAME: Max
   TEXT_SPEED: 0.05
+  INITIAL_SCENE: PlageScene
+  INITIAL_PNJ_POSITION: {x: 4, y: 1, z: 0}
 --- !u!114 &1740062596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1347,6 +1337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429d90dc6bfd3ce4a8ad2df5ee0b6754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Pnj: {fileID: 0}
 --- !u!4 &1740062597
 Transform:
   m_ObjectHideFlags: 0
@@ -1590,5 +1581,6 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1253282689}
   - {fileID: 196012687}
   - {fileID: 807496957}

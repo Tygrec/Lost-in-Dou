@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour {
     [SerializeField] TextMeshProUGUI _pressEInfoTxt;
@@ -23,9 +24,12 @@ public class UiManager : MonoBehaviour {
     [SerializeField] CookingDisplay _cookingDisplay;
     [SerializeField] CollectionDisplay _collectionDisplay;
 
+    [SerializeField] Image _showedItemImage;
+
     static public UiManager Instance;
 
     public Action<Inventory> OnInventoryChanged;
+    public bool WaitForItem;
     //  public Action OnPlayerStateChanged;
 
     public bool PlayerInventoryIsOpen() {
@@ -118,6 +122,23 @@ public class UiManager : MonoBehaviour {
     }
     public void HideCooking() {
         _cookingDisplay?.QuitDisplay();
+    }
+
+    public void OpenInventoryToChose() {
+        WaitForItem = true;
+        DisplayInventory(Game.G.Inv.Get(InvTag.Player));
+    }
+    public void CloseInventoryToChose() {
+        WaitForItem = false;
+        DisplayInventory(Game.G.Inv.Get(InvTag.Player));
+    }
+
+    public void DisplayItemShowedSprite(ItemData item) {
+        _showedItemImage.transform.parent.gameObject.SetActive(true);
+        _showedItemImage.sprite = item.ShowToPnjSprite();
+    }
+    public void HideItemShowedSprite() {
+        _showedItemImage.transform.parent.gameObject.SetActive(false);
     }
 
     private void Update() {

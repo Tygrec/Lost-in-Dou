@@ -17,11 +17,17 @@ public enum Emotion {
     Sad,
     Angry,
     Fearful,
-    Neutral
+    Neutral,
+    Wondering
 }
 public enum DialogId {
     TEST,
-    Daily
+    Showing,
+    Surprised,
+    NotFood,
+    ThankfulForEat,
+    Daily,
+    DiscoverCave
 }
 public enum InvTag {
     Player,
@@ -53,5 +59,6 @@ public enum SuccessRate {
 public enum EventType {
     None,
     Test,
-    GiveItemToPnj
+    GiveItemToPnj,
+    ShowObjectToPnj
 }

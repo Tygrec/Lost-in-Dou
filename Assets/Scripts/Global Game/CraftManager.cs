@@ -36,6 +36,7 @@ public class CraftManager : MonoBehaviour {
                 Game.G.Inv.Get(InvTag.Player).RemoveItem(item);
             }
 
+            CurrentCraft.Durability = CurrentIngredients.Sum(item => item.Durability);
             Game.G.Inv.Get(InvTag.Player).AddItem(CurrentCraft);
 
             CurrentCraft = null;

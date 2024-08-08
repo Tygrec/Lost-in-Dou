@@ -117,7 +117,18 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Fishing(FishData fish) {
-        Game.G.Inv.Get(InvTag.Player).AddItem(fish);
+        
+        
+       if (!Game.G.Inv.Get(InvTag.Player).AddItem(fish)) {
+            ThinkSomething("Je n'ai plus de place dans mon sac");
+        }
+        else {
+            if (_data.EquippedItem.LoseDurabilityAndShouldBroke()) {
+                ThinkSomething($"L'outil {_data.EquippedItem.name} s'est cassé");
+                Game.G.Inv.Get(InvTag.Player).RemoveItem(_data.EquippedItem);
+                _data.EquippedItem = null;
+            }
+        }
     }
 
     public void Equip(ItemInInventory itemValues) {

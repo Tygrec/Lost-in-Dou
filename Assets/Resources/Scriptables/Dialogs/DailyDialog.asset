@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f55cd3b6f05b5684baacb0ec7c3de0ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 55553d9340ad7eb4db6938ec06b33043, type: 3}
   m_Name: DailyDialog
   m_EditorClassIdentifier: 
   Replicas:
@@ -17,14 +17,14 @@ MonoBehaviour:
     Emotion: 4
     Text: Oui ?
     Answers:
-    - Text: Comment vas-tu ?
+    - Text: "Est-ce que tu peux regarder \xE7a ?"
       Reaction:
         Name: 1
         Emotion: 0
         Text: "Tr\xE8s bien merci !"
         Answers: []
       Modifier: 0
-      eventType: 0
+      eventType: 3
     - Text: "Tiens prends \xE7a"
       Reaction:
         Name: 0
@@ -33,4 +33,16 @@ MonoBehaviour:
         Answers: []
       Modifier: 0
       eventType: 2
-  Id: 1
+    - Text: Non, rien
+      Reaction:
+        Name: 1
+        Emotion: 4
+        Text: '?'
+        Answers: []
+      Modifier: 0
+      eventType: 0
+  - Name: 1
+    Emotion: 0
+    Text: A plus tard
+    Answers: []
+  Id: 3

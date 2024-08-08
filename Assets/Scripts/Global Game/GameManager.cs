@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour {
     private PnjData _pnjData;
     private Dictionary<Name, HumanData> _mappingHumanData = new Dictionary<Name, HumanData>();
 
+    public PnjManager Pnj;
+
     private int _relationship = 50;
     private void Awake() {
         _playerData = new PlayerData();
@@ -52,8 +54,30 @@ public class GameManager : MonoBehaviour {
         _GameState = gs;
     }
 
+    public bool PnjIsFollowing() {
+        return _pnjData.Follow;
+    }
+    public NeedsManager GetPnjNeedsManager() {
+        return Pnj?.GetComponent<NeedsManager>();
+    }
+
+    public void PnjReceiveItem(ItemData item) {
+        if (item.Consommable) {
+            Pnj?.GetComponent<NeedsManager>().Eat(item);
+            Game.G.Inv.Get(InvTag.Player).RemoveItem(item);
+            Game.G.Dialog.StartDialog(DialogId.ThankfulForEat);
+        }
+        else {
+            Game.G.Dialog.StartDialog(DialogId.NotFood);
+        }
+    }
     public void SwitchPnjFollow() {
         _pnjData.Follow = !_pnjData.Follow;
+        
+        if(!_pnjData.Follow) {
+            _pnjData.CurrentPosition = Game.G.GameManager.Pnj.transform.position;
+            print(_pnjData.CurrentPosition);
+        }
     }
     public void ChangePnjScene(string newScene) {
         if (_pnjData.Follow) {

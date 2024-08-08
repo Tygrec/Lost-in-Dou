@@ -9,15 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4076da0fdda6b6e4e930c53c7380bf9e, type: 3}
-  m_Name: Bois
+  m_Script: {fileID: 11500000, guid: 68d3564a4d7c02848b54042c72ec99c5, type: 3}
+  m_Name: "D\xE9lice de carpe"
   m_EditorClassIdentifier: 
-  Type: 1
-  Description: "Une branche tomb\xE9e d'un arbre"
-  Consommable: 0
-  Craftable: 0
-  Equippable: 0
-  Recipes: []
+  Ingredients:
+  - {fileID: 11400000, guid: 556a698757b3cde4881a049b20db04bd, type: 2}
+  - {fileID: 11400000, guid: 70b00ce06c05eb8438f360eb6b1e05fa, type: 2}
+  Sprite: {fileID: 0}
   SatietyValue: 0
   ThirstValue: 0
-  Durability: 1
