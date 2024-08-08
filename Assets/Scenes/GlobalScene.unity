@@ -915,7 +915,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68da046864262ad42a3a063efe2de3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _eventsTrigger: []
+  _eventsTrigger:
+  - TriggerEvent: {fileID: 0}
+    Transform: {fileID: 0}
+    WasTriggered: 0
+    Scene: 
 --- !u!1 &972828656
 GameObject:
   m_ObjectHideFlags: 0
