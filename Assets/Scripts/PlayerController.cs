@@ -31,16 +31,15 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
+        if (!_data.IsNapping) {
+            Move();
+        }
+
         if (Game.G.GameManager.GetGameState() != GAMESTATE.RUNNING)
             return;
 
         if (Input.GetKeyDown(KeyCode.R) && _data.Hunger > 0)
             _napCoroutine = StartCoroutine(INap());
-
-        if (!_data.IsNapping) {
-            Move();
-        }
-
         if (_data.Hunger <= 0 && _data.IsNapping)
             StopNapping();
     }
@@ -54,6 +53,9 @@ public class PlayerController : MonoBehaviour {
             if (isRunning)
                 StopRunning();
         }
+
+        if (Game.G.GameManager.GetGameState() != GAMESTATE.RUNNING)
+            return;
 
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");

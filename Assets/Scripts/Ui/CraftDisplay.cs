@@ -26,6 +26,7 @@ public class CraftDisplay : MonoBehaviour {
 
     public void DisplayCraftSelection() {
         Game.G.GameManager.ChangeGameState(GAMESTATE.PAUSE);
+        Game.G.Craft.CurrentIngredients.Clear();
 
         UiManager.Instance.Clear(_craftButtonsTransform);
         gameObject.SetActive(true);

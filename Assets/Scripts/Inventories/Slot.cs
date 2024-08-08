@@ -81,13 +81,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                 Game.G.Dialog.ItemChosen = item;
                 return;
             }
-
-            if (UiManager.Instance.StockInventoryIsOpen()) {
+            else if (UiManager.Instance.StockInventoryIsOpen()) {
                 if (Game.G.Inv.Get(InvTag.Stock).AddItem(item))
                     inv.RemoveItem(item);
             }
-
-            if (item.Consommable) {
+            else if (item.Consommable) {
                 if (_inventory is PlayerInventory) {
 
                     Game.G.Player.Needs.Eat(item);
@@ -167,4 +165,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             lastClickTime = Time.time;
         }
     }
+
+       private void OnDisable() {
+        if (_inventory.GetItemAtIndex(_index) != null)
+            _inventory.GetItemAtIndex(_index).Selected = false;
+    } 
 }

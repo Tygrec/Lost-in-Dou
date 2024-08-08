@@ -24,7 +24,9 @@ public class CraftManager : MonoBehaviour {
 
         bool success = false;
         foreach (var recipe in CurrentCraft.Recipes) {
-            success = !recipe.Ingredients.Except(CurrentIngredients).Any() && !CurrentIngredients.Except(recipe.Ingredients).Any();
+            success = !recipe.Ingredients.Except(CurrentIngredients).Any() && 
+                !CurrentIngredients.Except(recipe.Ingredients).Any() && 
+                recipe.Ingredients.Count == CurrentIngredients.Count;
 
             if (success)
                 break;
