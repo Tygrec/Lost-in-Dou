@@ -4303,14 +4303,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 287b98fe7b3b21a49a95c053d6ac9015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _item: {fileID: 1713956266}
-  _recipe: {fileID: 1956013807}
+  _item: {fileID: 0}
+  _recipe: {fileID: 0}
   _itemImg: {fileID: 342504211}
   _itemNameTxt: {fileID: 1472750333}
   _itemDescriptionTxt: {fileID: 1712414379}
-  _recipeNameTxt: {fileID: 92605674}
-  _recipeImg: {fileID: 664743456}
-  _ingredientsLayout: {fileID: 1499049647}
+  _recipeNameTxt: {fileID: 0}
+  _recipeImg: {fileID: 0}
+  _ingredientsLayout: {fileID: 0}
 --- !u!1 &757720871
 GameObject:
   m_ObjectHideFlags: 0

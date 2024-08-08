@@ -15,7 +15,7 @@ public class ConstGlobalValues : MonoBehaviour {
     public string PLAYER_NAME;
     public string PNJ_NAME;
     public float TEXT_SPEED;
-    public string INITIAL_SCENE;
+    public string MAIN_SCENE_NAME;
     public Vector3 INITIAL_PNJ_POSITION;
 }
 
