@@ -130,7 +130,7 @@ public class DetectItemForward : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.E))
                 Game.G.Player.Controller.Fishing(water.GetComponent<Fishing>().GetFish());
         }
-        else {
+        else if (water.GetComponent<Fishing>().Drinkable) {
             UiManager.Instance.DisplayPressEInfo("Boire");
 
             if (Input.GetKeyDown(KeyCode.E)) {

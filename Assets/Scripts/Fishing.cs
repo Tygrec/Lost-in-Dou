@@ -5,6 +5,7 @@ using UnityEngine;
 public class Fishing : MonoBehaviour {
     [SerializeField] List<FishData> _fishs;
     [SerializeField] List<int> _dropRate;
+    public bool Drinkable;
 
     public FishData GetFish() {
         int total = 0;

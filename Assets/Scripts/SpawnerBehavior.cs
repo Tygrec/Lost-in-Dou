@@ -66,7 +66,7 @@ public class SpawnerBehavior : MonoBehaviour {
             randomDirection += transform.position;
             randomDirection.x += _renderer.bounds.size.x / 2;
             randomDirection.z += _renderer.bounds.size.z / 2;
-            randomDirection.y = 5;
+            randomDirection.y = 2;
 
             // Check for collisions
             if (!Physics.CheckSphere(randomDirection, 0.5f, _layerMask)) {

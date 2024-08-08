@@ -29,8 +29,6 @@ public class UiManager : MonoBehaviour {
     static public UiManager Instance;
 
     public Action<Inventory> OnInventoryChanged;
-    public bool WaitForItem;
-    //  public Action OnPlayerStateChanged;
 
     public bool PlayerInventoryIsOpen() {
         return Game.G.Inv.GetDisplay(InvTag.Player).IsOpen;
@@ -125,11 +123,13 @@ public class UiManager : MonoBehaviour {
     }
 
     public void OpenInventoryToChose() {
-        WaitForItem = true;
-        DisplayInventory(Game.G.Inv.Get(InvTag.Player));
+        PlayerInventory inv = (PlayerInventory)Game.G.Inv.Get(InvTag.Player);
+        inv.WaitForItem = true;
+        DisplayInventory(inv);
     }
     public void CloseInventoryToChose() {
-        WaitForItem = false;
+        PlayerInventory inv = (PlayerInventory)Game.G.Inv.Get(InvTag.Player);
+        inv.WaitForItem = true;
         DisplayInventory(Game.G.Inv.Get(InvTag.Player));
     }
 

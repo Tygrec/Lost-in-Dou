@@ -82,7 +82,16 @@ public class DataBase : MonoBehaviour
     }
 
     public void Analyze(ItemData item) {
-        print($"{item.name} a été analysé");
+        List<RecipeData> toDiscover2 = new List<RecipeData>();
+        foreach (var recipe in _discoveredRecipes) {
+            if (recipe.Value)
+                continue;
+
+            if (recipe.Key.HasEveryIngredientsDiscovered())
+                toDiscover2.Add(recipe.Key);
+        }
+        foreach (var d in toDiscover2)
+            Discover(d);
     }
 
     public bool FillSpawnerDataMapping(Transform spawnersTransform) {
@@ -138,15 +147,5 @@ public class DataBase : MonoBehaviour
         foreach (var d in toDiscover)
             Discover(d);
 
-        List<RecipeData> toDiscover2 = new List<RecipeData>();
-        foreach (var recipe in _discoveredRecipes) {
-            if (recipe.Value)
-                continue;
-
-            if (recipe.Key.HasEveryIngredientsDiscovered())
-                toDiscover2.Add(recipe.Key);
-        }
-        foreach (var d in toDiscover2)
-            Discover(d);
     }
 }

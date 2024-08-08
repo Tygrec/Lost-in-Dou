@@ -19,11 +19,13 @@ public enum Emotion {
     Fearful,
     Neutral,
     Wondering,
-    Surprised
+    Surprised,
+    Embarassed
 }
 public enum DialogId {
     TEST,
     Showing,
+    NotShowable,
     Surprised,
     NotFood,
     ThankfulForEat,
