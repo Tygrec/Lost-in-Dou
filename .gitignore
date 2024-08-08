@@ -47,3 +47,9 @@
 # Crashlytics generated files
 crashlytics-build.properties
 fabric.properties
+
+# Ignore le fichier lock des packages
+/Packages/packages-lock.json
+
+# Ignore les fichiers de configuration des Layouts
+/UserSettings/Layouts/
