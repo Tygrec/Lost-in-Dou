@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4076da0fdda6b6e4e930c53c7380bf9e, type: 3}
   m_Name: Noix de coco
   m_EditorClassIdentifier: 
-  Consommable: 1
   Type: 0
   Description: Une noix de coco.
+  Consommable: 1
+  Craftable: 0
+  Equippable: 0
+  Showable: 0
+  Recipes: []
   SatietyValue: 20
-  ThirstValue: 0
+  ThirstValue: 10
+  Durability: 0
