@@ -16,6 +16,7 @@ public class Game : MonoBehaviour
     public Player Player;
     public InventoryManager Inv;
     public DialogSystem Dialog;
+    public SoundManager Sound;
 
     private void Awake() {
 
