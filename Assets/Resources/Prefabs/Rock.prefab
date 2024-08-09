@@ -84,7 +84,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4324b34e1d8c0374f97197936cc076d1, type: 2}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 59
+    m_Bits: 58
   Index: 0
 --- !u!1001 &7587532234150263205
 PrefabInstance:

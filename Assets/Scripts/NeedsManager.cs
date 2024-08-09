@@ -52,7 +52,6 @@ public class NeedsManager : MonoBehaviour {
         _data.Thirst += item.ThirstValue;
     }
     public void Drink() {
-        print("drink !");
         _data.Thirst = 100;
     }
 

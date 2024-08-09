@@ -52,4 +52,4 @@ fabric.properties
 /Packages/packages-lock.json
 
 # Ignore les fichiers de configuration des Layouts
-/UserSettings/Layouts/
+UserSettings/Layouts/default-2022.dwlt
