@@ -26,15 +26,21 @@ public class DialogSystem : MonoBehaviour
 
     public void StartDialog(DialogId id) {
         Game.G.GameManager.ChangeGameState(GAMESTATE.PAUSE);
+        Game.G.Player.Controller.TalkAnimation(true);
         DialogDisplayManager.D.DisplayDialog(m_Dialogs[id]);
     }
     public void StartDialog(Dialog dialog) {
         Game.G.GameManager.ChangeGameState(GAMESTATE.PAUSE);
+        Game.G.Player.Controller.TalkAnimation(true);
+        Game.G.GameManager.SetPnjAnimatorBool("isTalking", true);
         DialogDisplayManager.D.DisplayDialog(dialog);
     }
 
     public void StopDialog() {
         Game.G.GameManager.ChangeGameState(GAMESTATE.RUNNING);
+        Game.G.Player.Controller.TalkAnimation(false);
+        Game.G.GameManager.SetPnjAnimatorBool("isTalking", false);
+
     }
 
     public void StopShowingGame() {

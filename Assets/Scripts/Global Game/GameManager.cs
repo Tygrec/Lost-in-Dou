@@ -73,15 +73,23 @@ public class GameManager : MonoBehaviour {
     }
     public void SwitchPnjFollow() {
         _pnjData.Follow = !_pnjData.Follow;
-        
-        if(!_pnjData.Follow) {
+
+        if (!_pnjData.Follow) {
             _pnjData.CurrentPosition = Game.G.GameManager.Pnj.transform.position;
             print(_pnjData.CurrentPosition);
+        }
+        else {
+            SetPnjAnimatorBool("isWalking", false);
+            SetPnjAnimatorBool("isWalking", false);
         }
     }
     public void ChangePnjScene(string newScene) {
         if (_pnjData.Follow) {
             _pnjData.CurrentScene = newScene;
         }
+    }
+
+    public void SetPnjAnimatorBool(string boolName, bool value) {
+        Pnj?.GetComponent<Animator>().SetBool(boolName, value);
     }
 }

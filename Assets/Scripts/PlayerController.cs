@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     private PlayerData _data;
 
+    private Animator _animator;
     public ItemData Equipped() { return _data.EquippedItem; }
 
     float _speed; // Vitesse de déplacement
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start() {
+        _animator = GetComponent<Animator>();
         _data = (PlayerData)Game.G.GameManager.GetHumanData(Name.Player);
         _speed = Game.G.Values.PLAYER_SPEED;
     }
@@ -63,21 +65,41 @@ public class PlayerController : MonoBehaviour {
         Vector3 moveDirection = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
 
         if (moveDirection != Vector3.zero) {
+            _animator.SetBool("isWalking", true);
             // Déplace le joueur
             transform.Translate(moveDirection * _speed * Time.deltaTime, Space.World);
 
             // Tourne le joueur vers la direction de mouvement
             transform.rotation = Quaternion.LookRotation(moveDirection);
         }
+        else {
+            _animator.SetBool("isWalking", false);
+        }
     }
 
     private void StartRunning() {
         _speed = Game.G.Values.PLAYER_SPEED * 2;
+        _animator.SetBool("isRunning", true);
+        _animator.SetBool("isWalking", false);
+
+        if (Game.G.GameManager.PnjIsFollowing()) {
+            Game.G.GameManager.SetPnjAnimatorBool("isRunning", true);
+            Game.G.GameManager.SetPnjAnimatorBool("isWalking", false);
+        }
+
         isRunning = true;
         Game.G.Time.RegisterRecurringCallback(GetComponent<NeedsManager>().UpdateEnergy, 2);
     }
     private void StopRunning() {
         _speed = Game.G.Values.PLAYER_SPEED;
+        _animator.SetBool("isRunning", false);
+        _animator.SetBool("isWalking", true);
+
+        if (Game.G.GameManager.PnjIsFollowing()) {
+            Game.G.GameManager.SetPnjAnimatorBool("isRunning", false);
+            Game.G.GameManager.SetPnjAnimatorBool("isWalking", true);
+        }
+
         isRunning = false;
         Game.G.Time.RemoveRecurringCallback(GetComponent<NeedsManager>().UpdateEnergy);
     }
@@ -151,4 +173,7 @@ public class PlayerController : MonoBehaviour {
         _characterThoughts.Hide();
     }
 
+    public void TalkAnimation(bool value) {
+        _animator.SetBool("isTalking", value);
+    }
 }
