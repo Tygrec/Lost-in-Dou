@@ -42,6 +42,7 @@ public class DialogDisplayManager : MonoBehaviour {
         transform.GetChild(0).gameObject.SetActive(true);
         i = 0;
         _dialog = dialog;
+        UiManager.Instance.HideHud();
 
         DisplayReplica(_dialog.Replicas[i]);
 
@@ -182,6 +183,7 @@ public class DialogDisplayManager : MonoBehaviour {
         _sDialog = null;
         running = false;
         transform.GetChild(0).gameObject.SetActive(false);
+        UiManager.Instance.DisplayHud();
         Game.G.Dialog.StopDialog();
     }
 }

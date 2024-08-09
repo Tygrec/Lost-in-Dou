@@ -23,6 +23,7 @@ public class UiManager : MonoBehaviour {
     [SerializeField] CraftDisplay _craftDisplay;
     [SerializeField] CookingDisplay _cookingDisplay;
     [SerializeField] CollectionDisplay _collectionDisplay;
+    [SerializeField] HudDisplay _hudDisplay;
 
     [SerializeField] Image _showedItemImage;
 
@@ -85,6 +86,12 @@ public class UiManager : MonoBehaviour {
     }
     public void HideTooltip() {
         _tooltip.Hide();
+    }
+    public void DisplayHud() {
+        _hudDisplay.gameObject.SetActive(true);
+    }
+    public void HideHud() {
+        _hudDisplay.gameObject.SetActive(false);
     }
     public void DisplayCraft() {
         if (_craftDisplay.gameObject.activeSelf) {
