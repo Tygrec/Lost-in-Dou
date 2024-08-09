@@ -6,8 +6,9 @@ public class InventoryDisplay : MonoBehaviour {
 
     [SerializeField]  Transform _slotsTransfom;
     public bool IsOpen = false;
+    InvTag _invType;
     public void Display(Inventory inventory) {
-
+        _invType = inventory.GetSlotType();
         gameObject.SetActive(true);
         IsOpen = true;
 
@@ -28,6 +29,11 @@ public class InventoryDisplay : MonoBehaviour {
     }
 
     public void ExitDisplay() {
+        PlayerInventory inv = (PlayerInventory)Game.G.Inv.Get(InvTag.Player);
+        if (_invType == InvTag.Player && inv.WaitForItem) {
+            Game.G.Dialog.StopWaitingForItem();
+        }
+
         IsOpen = false;
         gameObject.SetActive(false);
     }

@@ -70,6 +70,12 @@ public class DialogSystem : MonoBehaviour
 
         ItemChosen = null;
     }
+    public void StopWaitingForItem() {
+        StopAllCoroutines();
+        PlayerInventory inv = (PlayerInventory)Game.G.Inv.Get(InvTag.Player);
+        inv.WaitForItem = false;
+        StartDialog(DialogId.Surprised);
+    }
 
     private IEnumerator IShowSprite(ItemData item) {
         UiManager.Instance.DisplayItemShowedSprite(item);

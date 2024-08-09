@@ -71,7 +71,7 @@ public class UiManager : MonoBehaviour {
 
         if (display.gameObject.activeSelf) {
             HideTooltip();
-            display.gameObject.SetActive(false);
+            display.ExitDisplay();
         }
         else
             display.Display(inventory);

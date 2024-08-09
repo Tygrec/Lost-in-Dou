@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55553d9340ad7eb4db6938ec06b33043, type: 3}
   m_Name: Surprised
   m_EditorClassIdentifier: 
-  Replicas: []
+  Replicas:
+  - Name: 1
+    Emotion: 5
+    Text: "? Tu as oubli\xE9 ce que tu voulais me donner ?"
+    Answers: []
   Id: 3
