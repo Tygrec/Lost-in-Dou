@@ -37,6 +37,7 @@ public class SceneSystem : MonoBehaviour {
 
         Game.G.GameManager.ChangeGameState(GAMESTATE.RUNNING);
         ManagePnj(newScene);
+        Game.G.Sound.ChangeSceneSound(newScene);
 
         yield return new WaitForSeconds(1);
 

@@ -21,10 +21,13 @@ public class FireData
     }
     private void StartFire() {
         _fireState = 100;
-        // TODO : mini jeu
+        Game.G.Sound.ActivateFireSound(true);
     }
     private void FireDie() {
         _fireState -= 1;
         _fireState = Mathf.Clamp(_fireState, 0, 100);
+
+        if (_fireState <= 0)
+            Game.G.Sound.ActivateFireSound(false);
     }
 }
