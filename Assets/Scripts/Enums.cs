@@ -29,7 +29,8 @@ public enum DialogId {
     ThankfulForEat,
     Daily,
     DiscoverCave,
-    FirstEncounter
+    FirstEncounter,
+    FindSecretPassageForest
 }
 public enum InvTag {
     Player,
