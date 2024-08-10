@@ -48,7 +48,7 @@ public class SpawnerBehavior : MonoBehaviour {
 
         Vector3 randomPosition = GetRandomPosition();
         if (randomPosition != Vector3.zero) {
-            ItemManager obj = Instantiate(item.Prefab(), transform);
+            ItemManager obj = Instantiate(item.Prefab());
             obj.SetSpawner(this, randomPosition);
             return obj;
         }
@@ -68,7 +68,7 @@ public class SpawnerBehavior : MonoBehaviour {
             float randomX = Random.Range(center.x - size.x / 2, center.x + size.x / 2);
             float randomZ = Random.Range(center.z - size.z / 2, center.z + size.z / 2);
 
-            Vector3 randomPosition = new Vector3(randomX, transform.position.y + 0.1f, randomZ);
+            Vector3 randomPosition = new Vector3(randomX, transform.position.y, randomZ);
 
             // Check for collisions
             if (!Physics.CheckSphere(randomPosition, 0.5f, _layerMask)) {
