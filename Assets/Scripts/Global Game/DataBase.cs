@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DataBase : MonoBehaviour
-{
+public class DataBase : MonoBehaviour {
     public FireData Fire;
 
     private Dictionary<int, SpawnerData> _spawnerDataMapping = new Dictionary<int, SpawnerData>();
@@ -19,10 +18,10 @@ public class DataBase : MonoBehaviour
     [SerializeField] List<ItemData> _availableCraftsAtStart;
     [SerializeField] List<RecipeData> _availableRecipesAtStart;
     public Dictionary<RecipeData, bool> GetAllRecipes() { return _discoveredRecipes; }
-    public Dictionary<ItemData, bool> GetAllCrafts() {  return _discoveredCrafts; }
-    public Dictionary<ItemData, bool> GetAllItems() {  return _discoveredItems; }
+    public Dictionary<ItemData, bool> GetAllCrafts() { return _discoveredCrafts; }
+    public Dictionary<ItemData, bool> GetAllItems() { return _discoveredItems; }
     public List<ItemData> GetAllDiscoveredItems() {
-        return _discoveredItems.Where(pair => pair.Value == true).Select(pair => pair.Key).ToList(); 
+        return _discoveredItems.Where(pair => pair.Value == true).Select(pair => pair.Key).ToList();
     }
     public ShowingDialog GetShowing(ItemData item) {
         return _showingDialogMapping[item];
@@ -94,13 +93,11 @@ public class DataBase : MonoBehaviour
             Discover(d);
     }
 
-    public bool FillSpawnerDataMapping(Transform spawnersTransform) {
+    public bool FillSpawnerDataMapping(SpawnerBehavior[] spawners) {
         if (_spawnerDataMapping.Count > 0)
             return false;
 
-        foreach (Transform child in spawnersTransform) {
-            SpawnerBehavior spawner = child.GetComponent<SpawnerBehavior>();
-
+        foreach (SpawnerBehavior spawner in spawners) {
             InitializeSpawnerId(spawner);
 
             SpawnerData data = new SpawnerData(spawner);

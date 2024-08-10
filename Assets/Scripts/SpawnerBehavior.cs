@@ -21,7 +21,6 @@ public class SpawnerData {
 
 public class SpawnerBehavior : MonoBehaviour {
     private SpawnerData _data;
-    [SerializeField] private Renderer _renderer;
     public int Id;
     public SpawnerData GetData() {
         return _data;
@@ -63,15 +62,21 @@ public class SpawnerBehavior : MonoBehaviour {
     private Vector3 GetRandomPosition() {
 
         for (int i = 0; i < 20; i++) {
-            Vector3 randomDirection = Random.insideUnitSphere * 2;
-            randomDirection += transform.position;
-            randomDirection.x += _renderer.bounds.size.x / 2;
-            randomDirection.z += _renderer.bounds.size.z / 2;
-            randomDirection.y = 0;
+            Vector3 center = transform.position;
+            Vector3 size = transform.localScale;
+
+            // Générer des coordonnées aléatoires dans les limites du cube
+            float randomX = Random.Range(center.x - size.x / 2, center.x + size.x / 2);
+            float randomZ = Random.Range(center.z - size.z / 2, center.z + size.z / 2);
+
+            Vector3 randomPosition = new Vector3(randomX, transform.position.y + 2, randomZ);
 
             // Check for collisions
-            if (!Physics.CheckSphere(randomDirection, 0.5f, _layerMask)) {
-                return randomDirection;
+            if (!Physics.CheckSphere(randomPosition, 0.5f, _layerMask)) {
+                return randomPosition;
+            }
+            else {
+                print(randomPosition + " at " + transform.position);
             }
         }
         // Return Vector3.zero if no valid position is found

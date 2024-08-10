@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class SpawnersManager : MonoBehaviour {
     void Start() {
-        if (!Game.G.Db.FillSpawnerDataMapping(transform)) {
-            foreach (Transform child in transform) {
-                SpawnerBehavior spawner = child.GetComponent<SpawnerBehavior>();
+        SpawnerBehavior[] spawners = (SpawnerBehavior[])FindObjectsOfType(typeof(SpawnerBehavior));
+
+        if (!Game.G.Db.FillSpawnerDataMapping(spawners)) {
+            foreach (SpawnerBehavior spawner in spawners) {
                 spawner.InitializeId();
                 spawner.Initialize();
             }
