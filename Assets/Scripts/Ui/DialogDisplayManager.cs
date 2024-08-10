@@ -119,7 +119,7 @@ public class DialogDisplayManager : MonoBehaviour {
         _answersObj.SetActive(replica.Answers.Count > 0);
 
         _pnjAvatar.gameObject.SetActive(true);
-        _pnjAvatar.sprite = Resources.Load<Sprite>($"Sprites/Characters/Pnj{Emotion.Wondering}");
+        _pnjAvatar.sprite = Resources.Load<Sprite>($"Sprites/Characters/Pnj{Emotion.Thinking}");
 
         if (replica.Answers.Count > 0)
             DisplayAnswers(replica.Answers);

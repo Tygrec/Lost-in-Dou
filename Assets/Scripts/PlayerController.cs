@@ -66,6 +66,8 @@ public class PlayerController : MonoBehaviour {
 
         if (moveDirection != Vector3.zero) {
             _animator.SetBool("isWalking", true);
+            SetPnjWalking(Game.G.GameManager.PnjIsFollowing());
+
             // Déplace le joueur
             transform.Translate(moveDirection * _speed * Time.deltaTime, Space.World);
 
@@ -82,11 +84,6 @@ public class PlayerController : MonoBehaviour {
         _animator.SetBool("isRunning", true);
         _animator.SetBool("isWalking", false);
 
-        if (Game.G.GameManager.PnjIsFollowing()) {
-            Game.G.GameManager.SetPnjAnimatorBool("isRunning", true);
-            Game.G.GameManager.SetPnjAnimatorBool("isWalking", false);
-        }
-
         isRunning = true;
         Game.G.Time.RegisterRecurringCallback(GetComponent<NeedsManager>().UpdateEnergy, 2);
     }
@@ -94,11 +91,6 @@ public class PlayerController : MonoBehaviour {
         _speed = Game.G.Values.PLAYER_SPEED;
         _animator.SetBool("isRunning", false);
         _animator.SetBool("isWalking", true);
-
-        if (Game.G.GameManager.PnjIsFollowing()) {
-            Game.G.GameManager.SetPnjAnimatorBool("isRunning", false);
-            Game.G.GameManager.SetPnjAnimatorBool("isWalking", true);
-        }
 
         isRunning = false;
         Game.G.Time.RemoveRecurringCallback(GetComponent<NeedsManager>().UpdateEnergy);
@@ -173,6 +165,12 @@ public class PlayerController : MonoBehaviour {
         _characterThoughts.Hide();
     }
 
+    private void SetPnjWalking(bool value) {
+        Game.G.GameManager.SetPnjAnimatorBool("isWalking", value);
+    }
+    private void SetPnjRunning(bool value) {
+        Game.G.GameManager.SetPnjAnimatorBool("isRunning", value);
+    }
     public void TalkAnimation(bool value) {
         _animator.SetBool("isTalking", value);
     }

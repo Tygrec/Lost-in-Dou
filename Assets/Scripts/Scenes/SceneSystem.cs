@@ -8,7 +8,9 @@ public class SceneSystem : MonoBehaviour {
     [SerializeField] Transform _pnjSpawn;
     [SerializeField] private List<SceneTransitionPlayer> _playerSpawns;
 
-    private Vector3 _playerPositionSave;
+    private void Start() {
+        ManagePnj(Game.G.Values.MAIN_SCENE_NAME);
+    }
 
     public void ChangeScene(string oldScene, string newScene) {
         Game.G.Db.SaveSpawnersId();
@@ -17,7 +19,6 @@ public class SceneSystem : MonoBehaviour {
 
     public void LoadMiniGame(string oldScene, string newScene) {
         Game.G.Db.SaveSpawnersId();
-        _playerPositionSave = Game.G.Player.transform.position;
         StartCoroutine(ILoadMiniGame(oldScene, newScene));
     }
 

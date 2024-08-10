@@ -9,7 +9,7 @@ public class PlayerData : HumanData {
 }
 
 public class PnjData : HumanData {
-    public string CurrentScene = "CaveScene";
+    public string CurrentScene = Game.G.Values.STARTING_PNJ_SCENE;
     public bool Follow = false;
     public Vector3 CurrentPosition = Game.G.Values.INITIAL_PNJ_POSITION;
 

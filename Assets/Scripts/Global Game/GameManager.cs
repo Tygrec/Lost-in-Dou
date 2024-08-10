@@ -33,6 +33,16 @@ public class GameManager : MonoBehaviour {
     private void Update() {
         if (Input.GetKeyDown(KeyCode.T) && _pnjData.Follow)
             SwitchPnjFollow();
+
+        if (_pnjData.Life <= 0)
+            Defeat(Game.G.Values.PNJ_NAME);
+        if (_playerData.Life <= 0)
+            Defeat(Game.G.Values.PLAYER_NAME);
+    }
+
+    private void Defeat(string name) {
+        UiManager.Instance.DisplayDefeat(name);
+        _GameState = GAMESTATE.PAUSE;
     }
 
     public HumanData GetHumanData(Name name) {
@@ -76,20 +86,19 @@ public class GameManager : MonoBehaviour {
 
         if (!_pnjData.Follow) {
             _pnjData.CurrentPosition = Game.G.GameManager.Pnj.transform.position;
-            print(_pnjData.CurrentPosition);
-        }
-        else {
-            SetPnjAnimatorBool("isWalking", false);
             SetPnjAnimatorBool("isWalking", false);
         }
     }
     public void ChangePnjScene(string newScene) {
         if (_pnjData.Follow) {
             _pnjData.CurrentScene = newScene;
+            Pnj.transform.position = Game.G.Player.transform.position - Game.G.Player.transform.forward * 2;
         }
     }
-
     public void SetPnjAnimatorBool(string boolName, bool value) {
+        if (Pnj == null)
+            return;
+
         Pnj?.GetComponent<Animator>().SetBool(boolName, value);
     }
 }

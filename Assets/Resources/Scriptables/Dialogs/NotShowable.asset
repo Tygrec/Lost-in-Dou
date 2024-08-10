@@ -18,7 +18,7 @@ MonoBehaviour:
     Text: "... tu es s\xFBre que tu as besoin de moi pour savoir ce que c'est ?"
     Answers: []
   - Name: 0
-    Emotion: 7
+    Emotion: 3
     Text: Ok, j'avoue.
     Answers: []
   Id: 2

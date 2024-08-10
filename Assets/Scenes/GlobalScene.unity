@@ -189,7 +189,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4aa2d5ca1f7a1f04eab05da6c7a18e89, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -285,7 +285,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: da0e8f419ce33de47be9179eb9bd15fa, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -375,7 +375,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1253282689}
     m_Modifications:
     - target: {fileID: 1127062255427939596, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
@@ -400,7 +400,7 @@ PrefabInstance:
     - target: {fileID: 5142596656040464264, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.4
+      value: 17.84
       objectReference: {fileID: 0}
     - target: {fileID: 5142596656040464264, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
@@ -410,7 +410,7 @@ PrefabInstance:
     - target: {fileID: 5142596656040464264, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.2
+      value: -12.98
       objectReference: {fileID: 0}
     - target: {fileID: 5142596656040464264, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
@@ -420,17 +420,17 @@ PrefabInstance:
     - target: {fileID: 5142596656040464264, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5142596656040464264, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5142596656040464264, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5142596656040464264, guid: 566cf418b4615274ca6cbae0babfc3fd,
         type: 3}
@@ -1331,7 +1331,7 @@ PrefabInstance:
     - target: {fileID: 272429562899634727, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1928448719966867095, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
@@ -1545,7 +1545,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1253282689}
   m_Layer: 0
-  m_Name: PnjSpawn
+  m_Name: Characters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1560,10 +1560,11 @@ Transform:
   m_GameObject: {fileID: 1253282688}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.41, y: 0, z: 2.62}
+  m_LocalPosition: {x: -36.39, y: 0, z: 15.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1952398269}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1356739468
@@ -1739,11 +1740,12 @@ MonoBehaviour:
   WAKE_UP_HOUR: 7
   MAX_PREPARATION_SLOTS: 4
   MAX_PREPARATION: 4
-  PLAYER_NAME: Alice
-  PNJ_NAME: Max
+  PLAYER_NAME: Max
+  PNJ_NAME: Apollo
   TEXT_SPEED: 0.05
   MAIN_SCENE_NAME: PlageScene
-  INITIAL_PNJ_POSITION: {x: -3.41, y: 0.5, z: 2.6}
+  STARTING_PNJ_SCENE: PlageScene
+  INITIAL_PNJ_POSITION: {x: -36.39, y: 0.5, z: 15.87}
 --- !u!114 &1740062596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1971,6 +1973,12 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &1952398269 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5142596656040464264, guid: 566cf418b4615274ca6cbae0babfc3fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 196012687}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2068849927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,7 +2052,7 @@ PrefabInstance:
     - target: {fileID: 1928448719966867095, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
       propertyPath: _sceneName
-      value: CaveScene
+      value: PlageScene
       objectReference: {fileID: 0}
     - target: {fileID: 6349403115591102064, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
@@ -2053,23 +2061,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6349403115591102064, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5.0073113
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349403115591102064, guid: 25cb895b9ac07fa409ec4b729d17c01e,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.79
+      value: -35.4743
       objectReference: {fileID: 0}
     - target: {fileID: 6349403115591102064, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2635808
+      value: 0.2636
       objectReference: {fileID: 0}
     - target: {fileID: 6349403115591102064, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.04
+      value: 15.2885
       objectReference: {fileID: 0}
     - target: {fileID: 6349403115591102064, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.94992965
       objectReference: {fileID: 0}
     - target: {fileID: 6349403115591102064, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
@@ -2079,7 +2092,7 @@ PrefabInstance:
     - target: {fileID: 6349403115591102064, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.3124641
       objectReference: {fileID: 0}
     - target: {fileID: 6349403115591102064, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
@@ -2094,7 +2107,7 @@ PrefabInstance:
     - target: {fileID: 6349403115591102064, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -36.416
       objectReference: {fileID: 0}
     - target: {fileID: 6349403115591102064, guid: 25cb895b9ac07fa409ec4b729d17c01e,
         type: 3}
@@ -2122,5 +2135,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1253282689}
-  - {fileID: 196012687}
   - {fileID: 807496957}

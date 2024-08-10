@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Replicas:
   - Name: 1
-    Emotion: 4
+    Emotion: 3
     Text: Oui ?
     Answers:
     - Text: "Est-ce que tu peux regarder \xE7a ?"

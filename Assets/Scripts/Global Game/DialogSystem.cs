@@ -15,7 +15,8 @@ public class DialogSystem : MonoBehaviour
         EventHub.Listen(EventType.ShowObjectToPnj, HandleShowItem);
     }
     private void OnDisable() {
-        
+        EventHub.Unlisten(EventType.GiveItemToPnj, HandleGiveItem);
+        EventHub.Unlisten(EventType.ShowObjectToPnj, HandleShowItem);
     }
 
     private void Start() {
@@ -72,6 +73,7 @@ public class DialogSystem : MonoBehaviour
     private IEnumerator IWaitForItem(Action<ItemData> action) {
         yield return new WaitUntil(() => ItemChosen != null);
 
+        
         action.Invoke(ItemChosen);
 
         ItemChosen = null;

@@ -30,6 +30,7 @@ public class InventoryDisplay : MonoBehaviour {
 
     public void ExitDisplay() {
         PlayerInventory inv = (PlayerInventory)Game.G.Inv.Get(InvTag.Player);
+
         if (_invType == InvTag.Player && inv.WaitForItem) {
             Game.G.Dialog.StopWaitingForItem();
         }

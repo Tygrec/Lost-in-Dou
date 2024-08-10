@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Replicas:
   - Name: 1
-    Emotion: 5
+    Emotion: 0
     Text: "? Tu as oubli\xE9 ce que tu voulais me donner ?"
     Answers: []
   Id: 3

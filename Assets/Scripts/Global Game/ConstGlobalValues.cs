@@ -16,6 +16,7 @@ public class ConstGlobalValues : MonoBehaviour {
     public string PNJ_NAME;
     public float TEXT_SPEED;
     public string MAIN_SCENE_NAME;
+    public string STARTING_PNJ_SCENE;
     public Vector3 INITIAL_PNJ_POSITION;
 }
 

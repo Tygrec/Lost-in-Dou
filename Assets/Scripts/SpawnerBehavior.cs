@@ -53,8 +53,7 @@ public class SpawnerBehavior : MonoBehaviour {
             return obj;
         }
         else {
-            print(item.name);
-            Debug.Log("Failed to find a valid position.");
+            Debug.Log("Failed to find a valid position : " + gameObject.transform.parent.name);
             return null;
         }
     }
@@ -69,14 +68,11 @@ public class SpawnerBehavior : MonoBehaviour {
             float randomX = Random.Range(center.x - size.x / 2, center.x + size.x / 2);
             float randomZ = Random.Range(center.z - size.z / 2, center.z + size.z / 2);
 
-            Vector3 randomPosition = new Vector3(randomX, transform.position.y + 2, randomZ);
+            Vector3 randomPosition = new Vector3(randomX, transform.position.y + 0.1f, randomZ);
 
             // Check for collisions
             if (!Physics.CheckSphere(randomPosition, 0.5f, _layerMask)) {
                 return randomPosition;
-            }
-            else {
-                print(randomPosition + " at " + transform.position);
             }
         }
         // Return Vector3.zero if no valid position is found

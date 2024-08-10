@@ -18,7 +18,9 @@ public class TimeManager : MonoBehaviour {
         GlobalTimer = GetDisplayedHours() * 60;
         _timeSpeed = Game.G.Values.TIME_SPEED;
     }
-
+    public DayTime GetDayTime() {
+        return (DayTime)(GetDisplayedHours() / 6);
+    }
     public int GetDay() {
         return _day;
     }

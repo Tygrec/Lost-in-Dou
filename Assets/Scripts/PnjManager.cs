@@ -8,7 +8,6 @@ public class PnjManager : MonoBehaviour
 
     private void Start() {
         _data = (PnjData)Game.G.GameManager.GetHumanData(Name.Pnj);
-
         transform.position = _data.CurrentPosition;
     }
 
@@ -16,7 +15,6 @@ public class PnjManager : MonoBehaviour
         if (_data.Hunger <= 0)
             StopSleeping();
 
-    //    GetComponent<Collider>().isTrigger = _data.Follow;
         if (_data.Follow)
             FollowPlayer();
 
@@ -24,11 +22,11 @@ public class PnjManager : MonoBehaviour
     }
 
     private void FollowPlayer() {
-        
         var player = Game.G.Player.transform;
     
         Vector3 followPosition = player.position - player.forward * GetComponent<CapsuleCollider>().radius * 3;
-        followPosition.y = transform.position.y;
+        followPosition.y = player.position.y;
+
         transform.position = Vector3.Lerp(transform.position, followPosition, Game.G.Values.PLAYER_SPEED * Time.deltaTime);
         transform.LookAt(player);
     }

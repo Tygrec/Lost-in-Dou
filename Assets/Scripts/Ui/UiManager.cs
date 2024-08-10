@@ -25,6 +25,8 @@ public class UiManager : MonoBehaviour {
     [SerializeField] CollectionDisplay _collectionDisplay;
     [SerializeField] HudDisplay _hudDisplay;
 
+    [SerializeField] Image _defeatDisplay;
+    [SerializeField] TextMeshProUGUI _defeatText;
     [SerializeField] Image _showedItemImage;
 
     static public UiManager Instance;
@@ -136,7 +138,7 @@ public class UiManager : MonoBehaviour {
     }
     public void CloseInventoryToChose() {
         PlayerInventory inv = (PlayerInventory)Game.G.Inv.Get(InvTag.Player);
-        inv.WaitForItem = true;
+        inv.WaitForItem = false;
         DisplayInventory(Game.G.Inv.Get(InvTag.Player));
     }
 
@@ -169,6 +171,11 @@ public class UiManager : MonoBehaviour {
             _cookingDisplay.QuitDisplay();
             _collectionDisplay.Hide();
         }
+    }
+
+    public void DisplayDefeat(string name) {
+        _defeatDisplay.gameObject.SetActive(true);
+        _defeatText.text = " Défaite : " + name + " est mort";
     }
 
     public void Clear(Transform t) {

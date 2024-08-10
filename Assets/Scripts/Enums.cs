@@ -15,12 +15,10 @@ public enum Name {
 public enum Emotion {
     Happy,
     Sad,
-    Angry,
-    Fearful,
+    Worrying,
     Neutral,
-    Wondering,
-    Surprised,
-    Embarassed
+    Thinking,
+    Surprised
 }
 public enum DialogId {
     TEST,
