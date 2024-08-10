@@ -81,6 +81,7 @@ public class DataBase : MonoBehaviour {
     }
 
     public void Analyze(ItemData item) {
+        
         List<RecipeData> toDiscover2 = new List<RecipeData>();
         foreach (var recipe in _discoveredRecipes) {
             if (recipe.Value)

@@ -4,10 +4,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Recette", menuName = "Nouvelle recette")]
 public class RecipeData : ScriptableObject, ITooltipDisplay {
     public List<ItemData> Ingredients;
-    public Sprite Sprite;
     public int SatietyValue;
     public int ThirstValue;
 
+    public Sprite Sprite() {
+        return Resources.Load<Sprite>($"Sprites/Recipes/{name}");
+    }
     public int GetSatiety(SuccessRate rate) {
         return SatietyValue *= (int)rate;
     }

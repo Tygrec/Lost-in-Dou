@@ -31,7 +31,7 @@ public class TooltipDisplay : MonoBehaviour
         gameObject.SetActive(true);
         _recipe.SetActive(true);
 
-        _recipeImg.sprite = recipe.Sprite;
+        _recipeImg.sprite = recipe.Sprite();
         _recipeNameTxt.text = recipe.name;
 
         foreach (var ingredient in recipe.Ingredients) {

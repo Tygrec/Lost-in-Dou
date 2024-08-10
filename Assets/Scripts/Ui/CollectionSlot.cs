@@ -16,7 +16,7 @@ public class CollectionSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         _item = item;
     }
     public void Display(RecipeData recipe, bool discovered) {
-        _itemImg.sprite = discovered ? recipe.Sprite : Game.G.Db.GetUnknownSprite();
+        _itemImg.sprite = discovered ? recipe.Sprite() : Game.G.Db.GetUnknownSprite();
         _recipe = recipe;
     }
 

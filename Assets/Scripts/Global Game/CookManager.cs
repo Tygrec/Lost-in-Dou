@@ -167,7 +167,7 @@ public class Plate {
     private void SetPlate(RecipeData recipe, SuccessRate success) {
         ThirstValue = recipe.GetThirst(success);
         SatietyValue = recipe.GetSatiety(success);
-        Sprite = recipe.Sprite;
+        Sprite = recipe.Sprite();
         Name = recipe.name;
     }
 }

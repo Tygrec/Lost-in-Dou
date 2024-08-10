@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55cd3b6f05b5684baacb0ec7c3de0ac, type: 3}
+  m_Name: Bar
+  m_EditorClassIdentifier: Assembly-CSharp::ShowingDialog
+  Replicas:
+  - Text: De quelle couleur est le poisson ?
+    Answers:
+    - Text: Bleu
+      RightOrWrong: 1
+    - Text: Vert
+      RightOrWrong: 0
+    - Text: Rouge
+      RightOrWrong: 0
+  - Text: Combien de nageoires a le poisson ?
+    Answers:
+    - Text: 0
+      RightOrWrong: 1
+    - Text: 1
+      RightOrWrong: 0
+    - Text: 2
+      RightOrWrong: 0
+  - Text: Quelle est l'expression du poisson ?
+    Answers:
+    - Text: Neutre
+      RightOrWrong: 0
+    - Text: "Contrari\xE9e"
+      RightOrWrong: 0
+    - Text: Contente
+      RightOrWrong: 1
+  - Text: "Oh je vois, c'est un bar ! C'est bon avec des l\xE9gumes"
+    Answers: []
+  - Text: "Euh... non je suis d\xE9sol\xE9, je ne vois pas du coup ce que \xE7a peut
+      \xEAtre."
+    Answers: []
+  Item: {fileID: 11400000, guid: 299cd44c5ad11454fb1f08cfdcf064ab, type: 2}
