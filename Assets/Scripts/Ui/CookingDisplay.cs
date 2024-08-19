@@ -37,6 +37,7 @@ public class CookingDisplay : MonoBehaviour {
             button.onClick.AddListener(() => { SetRecipeInPreparation(pair.Key); });
         }
     }
+    // Affiche des slots contenant toutes la nourriture que possède le joueur (changer l'inventaire)
     private void DisplayIngredients() {
         KitchenInventory kitchen = (KitchenInventory)Game.G.Inv.Get(InvTag.Kitchen);
         kitchen.SetFoodStock();
@@ -44,6 +45,7 @@ public class CookingDisplay : MonoBehaviour {
         UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Kitchen));
     }
 
+    
     private void DisplayPreparations() {
 
         for (int i = 0; i < _preparationDisplays.Count; i++) {
@@ -99,6 +101,7 @@ public class CookingDisplay : MonoBehaviour {
     public void HidePlate() {
         _result.SetActive(false);
     }
+    // Clic sur le bouton Valider
     public void Validate() {
         Game.G.Cook.CookAndEat();
     }
