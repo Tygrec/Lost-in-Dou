@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55cd3b6f05b5684baacb0ec7c3de0ac, type: 3}
+  m_Name: PoissonPapillon
+  m_EditorClassIdentifier: Assembly-CSharp::ShowingDialog
+  Replicas:
+  - Text: "Alors dis-moi... quelles sont les couleurs pr\xE9dominantes de ce poisson
+      ?"
+    Answers:
+    - Text: Bleu et blanc
+      RightOrWrong: 0
+    - Text: Jaune et bleu
+      RightOrWrong: 0
+    - Text: Blanc et jaune
+      RightOrWrong: 1
+  - Text: Hmm d'accord. Et combien de rayures a le poisson ?
+    Answers:
+    - Text: 2
+      RightOrWrong: 0
+    - Text: 3
+      RightOrWrong: 1
+    - Text: 4
+      RightOrWrong: 0
+  - Text: "Je vois... derni\xE8re question, dans quelle direction regarde-t-il ?"
+    Answers:
+    - Text: Vers l'avant
+      RightOrWrong: 0
+    - Text: "Vers l'arri\xE8re"
+      RightOrWrong: 0
+    - Text: Il te fixe
+      RightOrWrong: 1
+  - Text: "D'accord, j'ai trouv\xE9 ! C'est un poisson papillon. \xC7a se cuisine
+      avec des l\xE9gumes si tu peux en trouver."
+    Answers: []
+  - Text: "Euh... non je suis d\xE9sol\xE9, je ne vois pas du coup ce que \xE7a peut
+      \xEAtre."
+    Answers: []
+  Item: {fileID: 11400000, guid: 556a698757b3cde4881a049b20db04bd, type: 2}

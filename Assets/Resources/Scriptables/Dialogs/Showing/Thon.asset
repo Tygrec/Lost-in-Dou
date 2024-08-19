@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55cd3b6f05b5684baacb0ec7c3de0ac, type: 3}
+  m_Name: Thon
+  m_EditorClassIdentifier: Assembly-CSharp::ShowingDialog
+  Replicas:
+  - Text: Alors dis-moi, combien de membres a ce poisson ?
+    Answers:
+    - Text: 2
+      RightOrWrong: 0
+    - Text: 4
+      RightOrWrong: 0
+    - Text: 6
+      RightOrWrong: 1
+  - Text: D'accord, et combien d'entre eux sont jaunes ?
+    Answers:
+    - Text: 0
+      RightOrWrong: 0
+    - Text: 1
+      RightOrWrong: 0
+    - Text: 2
+      RightOrWrong: 1
+  - Text: Et enfin, combien ce poisson a-t-il de dents visibles ?
+    Answers:
+    - Text: 0
+      RightOrWrong: 1
+    - Text: 2
+      RightOrWrong: 0
+    - Text: 6
+      RightOrWrong: 0
+  - Text: "C'est un thon ! Je pense qu'on peut le faire griller, ce sera d\xE9licieux
+      !"
+    Answers: []
+  - Text: "Euh... non je suis d\xE9sol\xE9, je ne vois pas du coup ce que \xE7a peut
+      \xEAtre."
+    Answers: []
+  Item: {fileID: 11400000, guid: 299cd44c5ad11454fb1f08cfdcf064ab, type: 2}

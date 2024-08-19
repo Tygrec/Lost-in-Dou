@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ingredients:
   - {fileID: 11400000, guid: 70b00ce06c05eb8438f360eb6b1e05fa, type: 2}
-  - {fileID: 11400000, guid: 70b00ce06c05eb8438f360eb6b1e05fa, type: 2}
-  Sprite: {fileID: 21300000, guid: 0bd9e3b89844b4c45995257c4187fbc4, type: 3}
-  SatietyValue: 45
+  - {fileID: 11400000, guid: 544d1e05f11c2d0488c072d84c3dba9b, type: 2}
+  SatietyValue: 20
   ThirstValue: 20

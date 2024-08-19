@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55553d9340ad7eb4db6938ec06b33043, type: 3}
+  m_Name: StartDialog
+  m_EditorClassIdentifier: 
+  Replicas:
+  - Name: 0
+    Emotion: 1
+    Text: "Ngh... O\xF9 suis-je ?"
+    Answers: []
+  - Name: 0
+    Emotion: 1
+    Text: "J'\xE9tais sur ce bateau et... ah ! La temp\xEAte !"
+    Answers: []
+  - Name: 0
+    Emotion: 2
+    Text: "J'ai d\xFB \xE9chouer ici... j'esp\xE8re que ce n'est pas une \xEEle d\xE9serte."
+    Answers: []
+  - Name: 0
+    Emotion: 3
+    Text: "Reprends-toi Max ! \xC7a ne sert \xE0 rien de se lamenter ! Je vais aller
+      faire un tour des environs pour voir si je trouve quelqu'un."
+    Answers: []
+  Id: 10

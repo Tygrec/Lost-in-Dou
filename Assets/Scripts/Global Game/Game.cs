@@ -14,6 +14,7 @@ public class Game : MonoBehaviour
     public CookManager Cook;
     public DataBase Db;
     public Player Player;
+    public PnjManager Pnj;
     public InventoryManager Inv;
     public DialogSystem Dialog;
     public SoundManager Sound;

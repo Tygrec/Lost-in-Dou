@@ -40,7 +40,7 @@ public class HumanData {
     public HumanData() {
         Game.G.Time.RegisterRecurringCallback(UpdateStatsByTime, _intervalLoss);
     }
-    private void UpdateStatsByTime() {
+    public void UpdateStatsByTime() {
 
         Hunger -= _hungerLoss;
 

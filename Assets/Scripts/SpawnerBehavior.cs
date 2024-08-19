@@ -63,6 +63,7 @@ public class SpawnerBehavior : MonoBehaviour {
         for (int i = 0; i < 20; i++) {
             Vector3 center = transform.position;
             Vector3 size = transform.localScale;
+            float itemRay = 0.2f;
 
             // Générer des coordonnées aléatoires dans les limites du cube
             float randomX = Random.Range(center.x - size.x / 2, center.x + size.x / 2);
@@ -71,7 +72,7 @@ public class SpawnerBehavior : MonoBehaviour {
             Vector3 randomPosition = new Vector3(randomX, transform.position.y, randomZ);
 
             // Check for collisions
-            if (!Physics.CheckSphere(randomPosition, 0.5f, _layerMask)) {
+            if (!Physics.CheckBox(randomPosition + new Vector3(0, itemRay, 0), new Vector3(itemRay, itemRay, itemRay), Quaternion.identity, _layerMask)) {
                 return randomPosition;
             }
         }

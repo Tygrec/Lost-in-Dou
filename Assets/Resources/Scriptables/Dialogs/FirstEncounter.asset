@@ -59,4 +59,21 @@ MonoBehaviour:
     Emotion: 0
     Text: Ah... merci.
     Answers: []
+  - Name: 1
+    Emotion: 3
+    Text: "Je peux peut-\xEAtre t'\xEAtre utile pour quelque chose. Je suis apprenti
+      cuisinier, et je connais bien les poissons ou la nourriture de mani\xE8re g\xE9n\xE9rale.
+      Si tu trouves quelque chose de comestible, am\xE8ne-le moi et je te dirai ce
+      que c'est et comment le pr\xE9parer."
+    Answers: []
+  - Name: 1
+    Emotion: 2
+    Text: "Par contre il faudra me le d\xE9crire assez pr\xE9cis\xE9ment pour que
+      je puisse me faire une id\xE9e."
+    Answers: []
+  - Name: 0
+    Emotion: 0
+    Text: "G\xE9nial ! Moi je n'y connais rien du tout alors compte sur moi pour
+      te mettre \xE0 contribution."
+    Answers: []
   Id: 8

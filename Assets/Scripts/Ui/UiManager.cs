@@ -143,11 +143,11 @@ public class UiManager : MonoBehaviour {
     }
 
     public void DisplayItemShowedSprite(ItemData item) {
-        _showedItemImage.transform.parent.gameObject.SetActive(true);
+        _showedItemImage.transform.parent.parent.gameObject.SetActive(true);
         _showedItemImage.sprite = item.ShowToPnjSprite();
     }
     public void HideItemShowedSprite() {
-        _showedItemImage.transform.parent.gameObject.SetActive(false);
+        _showedItemImage.transform.parent.parent.gameObject.SetActive(false);
     }
 
     private void Update() {

@@ -81,17 +81,8 @@ public class DataBase : MonoBehaviour {
     }
 
     public void Analyze(ItemData item) {
-        
-        List<RecipeData> toDiscover2 = new List<RecipeData>();
-        foreach (var recipe in _discoveredRecipes) {
-            if (recipe.Value)
-                continue;
-
-            if (recipe.Key.HasEveryIngredientsDiscovered())
-                toDiscover2.Add(recipe.Key);
-        }
-        foreach (var d in toDiscover2)
-            Discover(d);
+        RecipeData recipe = _discoveredRecipes.Where(r => r.Key.Ingredients.Contains(item)).Select(r => r.Key).FirstOrDefault();
+        Discover(recipe);
     }
 
     public bool FillSpawnerDataMapping(SpawnerBehavior[] spawners) {

@@ -30,7 +30,8 @@ public enum DialogId {
     Daily,
     DiscoverCave,
     FirstEncounter,
-    FindSecretPassageForest
+    FindSecretPassageForest,
+    StartDialog
 }
 public enum InvTag {
     Player,

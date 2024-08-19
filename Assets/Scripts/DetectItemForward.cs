@@ -136,8 +136,8 @@ public class DetectItemForward : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.E)) {
                 Game.G.Player.Needs.Drink();
 
-                if (Game.G.GameManager.PnjIsFollowing()) {
-                    Game.G.GameManager.GetPnjNeedsManager().Drink();
+                if (Game.G.Pnj.IsFollowing()) {
+                    Game.G.Pnj.Drink();
                 }
             }
             
@@ -179,7 +179,7 @@ public class DetectItemForward : MonoBehaviour {
 
     IEnumerator StartFollowing() {
         yield return new WaitForSeconds(0.1f);
-        Game.G.GameManager.SwitchPnjFollow();
+        Game.G.Pnj.SwitchFollow();
     }
     /*   private void OnDrawGizmos() {
 

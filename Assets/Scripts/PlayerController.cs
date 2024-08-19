@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour {
         _animator = GetComponent<Animator>();
         _data = (PlayerData)Game.G.GameManager.GetHumanData(Name.Player);
         _speed = Game.G.Values.PLAYER_SPEED;
+
+        Game.G.Dialog.StartDialog(DialogId.StartDialog);
     }
 
     private void Update() {
@@ -66,7 +68,7 @@ public class PlayerController : MonoBehaviour {
 
         if (moveDirection != Vector3.zero) {
             _animator.SetBool("isWalking", true);
-            SetPnjWalking(Game.G.GameManager.PnjIsFollowing());
+            SetPnjWalking(Game.G.Pnj.IsFollowing());
 
             // Déplace le joueur
             transform.Translate(moveDirection * _speed * Time.deltaTime, Space.World);
@@ -121,6 +123,9 @@ public class PlayerController : MonoBehaviour {
     public IEnumerator ISleep() {
 
         _data.IsSleeping = true;
+        if (Game.G.Pnj.IsFollowing())
+            Game.G.Pnj.Sleep(true);
+
         Game.G.Scene.Transition();
 
         yield return new WaitForSeconds(1);
@@ -128,6 +133,8 @@ public class PlayerController : MonoBehaviour {
         Game.G.Time.SetNewDay(Game.G.Values.WAKE_UP_HOUR);
 
         _data.IsSleeping = false;
+        if (Game.G.Pnj.IsFollowing())
+            Game.G.Pnj.Sleep(false);
 
         _data.ClampStats();
     }
@@ -166,10 +173,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void SetPnjWalking(bool value) {
-        Game.G.GameManager.SetPnjAnimatorBool("isWalking", value);
+        Game.G.Pnj.SetAnimatorBool("isWalking", value);
     }
     private void SetPnjRunning(bool value) {
-        Game.G.GameManager.SetPnjAnimatorBool("isRunning", value);
+        Game.G.Pnj.SetAnimatorBool("isRunning", value);
     }
     public void TalkAnimation(bool value) {
         _animator.SetBool("isTalking", value);

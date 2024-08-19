@@ -33,19 +33,18 @@ public class DialogSystem : MonoBehaviour
     public void StartDialog(Dialog dialog) {
         Game.G.GameManager.ChangeGameState(GAMESTATE.PAUSE);
         Game.G.Player.Controller.TalkAnimation(true);
-        Game.G.GameManager.SetPnjAnimatorBool("isTalking", true);
+        Game.G.Pnj.SetAnimatorBool("isTalking", true);
         DialogDisplayManager.D.DisplayDialog(dialog);
     }
 
     public void StopDialog() {
         Game.G.GameManager.ChangeGameState(GAMESTATE.RUNNING);
         Game.G.Player.Controller.TalkAnimation(false);
-        Game.G.GameManager.SetPnjAnimatorBool("isTalking", false);
+        Game.G.Pnj.SetAnimatorBool("isTalking", false);
 
     }
 
     public void StopShowingGame() {
-        print("Fin : " + ShowingSuccess);
         if (ShowingSuccess)
             Game.G.Db.Analyze(ItemChosen);
 
@@ -64,19 +63,19 @@ public class DialogSystem : MonoBehaviour
 
     private void HandleGiveItem(object payload = null) {
         UiManager.Instance.OpenInventoryToChose();
-        StartCoroutine(IWaitForItem(Game.G.GameManager.PnjReceiveItem));
+        StartCoroutine(IWaitForItem(Game.G.Pnj.ReceiveItem));
     }
     private void HandleShowItem(object payload = null) {
         UiManager.Instance.OpenInventoryToChose();
         StartCoroutine(IWaitForItem(StartShowingGame));
     }
     private IEnumerator IWaitForItem(Action<ItemData> action) {
+        ItemChosen = null;
+
         yield return new WaitUntil(() => ItemChosen != null);
 
         
         action.Invoke(ItemChosen);
-
-        ItemChosen = null;
     }
     public void StopWaitingForItem() {
         StopAllCoroutines();

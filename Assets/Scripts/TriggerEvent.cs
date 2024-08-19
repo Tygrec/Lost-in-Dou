@@ -12,7 +12,7 @@ public class TriggerEvent : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (!other.gameObject.CompareTag("Player")|| !SceneManager.GetSceneByName(_sceneName).isLoaded)
             return;
-        if (_needApollo && !Game.G.GameManager.PnjIsFollowing())
+        if (_needApollo && !Game.G.Pnj.IsFollowing())
             return;
 
         Game.G.Dialog.StartDialog(_dialog);

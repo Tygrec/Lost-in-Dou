@@ -70,14 +70,14 @@ public class SceneSystem : MonoBehaviour {
 
         if (!pnj.Follow) {
             if (pnj.CurrentScene == newScene) {
-                Game.G.GameManager.Pnj = Instantiate(Resources.Load<PnjManager>("Prefabs/Pnj"), _pnjSpawn);
+                Game.G.Pnj.Manager = Instantiate(Resources.Load<PnjController>("Prefabs/Pnj"), _pnjSpawn);
             }
-            else if (Game.G.GameManager.Pnj != null) {
-                Destroy(Game.G.GameManager.Pnj.gameObject);
+            else if (Game.G.Pnj.Manager != null) {
+                Destroy(Game.G.Pnj.Manager.gameObject);
             }
         }
         else {
-            Game.G.GameManager.ChangePnjScene(newScene);
+            Game.G.Pnj.ChangeScene(newScene);
         }
             
     }
