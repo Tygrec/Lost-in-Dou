@@ -48,7 +48,7 @@ public class SpawnerBehavior : MonoBehaviour {
 
         Vector3 randomPosition = GetRandomPosition();
         if (randomPosition != Vector3.zero) {
-            ItemManager obj = Instantiate(item.Prefab());
+            ItemManager obj = Instantiate(item.Prefab(), transform.parent);
             obj.SetSpawner(this, randomPosition);
             return obj;
         }
