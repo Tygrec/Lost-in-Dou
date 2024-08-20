@@ -65,7 +65,9 @@ public class PlayerController : MonoBehaviour {
 
         if (moveDirection != Vector3.zero) {
             _animator.SetBool("isWalking", true);
-            SetPnjWalking(Game.G.Pnj.IsFollowing());
+
+            if (Game.G.Pnj.IsFollowing())
+                SetPnjWalking(true);
 
             // Déplace le joueur
             transform.Translate(moveDirection * _speed * Time.deltaTime, Space.World);
@@ -75,6 +77,8 @@ public class PlayerController : MonoBehaviour {
         }
         else {
             _animator.SetBool("isWalking", false);
+            if (Game.G.Pnj.IsFollowing())
+                SetPnjWalking(false);
         }
     }
 
