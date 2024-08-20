@@ -8,6 +8,7 @@ public class CookingDisplay : MonoBehaviour {
     [SerializeField] TextMeshProUGUI _title;
 
     [SerializeField] GameObject _result;
+    [SerializeField] GameObject _background;
     [SerializeField] TextMeshProUGUI _resultName;
     [SerializeField] Image _resultImage;
 
@@ -17,7 +18,7 @@ public class CookingDisplay : MonoBehaviour {
     [SerializeField] List<GameObject> _preparationDisplays;
 
     public void Display() {
-        gameObject.SetActive(true);
+        _background.SetActive(true);
         DisplayRecipes();
         DisplayIngredients();
         DisplayPreparations();
@@ -95,13 +96,14 @@ public class CookingDisplay : MonoBehaviour {
         Game.G.Cook.CookAndEat();
     }
     public void QuitDisplay() {
-        gameObject.SetActive(false);
+        _background.SetActive(false);
         _ingredientsSlotsTransform.gameObject.SetActive(false);
+
         foreach (var prep in _preparationDisplays)
             prep.gameObject.SetActive(false);
     }
     public void AbandonCooking() {
-        gameObject.SetActive(false);
+        _background.SetActive(false);
         Game.G.Cook.StopCooking();
     }
 
