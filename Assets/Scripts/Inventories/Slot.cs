@@ -2,12 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler {
+public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IDropHandler {
     private Inventory _inventory;
     private int _index;
     private int _prepId = 0;
 
-    [SerializeField] Image _itemImg;
+    [SerializeField] Transform _itemImg;
     [SerializeField] Image _check;
     [SerializeField] Image _equip;
     [SerializeField] Image _blocker;
@@ -15,9 +15,18 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private float lastClickTime = 0f;
     private const float doubleClickThreshold = 0.3f;
 
+    public bool Draggable = false;
+
     public void SetInventory(Inventory inventory, int index) {
         _inventory = inventory;
         _index = index;
+    }
+    public void RemoveItemFromInventory() {
+        if (!_inventory.RemoveItemAtIndex(_inventory.GetItemAtIndex(_index), _index))
+            Debug.LogError($"On essaye d'enlever l'item {_inventory.GetItemAtIndex(_index).Data} à l'index {_index} mais il n'existe pas");
+    }
+    private void AddItemToInventory(ItemInInventory item) {
+        _inventory.AddItemAtIndex(item, _index);
     }
 
     public void DisplayItem(ItemInInventory itemValues) {
@@ -25,7 +34,10 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             return;
         }
 
-        _itemImg.sprite = itemValues.Data.Sprite();
+        Clear();
+        DraggableImg img = Instantiate(Resources.Load<DraggableImg>("Prefabs/Ui/Image Draggable"), _itemImg);
+        img.SetImage(itemValues.Data.Sprite());
+        img.Item = itemValues;
 
         _equip.gameObject.SetActive(itemValues.Equipped);
         _check.gameObject.SetActive(itemValues.Selected);
@@ -48,9 +60,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         }
         else if (_inventory.GetSlotType() == InvTag.Stock) {
             CheckStockInventoryClick(item);
-        }
-        else if (_inventory.GetSlotType() == InvTag.Kitchen) {
-            CheckKitchenInventoryClick(item);
         }
     }
 
@@ -127,32 +136,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _check.gameObject.SetActive(item.Selected);
     }
 
-    private void CheckKitchenInventoryClick(ItemInInventory item) {
-        int currentPrepId = Game.G.Cook.GetCurrentPreparationId();
-
-        // Aucune préparation sélectionnée et l'item n'est dans aucune préparation
-        if (currentPrepId == -1 && !item.Selected)
-            return;
-
-        // Préparation sélectionnée et l'item n'est dans aucune préparation
-        if (currentPrepId != -1 && !item.Selected) {
-            Game.G.Cook.AddIngredientToCurrentPreparation(item.Data);
-            GetComponent<Outline>().effectColor = Game.G.Cook.GetCurrentPreparationColor();
-            _prepId = currentPrepId;
-        }
-
-        // L'item est dans une préparation
-        if (item.Selected) {
-            Game.G.Cook.RemoveIngredientFromPreparation(item.Data, _prepId);
-            _prepId = -1;
-        }
-
-        item.Selected = !item.Selected;
-
-        GetComponent<Outline>().enabled = item.Selected;
-    }
-
-
     private void CheckStockInventoryClick(ItemInInventory itemValues) {
         ItemData item = itemValues.Data;
 
@@ -166,8 +149,23 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         }
     }
 
-       private void OnDisable() {
+    private void OnDisable() {
         if (_inventory.GetItemAtIndex(_index) != null)
             _inventory.GetItemAtIndex(_index).Selected = false;
-    } 
+    }
+
+    private void Clear() {
+        if (_itemImg.childCount > 0)
+            Destroy(_itemImg.GetChild(0));
+    }
+
+    public void OnDrop(PointerEventData eventData) {
+        if (_itemImg.childCount > 0)
+            return;
+
+        DraggableImg dropped = eventData.pointerDrag.GetComponent<DraggableImg>();
+        AddItemToInventory(dropped.Item);
+        dropped.RemoveItselfFromOldInventory();
+        dropped.TransformAfterDrag = _itemImg;
+    }
 }

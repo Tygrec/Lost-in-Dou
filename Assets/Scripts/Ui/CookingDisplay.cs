@@ -14,7 +14,7 @@ public class CookingDisplay : MonoBehaviour {
     [SerializeField] Transform _recipesButtonTransform;
     [SerializeField] Transform _ingredientsSlotsTransform;
 
-    [SerializeField] List<PreparationDisplay> _preparationDisplays;
+    [SerializeField] List<GameObject> _preparationDisplays;
 
     public void Display() {
         gameObject.SetActive(true);
@@ -37,27 +37,17 @@ public class CookingDisplay : MonoBehaviour {
             button.onClick.AddListener(() => { SetRecipeInPreparation(pair.Key); });
         }
     }
-    // Affiche des slots contenant toutes la nourriture que possède le joueur (changer l'inventaire)
     private void DisplayIngredients() {
         KitchenInventory kitchen = (KitchenInventory)Game.G.Inv.Get(InvTag.Kitchen);
         kitchen.SetFoodStock();
 
-        UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Kitchen));
+        UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Kitchen), true);
     }
-
     
     private void DisplayPreparations() {
 
         for (int i = 0; i < _preparationDisplays.Count; i++) {
-            _preparationDisplays[i].SetPreparation(Game.G.Cook.Preparations[i]);
-            UiManager.Instance.DisplayInventory(Game.G.Cook.Preparations[i].Inventory);
-        }
-    }
-
-    public void SetCurrentPreparation(Preparation preparation) {
-
-        foreach (var display in _preparationDisplays) {
-            display.SetSelected(display.GetPreparation() == preparation);
+            UiManager.Instance.DisplayInventory(Game.G.Cook.Preparations[i].Inventory, true);
         }
     }
 
@@ -73,8 +63,6 @@ public class CookingDisplay : MonoBehaviour {
             return;
         }
 
-        Game.G.Cook.ChangeCurrentPreparation(freePrep);
-
         List<ItemData> items = new List<ItemData>();
         foreach (var item in recipe.Ingredients) {
             if (Game.G.Inv.Get(InvTag.Kitchen).ItemExistsInInventory(item))
@@ -86,8 +74,9 @@ public class CookingDisplay : MonoBehaviour {
         }
 
         Game.G.Cook.AddIngredientsToPreparation(items, freePrep);
-        Game.G.Inv.Get(InvTag.Kitchen).SetAllItemsSelected(items);
-
+        foreach (var item in items) {
+            Game.G.Inv.Get(InvTag.Kitchen).RemoveItem(item);
+        }
 
     }
 

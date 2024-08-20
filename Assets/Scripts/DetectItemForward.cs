@@ -148,8 +148,8 @@ public class DetectItemForward : MonoBehaviour {
         UiManager.Instance.DisplayPressEInfo("Ouvrir le stockage");
 
         if (Input.GetKeyDown(KeyCode.E)) {
-            UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Player));
-            UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Stock));
+            UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Player), false);
+            UiManager.Instance.DisplayInventory(Game.G.Inv.Get(InvTag.Stock), false);
 
         }
     }

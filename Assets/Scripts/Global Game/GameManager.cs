@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour {
         _mappingHumanData.Add(Name.Pnj, _pnjData);
     }
 
+    private void Start() {
+    //    Game.G.Dialog.StartDialog(DialogId.StartDialog);
+    }
+
     private void Update() {
         if (_pnjData.Life <= 0)
             Defeat(Game.G.Values.PNJ_NAME);

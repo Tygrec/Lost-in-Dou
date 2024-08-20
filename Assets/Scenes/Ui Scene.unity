@@ -6983,6 +6983,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2115010900}
   - {fileID: 1296701783}
   m_Father: {fileID: 1972869714}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7010,10 +7011,10 @@ MonoBehaviour:
   _recipesButtonTransform: {fileID: 1278021654}
   _ingredientsSlotsTransform: {fileID: 2126596884}
   _preparationDisplays:
-  - {fileID: 340235002}
-  - {fileID: 1887637764}
-  - {fileID: 1865688329}
-  - {fileID: 1020372362}
+  - {fileID: 340234997}
+  - {fileID: 1887637759}
+  - {fileID: 1865688324}
+  - {fileID: 1020372361}
 --- !u!1 &1128149092
 GameObject:
   m_ObjectHideFlags: 0
@@ -8537,7 +8538,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1296701783
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8556,7 +8557,6 @@ RectTransform:
   - {fileID: 1967999292}
   - {fileID: 1245090840}
   - {fileID: 374842455}
-  - {fileID: 2115010900}
   m_Father: {fileID: 1108487246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -14479,7 +14479,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115010899}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14488,7 +14488,7 @@ RectTransform:
   - {fileID: 1396790795}
   - {fileID: 612820073}
   - {fileID: 1877959820}
-  m_Father: {fileID: 1296701783}
+  m_Father: {fileID: 1108487246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

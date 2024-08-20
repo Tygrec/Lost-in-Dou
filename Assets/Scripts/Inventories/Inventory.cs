@@ -50,6 +50,13 @@ public abstract class Inventory {
         return true;
     }
 
+    public virtual void AddItemAtIndex(ItemInInventory item, int i) {
+        if (_stock[i] != null)
+            return;
+
+        _stock[i] = item;
+    }
+
     // Retourne FALSE s'il n'y a pas assez d'item à retirer de l'inventaire
     public virtual bool RemoveItem(ItemData item) {
 
@@ -64,6 +71,13 @@ public abstract class Inventory {
         return true;
     }
 
+    public virtual bool RemoveItemAtIndex(ItemInInventory item, int i) {
+        if (_stock[i] != item)
+            return false;
+
+        _stock[i] = null;
+        return true;
+    }
     // Fonctions utilitaires pour manipuler l'inventaire
     public bool ItemExistsInInventory(ItemData item) {
         foreach (var i in _stock) {

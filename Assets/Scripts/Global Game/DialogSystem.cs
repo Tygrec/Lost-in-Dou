@@ -9,7 +9,7 @@ public class DialogSystem : MonoBehaviour
     Dictionary<DialogId, Dialog> m_Dialogs = new Dictionary<DialogId, Dialog>();
     public bool ShowingSuccess = true;
 
-    public ItemData ItemChosen = null;
+    [HideInInspector] public ItemData ItemChosen = null;
     private void OnEnable() {
         EventHub.Listen(EventType.GiveItemToPnj, HandleGiveItem);
         EventHub.Listen(EventType.ShowObjectToPnj, HandleShowItem);

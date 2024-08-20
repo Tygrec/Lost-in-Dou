@@ -7,7 +7,7 @@ public class InventoryDisplay : MonoBehaviour {
     [SerializeField]  Transform _slotsTransfom;
     public bool IsOpen = false;
     InvTag _invType;
-    public void Display(Inventory inventory) {
+    public void Display(Inventory inventory, bool draggable) {
         _invType = inventory.GetSlotType();
         gameObject.SetActive(true);
         IsOpen = true;
@@ -17,7 +17,7 @@ public class InventoryDisplay : MonoBehaviour {
         for (int i = 0; i < inventory.GetMaxSize(); i++) {
             Slot slot = Instantiate(Resources.Load<Slot>("Prefabs/Ui/Slot"), _slotsTransfom);
             slot.SetInventory(inventory, i);
-
+            slot.Draggable = draggable;
             slot.DisplayItem(inventory.GetItemAtIndex(i));
         }
     }

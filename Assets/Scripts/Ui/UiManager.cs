@@ -65,10 +65,10 @@ public class UiManager : MonoBehaviour {
         if (!inventoryDisplay.gameObject.activeSelf)
             return;
         else {
-            inventoryDisplay.Display(inventory);
+            inventoryDisplay.Display(inventory, false);
         }
     }
-    public void DisplayInventory(Inventory inventory) {
+    public void DisplayInventory(Inventory inventory, bool draggable) {
 
         var display = Game.G.Inv.GetDisplay(inventory);
 
@@ -77,7 +77,12 @@ public class UiManager : MonoBehaviour {
             display.ExitDisplay();
         }
         else
-            display.Display(inventory);
+            display.Display(inventory, draggable);
+    }
+
+    public void DisplayDraggableInventory(Inventory inventory) {
+        var display = Game.G.Inv.GetDisplay(inventory);
+
     }
 
     public void DisplayTooltip(ItemData item) {
@@ -118,9 +123,9 @@ public class UiManager : MonoBehaviour {
         _cookingDisplay.Display();
     }
     // TODO : à changer, ce n'est pas à l'UI manager de gérer ça
-    public void SetCurrentPreparation(Preparation prep) {
+ /*   public void SetCurrentPreparation(Preparation prep) {
         _cookingDisplay.SetCurrentPreparation(prep);
-    }
+    } */
     public void DisplayPlate(Plate plate) {
         _cookingDisplay.DisplayPlate(plate);
     }
@@ -134,12 +139,12 @@ public class UiManager : MonoBehaviour {
     public void OpenInventoryToChose() {
         PlayerInventory inv = (PlayerInventory)Game.G.Inv.Get(InvTag.Player);
         inv.WaitForItem = true;
-        DisplayInventory(inv);
+        DisplayInventory(inv, false);
     }
     public void CloseInventoryToChose() {
         PlayerInventory inv = (PlayerInventory)Game.G.Inv.Get(InvTag.Player);
         inv.WaitForItem = false;
-        DisplayInventory(Game.G.Inv.Get(InvTag.Player));
+        DisplayInventory(Game.G.Inv.Get(InvTag.Player), false);
     }
 
     public void DisplayItemShowedSprite(ItemData item) {
@@ -152,7 +157,7 @@ public class UiManager : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.I)) {
-            DisplayInventory(Game.G.Inv.Get(InvTag.Player));
+            DisplayInventory(Game.G.Inv.Get(InvTag.Player), false);
         }
 
         if (Input.GetKeyDown(KeyCode.C)) {

@@ -24,12 +24,18 @@ public class PnjManager : MonoBehaviour
         _pnjData.IsSleeping = value;
     }
     public void Eat(ItemData item) {
+        if (Manager == null) return;
+
         Manager?.GetComponent<NeedsManager>().Eat(item);
     }
     public void Eat(Plate plate) {
+        if (Manager == null) return;
+
         Manager?.GetComponent<NeedsManager>().Eat(plate);
     }
     public void Drink() {
+        if (Manager == null) return;
+
         Manager?.GetComponent<NeedsManager>().Drink();
     }
 

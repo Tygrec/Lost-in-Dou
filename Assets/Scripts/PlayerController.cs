@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     private PlayerData _data;
 
-    private Animator _animator;
+    [SerializeField] Animator _animator;
     public ItemData Equipped() { return _data.EquippedItem; }
 
     float _speed; // Vitesse de déplacement
@@ -27,11 +27,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start() {
-        _animator = GetComponent<Animator>();
         _data = (PlayerData)Game.G.GameManager.GetHumanData(Name.Player);
         _speed = Game.G.Values.PLAYER_SPEED;
-
-        Game.G.Dialog.StartDialog(DialogId.StartDialog);
     }
 
     private void Update() {

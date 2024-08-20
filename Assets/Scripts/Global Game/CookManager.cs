@@ -7,7 +7,6 @@ using UnityEngine;
 public class CookManager : MonoBehaviour {
 
     public Preparation[] Preparations;
-    private Preparation _currentPreparation;
 
     private void Start() {
         Preparations = new Preparation[Game.G.Values.MAX_PREPARATION];
@@ -22,7 +21,6 @@ public class CookManager : MonoBehaviour {
 
     public void StopCooking() {
         Game.G.GameManager.ChangeGameState(GAMESTATE.RUNNING);
-        _currentPreparation = null;
 
         foreach (Preparation preparation in Preparations) {
             preparation.Inventory.ClearInventory();
@@ -44,6 +42,8 @@ public class CookManager : MonoBehaviour {
     }
 
     private IEnumerator IEat(List<Plate> foods, int index) {
+        UiManager.Instance.HideCooking();
+
         if (foods.Count > index) {
             UiManager.Instance.DisplayPlate(foods[index]);
             Game.G.Player.Needs.Eat(foods[index]);
@@ -70,39 +70,6 @@ public class CookManager : MonoBehaviour {
         return null;
     }
 
-    public void ChangeCurrentPreparation(Preparation preparation) {
-        _currentPreparation = preparation;
-
-        // TODO : à changer, ce n'est pas à l'UI manager de gérer ça
-        UiManager.Instance.SetCurrentPreparation(preparation);
-    }
-    public int GetCurrentPreparationId() {
-        if (_currentPreparation == null)
-            return -1;
-
-        return _currentPreparation.Id;
-    }
-    public Color GetCurrentPreparationColor() {
-        return _currentPreparation.Color;
-    }
-    public Preparation GetPreparationById(int id) {
-        return Preparations[id-1];
-    }
-    public void AddIngredientToCurrentPreparation(ItemData item) {
-        if (_currentPreparation == null)
-            return;
-
-        _currentPreparation.Inventory.AddItem(item);
-    }
-    public void RemoveIngredientFromCurrentPreparation(ItemData item) {
-        if (_currentPreparation == null)
-            return;
-
-        _currentPreparation.Inventory.RemoveItem(item);
-    }
-    public void RemoveIngredientFromPreparation(ItemData item, int id) {
-        Preparations[id].Inventory.RemoveItem(item);
-    }
     public void AddIngredientToPreparation(ItemData item, Preparation preparation) {
         preparation.Inventory.AddItem(item);
     }
