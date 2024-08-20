@@ -12,6 +12,10 @@ public class ConstGlobalValues : MonoBehaviour {
     public int WAKE_UP_HOUR;
     public int MAX_PREPARATION_SLOTS;
     public int MAX_PREPARATION;
+    public int HUNGER_LOSS;
+    public int ENERGY_LOSS;
+    public int THIRST_LOSS;
+    public int LIFE_LOSS;
     public string PLAYER_NAME;
     public string PNJ_NAME;
     public float TEXT_SPEED;

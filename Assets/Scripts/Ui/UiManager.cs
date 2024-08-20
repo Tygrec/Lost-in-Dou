@@ -122,10 +122,7 @@ public class UiManager : MonoBehaviour {
     public void DisplayCooking() {
         _cookingDisplay.Display();
     }
-    // TODO : à changer, ce n'est pas à l'UI manager de gérer ça
- /*   public void SetCurrentPreparation(Preparation prep) {
-        _cookingDisplay.SetCurrentPreparation(prep);
-    } */
+
     public void DisplayPlate(Plate plate) {
         _cookingDisplay.DisplayPlate(plate);
     }

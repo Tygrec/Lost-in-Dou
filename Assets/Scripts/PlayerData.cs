@@ -30,10 +30,6 @@ public class HumanData {
     public bool IsNapping = false;
     public bool IsSleeping = false;
 
-    private const int _hungerLoss = 2;
-    private const int _thirstLoss = 3;
-    private const int _energyLoss = 1;
-    private const int _lifeLoss = 1;
 
     private const int _intervalLoss = 10;
 
@@ -42,20 +38,20 @@ public class HumanData {
     }
     public void UpdateStatsByTime() {
 
-        Hunger -= _hungerLoss;
+        Hunger -= Game.G.Values.HUNGER_LOSS;
 
-        Thirst -= _thirstLoss;
+        Thirst -= Game.G.Values.THIRST_LOSS;
 
         if (Thirst <= 0 && !IsSleeping) {
-            Life -= _lifeLoss;
+            Life -= Game.G.Values.LIFE_LOSS;
         }
 
-        Energy = IsNapping || IsSleeping ? Energy + _energyLoss : Energy - _energyLoss;
+        Energy = IsNapping || IsSleeping ? Energy + Game.G.Values.ENERGY_LOSS : Energy - Game.G.Values.ENERGY_LOSS;
 
         ClampStats();
     }
     public void UpdateEnergy() {
-        Energy -= _energyLoss;
+        Energy -= Game.G.Values.ENERGY_LOSS;
     }
     public void ClampStats() {
         Hunger = Mathf.Clamp(Hunger, 0, 100);
