@@ -99,7 +99,6 @@ MonoBehaviour:
   Id: 0
   _spawnables:
   - {fileID: 11400000, guid: 70b00ce06c05eb8438f360eb6b1e05fa, type: 2}
-  - {fileID: 11400000, guid: 97fda438265d75e41a477f42fd452be0, type: 2}
   _layerMask:
     serializedVersion: 2
     m_Bits: 59
