@@ -92,4 +92,11 @@ public class DialogSystem : MonoBehaviour
         UiManager.Instance.HideItemShowedSprite();
         DialogDisplayManager.D.DisplayDialog(Game.G.Db.GetShowing(item));
     }
+
+    public bool IsAtLastReplica() {
+        return DialogDisplayManager.D.IsAtLastReplica();
+    }
+    public bool IsFinished() {
+        return DialogDisplayManager.D.IsFinished();
+    }
 }

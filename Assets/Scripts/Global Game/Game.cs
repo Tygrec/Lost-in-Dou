@@ -18,6 +18,7 @@ public class Game : MonoBehaviour
     public InventoryManager Inv;
     public DialogSystem Dialog;
     public SoundManager Sound;
+    public CameraManager Camera;
 
     private void Awake() {
 

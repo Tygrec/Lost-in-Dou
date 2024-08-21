@@ -186,4 +186,11 @@ public class DialogDisplayManager : MonoBehaviour {
         UiManager.Instance.DisplayHud();
         Game.G.Dialog.StopDialog();
     }
+
+    public bool IsAtLastReplica() {
+        return i == _dialog.Replicas.Count - 1;
+    }
+    public bool IsFinished() {
+        return _dialog == null || i >= _dialog.Replicas.Count;
+    }
 }
