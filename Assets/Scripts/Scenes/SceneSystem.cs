@@ -30,6 +30,7 @@ public class SceneSystem : MonoBehaviour {
 
         yield return new WaitForSeconds(1);
 
+        print(oldScene);
         SceneManager.LoadScene(newScene, LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(oldScene);
         Game.G.Player.transform.position = playerPosition;

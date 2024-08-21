@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55553d9340ad7eb4db6938ec06b33043, type: 3}
+  m_Name: FindPassageRiver
+  m_EditorClassIdentifier: 
+  Replicas:
+  - Name: 0
+    Emotion: 5
+    Text: "Oh ! Ces deux arbres sont tomb\xE9s pendant la nuit !"
+    Answers: []
+  - Name: 0
+    Emotion: 0
+    Text: "On dirait que je peux traverser la rivi\xE8re maintenant."
+    Answers: []
+  Id: 0

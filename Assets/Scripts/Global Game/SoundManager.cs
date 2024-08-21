@@ -16,8 +16,10 @@ public class SoundManager : MonoBehaviour {
     }
 
     public void ChangeSceneSound(string newScene) {
-        _audioAmbient.clip = _ambientSounds.Find(sound => sound.SceneName == newScene).Audio;
+        _audioAmbient.clip = _ambientSounds.Find(sound => sound.SceneName == newScene).Ambient;
+        _audioSounds.clip = _ambientSounds.Find(sound => sound.SceneName == newScene).Sound;
         _audioAmbient.Play();
+        _audioSounds.Play();
     }
     public void ActivateFireSound(bool value) {
         _audioSounds.clip = _caveAmbientFire;
@@ -31,6 +33,7 @@ public class SoundManager : MonoBehaviour {
 }
 [Serializable]
 public class SceneAmbientSound {
-    public AudioClip Audio;
+    public AudioClip Ambient;
+    public AudioClip Sound;
     public string SceneName;
 }

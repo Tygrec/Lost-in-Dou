@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (_pnjData.Life <= 0)
-            Defeat(Game.G.Values.PNJ_NAME);
+     //   if (_pnjData.Life <= 0)
+     //       Defeat(Game.G.Values.PNJ_NAME);
         if (_playerData.Life <= 0)
             Defeat(Game.G.Values.PLAYER_NAME);
     }
